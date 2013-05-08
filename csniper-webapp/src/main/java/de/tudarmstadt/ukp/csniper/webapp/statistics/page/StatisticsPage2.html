@@ -1,0 +1,78 @@
+﻿<!--
+  Copyright 2013
+  Ubiquitous Knowledge Processing (UKP) Lab
+  Technische Universität Darmstadt
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd" >
+	<body>
+		<wicket:extend>
+			<form wicket:id="settingsForm" class="vfill" style="margin:15px">
+				<fieldset class="ui-widget-content ui-corner-all centering">
+					<table>
+						<tr>
+							<td>
+								<label class="top">Users:</label>
+								<select class="hfill" wicket:id="userSelect"></select>
+							</td>
+							<td>
+								<label class="inline top">Quality control</label>
+								<a wicket:id="thresholdHelp"></a>
+								<br /><br />
+								<label class="top">User threshold</label>
+								<input class="hfill" type="number" wicket:id="userThreshold" /><br />
+								<br />
+								<label class="top">Confidence threshold</label>
+								<input class="hfill" type="number" wicket:id="confidenceThreshold" />
+							</td>
+							<td>
+								<label class="top">Queries:</label>
+								<select class="hfill" wicket:id="querySelect"></select>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3" class="centering">
+								<div>Beware that calculating the query statistics may take a <b>very long time</b>.</div>
+								<div><button wicket:id="thresholdButton">[button]</button></div>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+			</form>
+			<div wicket:id="statsTable"></div>
+			<br />
+			<div class="ui-state-highlight ui-corner-all info">
+				<img class="icon" src="images/tux-help.png"/>
+				<div class="content">
+					<h4>Explanation</h4>
+					<ul>
+						<li>A hit counts as a <i>true positive</i> (TP) a relevant majority of annotators 
+						say that is a correct result. A majority is relevant it is above the <i>threshold</i>
+						compared to the total number of users .</li>
+						<li>The <i>precision</i> is calculated using the <i>true positives</i> (TP) and 
+						<i>false positives</i> (FP) with <i>unknown</i> (UNK) items counting towards the
+						false positives. For the <i>estimated precision</i> the unknown items are not taken into
+						account.</li>
+						<li><i>Complete</i> is the percentage of <i>true positives</i> (TP) and 
+						<i>false positives</i> (FP) compared to the total number of items. This indicates
+						how far the annotation task for this query has already progressed.</li>
+						<li><i>Correct</i> and <i>wrong</i> are total number of correct and wrong votes that
+						all users have placed for items in this query.</li>
+						<li><i>Kappa</i> is calculated using Fleiss' Kappa.</li>
+					</ul>
+				</div>
+			</div>
+		</wicket:extend>
+	</body>
+</html>

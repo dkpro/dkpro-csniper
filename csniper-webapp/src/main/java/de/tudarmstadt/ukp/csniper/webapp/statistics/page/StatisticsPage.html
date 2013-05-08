@@ -1,0 +1,161 @@
+﻿<!--
+  Copyright 2013
+  Ubiquitous Knowledge Processing (UKP) Lab
+  Technische Universität Darmstadt
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd" >
+	<body>
+		<wicket:extend>
+			<form wicket:id="statisticsForm" method="post" action="?" class="vfill" style="margin:15px">
+				<fieldset class="ui-widget-content ui-corner-all centering">
+					<table>
+						<tr>
+							<td>
+								<div><label class="top">Corpora</label></div>
+								<div><select class="hfill" wicket:id="collections"></select></div>
+							</td>
+							<td>
+								<div><label class="top">Types</label></div>
+								<div><select class="hfill"wicket:id="types"></select></div>
+							</td>
+							<td>
+								<div><label class="top">Users</label></div>
+								<div><select class="hfill"wicket:id="users"></select></div>
+							</td>
+							<td rowspan="2">
+								<div>
+									<label class="inline top">Quality control</label>
+									<a wicket:id="thresholdHelp"></a>
+								</div>
+								<br />
+								<div>
+									<label class="top">User threshold</label>
+									<input type="number" wicket:id="userThreshold" /><br />
+									<br />
+									<label class="top">Confidence threshold</label>
+									<input type="number" wicket:id="confidenceThreshold" />
+								</div>
+							</td>
+							<td rowspan="2">
+								<div><label class="top">Filter</label></div>
+								<div><ul class="vcheckboxgroup" wicket:id="filters">[ul]</ul></div>
+							</td>
+							<td rowspan="2" style="width:100%;">
+							   <!-- This one pushes the graphics to the right -->
+							</td>
+							<td rowspan="2">
+								<div><label class="top">Agreement</label></div>
+								<img wicket:id="pieChart" alt="Distribution of items by evaluation" />
+								<table>
+									<tr>
+										<td><label>Fleiss' Kappa:</label></td>
+										<td><span wicket:id="fleissKappa">[fleissKappa]</span></td>
+									</tr>
+								</table>	
+							</td>
+							<td rowspan="2">
+								<div><label class="top">Users</label></div>
+								<img wicket:id="usersChart" alt="Votes" />
+							</td>
+							<td rowspan="2">
+								<div><label class="top">Progress</label></div>
+								<img wicket:id="progressChart" alt="Progress" />
+								<table>
+									<tr>
+										<td><label>Complete:</label></td>
+										<td><span wicket:id="complete">[complete]</span>&nbsp;/&nbsp;<span wicket:id="goal">[goal]</span></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<div>
+									<div class="buttons">
+										<button wicket:id="statisticsButton">[button]</button>
+										<button wicket:id="exportButton">Export...</button>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</fieldset>
+			</form>
+
+			<p wicket:id="displayOptions">
+				Showing items from collection <b wicket:id="collectionIdLabel">[collectionId]</b> for type <b wicket:id="typeLabel">[type]</b>, filtered by <b wicket:id="filterLabel">[filter]</b>.<br />
+			</p>
+
+			<table class="hfill" style="border-collapse:collapse" wicket:id="resultTable"><tr><td>[table]</td></tr></table>
+
+			<div wicket:id="exportModal"></div>
+			
+			<div wicket:id="contextViewsContainer">
+				<wicket:container wicket:id="contextViews">
+					<wicket:container wicket:id="contextView"/>
+				</wicket:container> 
+			</div>
+<!--
+			<div class="ui-state-highlight ui-corner-all info biginfo">
+				<img class="icon" src="images/tux-help.png"/>
+				<div class="content">
+					<h4>Thresholds</h4>
+					<ul>
+						<li>
+			 				<b>User threshold</b>: percentage of users who have to assess an item as
+			 				<i>Correct</i> or <i>Wrong</i> for it to be considered <i>Correct</i>, <i>Wrong</i> or <i>Disputed</i>.
+			 				If below for both <i>Correct</i> and <i>Wrong</i>, this item is considered <i>Incomplete</i>.
+			 			</li>
+			 			<li>
+							<b>Confidence threshold</b>: percentage of assessments the majority vote
+							has to have over the minority (only counting votes above the user threshold).
+						</li>
+					</ul>
+					Consider the following example:<br />
+					10 testers, with 6 voting <i>Correct</i> and 4 voting <i>Wrong</i>.
+					We will show 3 scenarios:<br />
+					<ol style="list-style-type:lower-alpha">
+						<li>
+							User threshold = 0.3, Confidence threshold = 0.6.<br />
+							The item is labeled as <i>Correct</i>,
+							because there are enough <i>Correct</i> votes (6/10 &gt; 0.3),
+							and the difference between <i>Correct</i> and <i>Wrong</i> votes
+							(after subtraction of user threshold) is (0.6 - 0.3) - (0.4 - 0.3) = 0.2,
+							normalized 0.2 / 0.3 = 0.66 &gt; 0.6.<br />
+							<img src="images/statistics-example-a.png" alt="example a)" /><br /><br />
+						</li>
+						<li>
+							User threshold = 0.7, Confidence threshold = 0.4.<br />
+							The item is labeled as <i>Incomplete</i>,
+							because there are neither enough <i>Correct</i> (6/10 &lt; 0.7)
+							nor enough <i>Wrong</i> votes (4/10 &lt; 0.7).<br />
+							[image tbd]<br /><br />
+						</li>
+						<li>
+							User threshold = 0.2, Confidence threshold = 0.7<br />
+							The item is labeled as <i>Disputed</i>,
+							because there are enough votes (6/10 &gt; 0.2, 4/10 &gt; 0.2),
+							but the difference between <i>Correct</i> and <i>Wrong</i> votes
+							(after subtraction of user threshold) is 0.4 - 0.2 = 0.2,
+							normalized 0.2 / 0.4 = 0.5 &lt; 0.7.<br />
+							[image tbd]<br /><br />
+						</li>
+					</ol>
+				</div>
+			</div>
+-->
+		</wicket:extend>
+	</body>
+</html>

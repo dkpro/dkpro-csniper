@@ -1,0 +1,67 @@
+﻿<!--
+  Copyright 2013
+  Ubiquitous Knowledge Processing (UKP) Lab
+  Technische Universität Darmstadt
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd" >
+	<body>
+		<wicket:extend>
+			<form wicket:id="form" method="post">
+				<fieldset>
+					<table><tr><td>
+						<div class="header">Your input text:</div>
+						<textarea wicket:id="inputText" rows="8" cols="64" name="inputText"></textarea>
+						<div class="buttons">
+							<label>Parse this text with: </label>
+							<select wicket:id="parser"></select>
+							<select wicket:id="language"></select>
+							<button wicket:id="parseButton">Parse</button>
+						</div>
+
+						<div class="header">
+							<span>Choose an existing </span>
+							<select wicket:id="tool"></select>
+							<span>script and edit it:</span>
+							<select wicket:id="scriptSelect"></select>
+							<span>or create one:</span>
+						</div>
+						<textarea wicket:id="script" rows="8" cols="64" name="script"></textarea>
+						<div class="buttons">
+							<label>Save your script as: </label>
+							<input class="short" type="text" />
+							<input wicket:id="saveButton" type="submit" value="Save" disabled="disabled" />
+						</div>
+						<div class="header">Choose which annotations should be marked (comma-separated):</div>
+						<input type="text" wicket:id="annotations" name="annotations" id="markedTypes" />
+						<div class="header">and in which colors (comma-separated):</div>
+						<input type="text" wicket:id="colors" name="colors" />
+						<div class="buttons">
+							<button wicket:id="processButton">Process</button>
+						</div>
+					</td>
+					<td>
+						<div><img wicket:id="treeImg" /></div>
+						<div style="text-align: center;">
+							<input wicket:id="previousParseButton" type="submit" value="&lt;&lt;" />
+							<span wicket:id="currentParse">[current]</span> / <span wicket:id="parseCount">[max]</span>
+							<input wicket:id="nextParseButton" type="submit" value="&gt;&gt;" />
+						</div>
+					</td>
+					</tr></table>
+				</fieldset>
+			</form>
+		</wicket:extend>
+	</body>
+</html>

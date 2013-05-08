@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT transformations (transformation+)>
+<!ELEMENT transformation (name,tregex,operation*)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT tregex (#PCDATA)>
+<!ELEMENT operation (#PCDATA)>

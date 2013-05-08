@@ -1,0 +1,12 @@
+database.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
+database.driver=com.mysql.jdbc.Driver
+database.url=jdbc:mysql://localhost:3306/LOEWE-NCC
+database.username=LOEWE-NCC
+database.password=LOEWE-NCC
+
+engine.cqp.executable=/Users/bluefire/bin/cwb-3.2.0-snapshot-282/cqp
+engine.cqp.registry=/Users/bluefire/UKP/Library/IMSCWB/loewe-ncc/registry
+engine.cqp.macrosLocation=classpath:/BNC_macros.txt
+
+engine.xmi.basePath=/Users/bluefire/UKP/Library/IMSCWB/loewe-ncc/
+engine.xmi.relativePath=xmi

@@ -1,0 +1,45 @@
+# !NP: Nominalphrase (sehr vereinfacht)
+MACRO NP(0)
+(
+	[pos="AT0"]? 
+	[]? 
+	[pos="AJ.*"]* 
+	[pos="N.*"]
+)
+;
+
+# !PP: Präpositionalphrase (sehr vereinfacht)
+MACRO PP(0)
+(
+	[pos="PRP"] 
+	/NP[]
+)
+;
+
+# !VCF: finite verbale Kette
+MACRO VCF(0)
+(
+	[pos="V.?B" | pos="V.?D" | pos="V.?Z" | pos="VM0"]
+	[pos="V.*"]*
+)
+;
+
+# !VCC: verbal Kette in clefts (letztes Element: BE)
+MACRO VCC(0)
+(
+	#[pos="VBB" | pos="VBD" | pos="VBZ"] |
+	#([pos="V.*"]* [pos="VBG" | pos="VBI" | pos="VBN"])
+	#modified:
+	([pos="VBB" | pos="VBD" | pos="VBZ"]* [lemma="be"]) |
+	([pos="V.*"]* [pos="VBG" | pos="VBI" | pos="VBN"]* [lemma="be"])
+)
+;
+
+# !RC: Relativsatz
+MACRO RC(0)
+(
+	([pos="DTQ" | pos="PNQ" | pos="CJT"] /VCF[] []?) |
+	([pos="CJT"]? /NP[] /VCF[] []?) |
+	([pos="PR.*"]* [pos=".Q"] /NP[] /VCF[] []?)
+)
+;

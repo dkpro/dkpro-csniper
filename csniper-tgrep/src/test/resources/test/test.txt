@@ -1,0 +1,60 @@
+# BNC,A03,25716,25773
+(ROOT (S (NP (PRP It)) (VP (VBZ is) (PP (IN during) (NP (DT this) (NN time))) (SBAR (IN that) (S (S (VP (VB torture) (ADVP (RBS most) (RB commonly)))) (VP (VBZ occurs))))) (. .)))
+# BNC,A0H,209840,209903
+(ROOT (S (NP (PRP It)) (VP (VBZ is) (PP (IN in) (NP (DT these) (NNS situations))) (SBAR (IN that) (S (NP (JJ centring) (NNS skills)) (VP (VBP are) (ADJP (RBS most) (JJ useful)))))) (. .)))
+# BNC,A13,8916,8973
+(ROOT (S (NP (PRP It)) (VP (VBZ is) (PP (IN in) (NP (NP (DT the) (NN pub) (NN cellar)) (SBAR (WHNP (WDT that)) (S (NP (DT the) (NNS beers)) (VP (VBZ reaches) (NP (NN maturity)))))))) (. .)))
+# BNC,A19,63111,63225
+(ROOT (S (NP (PRP It)) (VP (VBZ is) (PP (IN under) (NP (DT these) (NNS conditions))) (SBAR (IN that) (S (NP (DT the) (NN magnetometer)) (VP (VBZ is) (ADJP (JJ useful) (PP (IN in) (S (VP (VBG detecting) (NP (NP (DT the) (NNS fluctuations)) (PP (IN in) (NP (DT the) (JJ magnetic) (NNS fields)))))))))))) (. .)))
+# BNC,A1A,213401,213555
+(ROOT (S (NP (PRP It)) (VP (VBZ is) (PP (IN for) (NP (NP (DT this) (NN reason)) (SBAR (IN that) (S (NP (NN deconstruction)) (VP (VP (VBZ remains) (NP (NP (DT a) (JJ fundamental) (NN threat)) (PP (TO to) (NP (NNP Marxism))))) (, ,) (CC and) (VP (PP (IN by) (NP (NP (NN implication)) (PP (TO to) (NP (JJ other) (ADJP (JJ culturalist) (CC and) (JJ contextualizing)) (NNS approaches)))))))))))) (. .)))
+# BNC,A2G,3962,4164
+(ROOT (S (S (NP (PRP It)) (VP (VBZ is) (PP (IN in) (NP (DT the) (NN battle) (NNS scenes))) (SBAR (IN that) (S (NP (DT the) (JJ new) (NN film)) (VP (VBZ differs) (ADVP (RBS most)) (PP (IN from) (NP (NP (NNP Olivier) (POS 's)) (NN prototype)))))))) (, ,) (CC and) (S (NP (NNP Branagh)) (VP (MD can) (RB fairly) (VP (VB claim) (S (VP (TO to) (VP (VB have) (VP (VBN stripped) (NP (NP (DT the) (NN veneer)) (PP (IN of) (NP (NN jingoism)))) (PP (IN from) (NP (DT the) (NN play))) (, ,) (PP (IN by) (S (VP (VBG showing) (NP (NN war)) (PP (IN in) (NP (PRP$ its) (JJ true) (NN horror))))))))))))) (. .)))
+# BNC,A59,70771,70851
+(ROOT (S (NP (PRP It)) (VP (VBD was) (PP (IN on) (NP (DT this) (NN work))) (SBAR (IN that) (S (NP (NNP Josiah)) (VP (VBD Wedgwood) (VP (VBN based) (NP (PRP$ his) (JJ neoclassical) (NN pottery) (NNS designs))))))) (. .)))
+# BNC,A5Y,161995,162224
+(ROOT (S (NP (PRP It)) (VP (VBZ is) (PP (IN in) (NP (NP (DT the) (JJ initial) (NN anticipation)) (SBAR (IN that) (S (NP (DT the) (JJ middle) (NN class)) (VP (MD will) (VP (VB show) (NP (NN respect)) (SBAR (IN that) (S (NP (DT the) (NN bias)) (VP (VBZ lies) (, ,) (PP (IN for) (SBAR (WHADVP (WRB where)) (S (NP (DT this) (NN deference)) (VP (VBZ is) (VP (VBG lacking) (, ,) (PP (ADVP (RB even)) (IN from) (NP (NP (NN someone)) (SBAR (WHNP (WP who)) (S (VP (VBZ appears) (NP (JJ middle) (NN class)))))))))))) (, ,) (SBAR (S (NP (NP (DT a) (NN variant)) (PP (IN of) (NP (DT the) (NN gouger) (NN typification)))) (VP (VBZ comes) (PP (IN into) (NP (NN force)))))))))))))))) (. .)))
+# BNC,A0Y,50694,50778
+(ROOT (S (PP (IN For) (NP (NP (JJR more) (NN information)) (SBAR (S (VP (VBP see) (VP (VBG HEATING) (NP (NNS COSTS)))))))) (, ,) (NP (NP (NNP INCOME) (NNP SUPPORT)) (CC AND) (NP (DT THE) (NNP SOCIAL))) (VP (VBD FUND) (PRN (-LRB- -LRB-) (NP (NNP Page) (CD 2)) (-RRB- -RRB-))) (. .)))
+# BNC,A0X,68107,68275
+(ROOT (S (NP (ADVP (JJ Amongst)) (DT the) (NNS alternatives)) (VP (VBP are) (NP (NN tungsten) (, ,) (NN diamond) (CC and) (NN ruby) (NNS carvers)) (S (VP (VBG offering) (NP (NP (DT a) (NN range)) (PP (IN of) (NP (NNS benefits)))) (PP (IN from) (NP (JJR longer) (NN life))) (PP (TO to) (NP (NP (JJ precise) (VBG detailing)) (, ,) (SBAR (WHNP (WDT which)) (S (VP (VBZ is) (ADJP (JJ vital) (PP (IN for) (NP (NN wildfowl)))) (S (VP (VBG carving))))))))))) (. .)))
+# BNC,A0Y,103557,103595
+(ROOT (S (PP (IN For) (ADVP (RBR more))) (NP (NN information)) (VP (VBP see) (NP (NN factsheet) (CD 16))) (. .)))
+# BNC,A0Y,103106,103144
+(ROOT (S (PP (IN For) (ADVP (RBR more))) (NP (NN information)) (VP (VBP see) (NP (NN factsheet) (CD 16))) (. .)))
+# BNC,A0P,145300,145329
+(ROOT (FRAG (PP (IN on) (NP (NN newspaper) (VBN covered) (NNS benches))) (, ,)))
+# BNC,A0P,144685,144714
+(ROOT (S (NP (NNP Into) (NX (DT that) (NN group))) (VP (VBD came) (NP (NNP Leonard))) (. .)))
+# BNC,A0R,99877,99908
+(ROOT (S (NP (NNP Beside) (DT the) (NNP President)) (VP (VBD sat) (NP (NNP Susan))) (. .)))
+# BNC,A0R,55171,55246
+(ROOT (S (S (PP (IN Outside) (NP (DT the) (NN kitchen)))) (VP (VBD were) (NP (NNS brambles) (CC and) (NNS thistles)) (ADVP (ADVP (RB as) (RB far)) (SBAR (IN as) (S (NP (DT the) (NN eye)) (VP (MD could) (VP (VB see))))))) (. .)))
+# BNC,A0C,167222,167330
+(ROOT (S (PP (IN In) (NP (CD 1972))) (NP (NNP Loiseau)) (VP (VBD left) (NP (NNP Roanne)) (PP (IN for) (NP (NNP Paris))) (S (VP (TO to) (VP (VB work) (PP (IN with) (NP (NP (NNP Claude) (NNP Verger)) (, ,) (NP (NP (NN owner)) (PP (IN of) (NP (CD two) (JJ prestigious) (NN city) (NNS restaurants)))))))))) (. .)))
+# BNC,A08,142020,142108
+(ROOT (S (PP (IN Through) (NP (DT the) (NN glass) (NN shone))) (NP (NNP God)) (VP (VBZ 's) (NP (NN sun)) (, ,) (S (VP (VBG setting) (NP (NP (DT the) (JJ colours) (NN alight)) (: :) (ADJP (JJ blue) (, ,) (JJ green) (, ,) (JJ yellow) (, ,) (JJ red)))))) (. .)))
+# BNC,A0H,201163,201316
+(ROOT (S (PP (IN By) (NP (DT all) (NNS means))) (NP (NP (JJ practise) (NNS side-slipping)) (PP (IN at) (NP (NP (NN height)) (, ,) (ADVP (CC but))))) (VP (VBP do) (RB n't) (VP (VB assume) (SBAR (IN that) (S (SBAR (IN because) (S (NP (PRP you)) (VP (MD can) (VP (VB do) (NP (PRP it)) (PP (IN at) (NP (NN height))))))) (NP (PRP you)) (VP (MD will) (VP (VB be) (ADJP (JJ able) (S (VP (TO to) (VP (VB do) (NP (PRP it)) (ADVP (RB accurately)) (PP (IN on) (NP (DT an) (NN approach))))))))))))) (. .)))
+# BNC,A0H,176890,177050
+(ROOT (S (PP (IN On) (NP (NP (DT the) (NN weight)) (NP (NN shift) (NNS types)))) (NP (PRP it)) (VP (VBZ is) (ADJP (JJ difficult) (S (VP (TO to) (VP (VB give) (NP (DT the) (NN student) (NN experience)) (PP (IN at) (NP (JJ low) (JJ â€˜) (NN g))))))) (SBAR (S (NP (NP (JJ â€™) (NNS manoeuvres)) (CC and) (NP (DT the) (NNS pilots))) (VP (MD may) (VP (VB be) (VP (ADVP (RB badly)) (VBN affected) (PP (IN without) (S (NP (PRP it)) (VP (VBG becoming) (ADJP (JJ obvious))))))))))) (. .)))
+# BNC,A03,60483,60549
+(ROOT (S (S (PP (IN In) (NP (DT no) (NNS circumstances)))) (VP (MD should) (ADVP (NNS communications)) (VP (VB be) (VP (VBN sent) (PP (TO to) (NP (DT the) (NN prisoner)))))) (. .)))
+# BNC,A06,65226,65253
+(ROOT (SINV (PP (TO To) (NP (JJ such) (NN abhorr))) (VP (VBD 'd)) (NP (NN pollution)) (. .)))
+# BNC,A05,46749,46925
+(ROOT (S (NP (NNP Round) (NX (DT the) (NN corner))) (VP (VBD was) (NP (NP (NP (NNP Dixon) (POS 's)) (NNP Blazes)) (, ,) (NP (DT a) (NN blast) (NN furnace)) (, ,) (CC and) (NP (NP (NP (DT the) (NNPS Workers) (POS ')) (NNP Circle)) (, ,) (SBAR (WHADVP (WRB where)) (S (NP (NP (NNS dreams)) (PP (IN of) (NP (JJ socialist) (NN emancipation)))) (VP (VBD were) (VP (VBN debated) (NP (NP (JJ â€”) (NNS dreams)) (SBAR (WHNP (WDT which)) (S (VP (VBD were) (ADVP (RB soon)) (S (VP (TO to) (VP (VB fade) (PP (IN for) (NP (NNP Glasser))))))))))))))))) (. .)))
+# BNC,FBB,124806,124953
+(ROOT (S (NP (IN With)) (ADVP (RB oligarchy)) (VP (VBD went) (NP (NN federalism)) (PRN (-LRB- -LRB-) (SBAR (IN though) (S (NP (DT the) (NN connection)) (VP (VBD was) (RB not) (NP (DT a) (JJ necessary) (CD one)) (, ,) (SBAR (IN since) (S (PP (IN in) (NP (DT the) (JJ fourth-century) (NN league))) (NP (PRP we)) (VP (VBP find) (NP (JJ democratic) (NNS institutions)))))))) (-RRB- -RRB-))) (. .)))
+# BNC,FBD,55807,55899
+(ROOT (S (PP (IN In) (NP (JJ other) (NNS ducks))) (NP (VBG courting) (NNS males)) (VP (MD may) (RB also) (VP (VB preen) (NP (PRP themselves)) (PP (IN in) (NP (NP (JJ certain) (NNS phases)) (PP (IN of) (NP (PRP$ their) (NNS displays))))))) (. .)))
+# BNC,FB7,9201,9367
+(ROOT (S (S (PP (IN In) (NP (JJ many) (NNS ways))) (NP (NN farming) (NNS techniques)) (VP (VBD appeared) (ADJP (JJ archaic)))) (: :) (S (NP (NP (DT the) (JJ main) (VBG cultivating) (NN tool)) (, ,) (NP (NP (DT the) (NN laya)) (-LRB- -LRB-) (NP (DT a) (JJ two-pronged) (NN fork)) (-RRB- -RRB-)) (, ,)) (VP (VBD seemed) (NP (DT a) (JJ primitive) (NN survival)) (PP (TO to) (NP (NP (NNS enthusiasts)) (PP (IN for) (NP (DT the) (NN plough))))))) (. .)))
+# BNC,FBB,62269,62464
+(ROOT (S (PP (IN Among) (NP (DT these) (NNPS Pythagoreans))) (PRN (SINV (VP (VBD was)) (NP (NP (NNPS Lysis)) (PP (IN of) (NP (NNP Tarentum))) (, ,) (SBAR (WHNP (WP who)) (S (VP (VP (VBD was) (S (VP (TO to) (VP (VB be) (NP (NP (DT the) (NN teacher)) (PP (IN of) (NP (DT the) (NNP Theban) (NNP statesman) (NNPS Epaminondas)))))))) (, ,) (CC but) (VP (VBZ attempts) (S (VP (TO to) (VP (VB link) (NP (NNP Theban) (NNS politics)) (PP (IN with) (NP (NNP Pythagorean))))))))))))) (NP (NN philosophy)) (VP (VBP are) (RB not) (VP (VBG convincing))) (. .)))
+# BNC,FBL,277670,277720
+(ROOT (S (PP (IN For) (NP (JJR more) (NN information) (NN contact))) (NP (NNP Henry)) (VP (VBZ Cooke) (NP (NNP Lumsden))) (. .)))
+# BNC,FDP,56227,56339
+(ROOT (S (S (PP (IN Under) (NP (NN consideration)))) (VP (VBP are) (NP (NP (NNS transactions)) (VP (VBN entered) (PP (IN into)) (PP (IN in) (NP (NP (DT the) (NN course)) (PP (IN of) (S (VP (VBG carrying) (PP (IN on) (NP (JJ unauthorised) (NN investment) (NN business))))))))))) (. .)))
+# BNC,FBH,149428,149488
+(ROOT (S (PP (IN In) (NP (NN reality))) (NP (NNS HSDU)) (VP (VBP are) (NP (NP (NNS guests)) (PP (TO to) (NP (NP (DT the) (JJ â€˜) (NN government) (NN â€™)) (PP (IN of) (NP (NNP Gazankulu))))))) (. .)))
