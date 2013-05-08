@@ -1,0 +1,2 @@
+(It ?[.. (/VB.?/ <: (has|have|had))] .. ((/VB.?/ <: (is|was|been)) $. NP=CleftConstituent .. (WHNP > SBAR=CleftClause)))
+relabel CleftConstituent /^(.*)$/CleftConstituent#$1/

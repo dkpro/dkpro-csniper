@@ -1,0 +1,84 @@
+﻿<!--
+  Copyright 2013
+  Ubiquitous Knowledge Processing (UKP) Lab
+  Technische Universität Darmstadt
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  
+    http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd" >
+	<body>
+		<wicket:extend>
+			<form wicket:id="selectionForm" class="vfill" style="margin:15px">
+				<fieldset class="ui-widget-content ui-corner-all centering">
+					<div><label class="top">Types:</label></div>
+					<div><select class="hfill"wicket:id="type"></select></div>
+					<div class="buttons"><input type="submit" wicket:id="create"/></div>
+				</fieldset>	
+			</form>
+			<form wicket:id="detailForm" class="vfill" style="margin:15px">
+				<fieldset class="ui-widget-content ui-corner-all centering">
+					<table class="hfill" >
+						<tr>
+							<td><label>Name:</label></td>
+							<td class="hfill" ><input type="text" wicket:id="name" class="hfill" /></td>
+						</tr>
+						<tr>
+							<td><label>Goal Correct:</label></td>
+							<td class="hfill" ><input type="number" wicket:id="goal" class="hfill" /></td>
+						</tr>
+						<tr>
+							<td><label>Goal Wrong:</label></td>
+							<td class="hfill" ><input type="number" wicket:id="goalWrong" class="hfill" /></td>
+						</tr>
+						<tr>
+							<td><label>Description:</label></td>
+							<td class="hfill">
+								<textarea wicket:id="description" class="hfill" rows="10"></textarea>
+								<wicket:enclosure>
+									<div class="ui-state-highlight ui-corner-all info ui-helper-reset">
+										<div class="content" wicket:id="previewPane"></div>
+									</div>
+								</wicket:enclosure>
+								<div class="buttons">
+									<input type="submit" wicket:id="previewButton"/>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td><label>Additional columns:</label></td>
+							<td class="hfill">
+								<table>
+									<tr>
+										<th>Column name</th>
+										<th>Show column per default</th>
+										<th>Remove column</th>
+									</tr>
+									<tr wicket:id="additionalColumns">
+										<td><input wicket:id="name" type="text" /></td>
+										<td><input wicket:id="showColumn" type="checkbox" /></td>
+										<td><input wicket:id="removeButton" type="submit" /></td>
+									</tr>
+								</table>
+								<input type="submit" wicket:id="addColumnButton"/>
+							</td>
+						</tr>
+					</table>
+					<div class="buttons">
+						<input type="submit" wicket:id="save"/>
+						<input type="submit" wicket:id="cancel"/>
+					</div>
+				</fieldset>	
+			</form>
+		</wicket:extend>
+	</body>
+</html>

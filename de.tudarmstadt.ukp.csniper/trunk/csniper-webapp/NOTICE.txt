@@ -1,0 +1,37 @@
+de.tudarmstadt.ukp.csniper.webapp.support.task:
+
+Classes in this package have been adapted from org.wicketstuff.progressbar by Christopher Hlubek
+licensed under the Apache Software License 2.0.
+
+AjaxFileDownload:
+
+This class is based on concepts found in example code at
+https://cwiki.apache.org/WICKET/ajax-update-and-file-download-in-one-blow.html
+
+
+Image files:
+
+The following images in src/main/webapp/images are licensed under CC BY-NC-SA:
+	tux-analysis.png	by tarazan, http://tux.crystalxp.net/en.id.9842-tarazan-x-ray.html
+	tux-evaluation.png	by kami23, http://tux.crystalxp.net/en.id.4023-doubtux.html
+	tux-magnifying-glass.png	by OCAL, http://www.clker.com/clipart-24887.html
+								by batux, http://tux.crystalxp.net/en.id.9666-batux-tux-g2-hd.html
+	tux-mechanic.png	by lilitux, http://tux.crystalxp.net/en.id.17369-lilitux-tux-bricoleur.html
+	tux-nace.png	by Brightknight, http://tux.crystalxp.net/en.id.3796-brightknight-tux-hatches.html
+	tux-sherlock.png	by brunocb, http://tux.crystalxp.net/en.id.5975-sherlock-holmes-tux.html
+	tux-statistics.png	by lilitux, http://tux.crystalxp.net/en.id.15113-lilitux-tux-atlas.html, modified by Erik-Lân Do Dinh
+	tux-users.png	by emulienfou, http://tux.crystalxp.net/en.id.12943-emulienfou-msn-tux.html
+
+The following images in src/main/webapp/images are licensed under GNU LGPL:
+	tux-help.png	by Overlord59, http://tux.crystalxp.net/en.id.1764-tux-teacher.html
+	tux-prof.png	by Overlord59, http://tux.crystalxp.net/en.id.1515-tux-teacher.html
+
+Entypo pictograms by Daniel Bruce [www.entypo.com] in src/main/webapp/images are licensed under CC BY-SA:
+	analysis.png
+	ascending.png
+	context.png
+	descending.png
+	questionmark.png
+
+statistics-example-a.png
+ukp-logo.png

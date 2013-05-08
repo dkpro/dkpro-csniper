@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>ClearTkFeature</name>
+  <description/>
+  <version>1.0</version>
+  <vendor/>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.csniper.ml.type.ClearTkFeature</name>
+      <description>This annotation saves a ClearTK Feature.</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>clearTkFeatureName</name>
+          <description>The name of the ClearTK feature.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>clearTkFeatureValue</name>
+          <description>The value of the ClearTK feature.</description>
+          <rangeTypeName>uima.cas.String</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

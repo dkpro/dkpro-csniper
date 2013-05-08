@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><typeSystemDescription xmlns="http://uima.apache.org/resourceSpecifier">
+  <name>BooleanClassification</name>
+  <description/>
+  <version>1.0</version>
+  <vendor/>
+  <types>
+    <typeDescription>
+      <name>de.tudarmstadt.ukp.csniper.ml.type.BooleanClassification</name>
+      <description>This type is intended to be used with a binary classifier.
+It contains fields for
+- gold value
+- predicted value
+- score used for prediction
+- category which is being predicted</description>
+      <supertypeName>uima.tcas.Annotation</supertypeName>
+      <features>
+        <featureDescription>
+          <name>expectedLabel</name>
+          <description/>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>predictedLabel</name>
+          <description/>
+          <rangeTypeName>uima.cas.Boolean</rangeTypeName>
+        </featureDescription>
+        <featureDescription>
+          <name>score</name>
+          <description/>
+          <rangeTypeName>uima.cas.Double</rangeTypeName>
+        </featureDescription>
+      </features>
+    </typeDescription>
+  </types>
+</typeSystemDescription>

@@ -1,0 +1,75 @@
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+		
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="ignoreUnresolvablePlaceholders" value="true"/>
+		<property name="ignoreResourceNotFound" value="true"/>
+		<property name="locations">
+			<list>
+				<value>classpath:META-INF/csniper.properties</value>
+				<value>file:${csniper.home}/csniper.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- setup wicket application -->
+	<bean id="wicketApplication" class="de.tudarmstadt.ukp.csniper.webapp.WicketApplication"/>
+
+	<bean id="examplesRepository" class="de.tudarmstadt.ukp.csniper.webapp.analysis.ExamplesRepository">
+		<property name="examples">
+			<map>
+				<entry key="textmarker">
+					<list>
+						<value>classpath*://textmarker/examples/*.tm</value>
+					</list>
+				</entry>
+				<entry key="tregex">
+					<list>
+						<value>classpath*://tregex/examples/*.tregex</value>
+					</list>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="corpusService" class="de.tudarmstadt.ukp.csniper.webapp.evaluation.CorpusServiceImpl">
+		<property name="repositoryPath" value="${corpus.service.path}"></property>
+		<property name="corpusInfoFile" value="${corpus.service.info.file}"></property>
+		<property name="engines">
+			<list>
+				<bean name="cqp" class="de.tudarmstadt.ukp.csniper.webapp.search.cqp.CqpEngine">
+					<property name="cqpExecutable" value="${engine.cqp.executable}"/>
+					<property name="macrosLocation" value="${engine.cqp.macrosLocation}"/>
+					<property name="corpusService" ref="corpusService" />
+				</bean>
+				<bean name="tgrep" class="de.tudarmstadt.ukp.csniper.webapp.search.tgrep.TgrepEngine">
+					<property name="tgrepExecutable" value="${engine.tgrep.executable}"/>
+					<property name="corpusService" ref="corpusService" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="contextProvider" class="de.tudarmstadt.ukp.csniper.webapp.search.xmi.SerializedCasContextProvider">
+		<property name="corpusService" ref="corpusService" />
+	</bean>
+
+	<bean id="applicationContextProvider" class="de.tudarmstadt.ukp.csniper.webapp.support.spring.ApplicationContextProvider"></bean>
+
+	<bean id="taskService" class="de.tudarmstadt.ukp.csniper.webapp.support.task.TaskService"
+		scope="session">
+		<constructor-arg ref="taskExecutor"/>
+	</bean>
+
+	<bean id="taskExecutor" class="org.wicketstuff.progressbar.spring.AsynchronousExecutor" scope="session"/>
+	
+	<bean id="settingsPath" class="java.lang.String">
+		<constructor-arg value="${csniper.home}" />
+	</bean>
+</beans>
