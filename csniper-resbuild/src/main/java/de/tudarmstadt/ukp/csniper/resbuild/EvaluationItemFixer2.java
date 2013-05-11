@@ -84,22 +84,26 @@ public class EvaluationItemFixer2
 		{
 			setCorpusService(new CorpusService()
 			{
-				public List<SearchEngine> listEngines(String aCorpusId)
+				@Override
+                public List<SearchEngine> listEngines(String aCorpusId)
 				{
 					return null;
 				}
 
-				public List<String> listCorpora()
+				@Override
+                public List<String> listCorpora()
 				{
 					return null;
 				}
 
-				public File getRepositoryPath()
+				@Override
+                public File getRepositoryPath()
 				{
 					return new File(REPOSITORY);
 				}
 
-				public Corpus getCorpus(String aCorpusId)
+				@Override
+                public Corpus getCorpus(String aCorpusId)
 				{
 					return null;
 				}
