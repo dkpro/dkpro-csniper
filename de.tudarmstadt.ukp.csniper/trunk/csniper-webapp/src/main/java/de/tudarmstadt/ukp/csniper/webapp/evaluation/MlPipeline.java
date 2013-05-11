@@ -49,6 +49,14 @@ import org.uimafit.util.JCasUtil;
 
 import com.google.common.io.Files;
 
+import de.tudarmstadt.ukp.csniper.ml.DummySentenceSplitter;
+import de.tudarmstadt.ukp.csniper.ml.GoldFromMetadataAnnotator;
+import de.tudarmstadt.ukp.csniper.ml.TKSVMlightFeatureExtractor;
+import de.tudarmstadt.ukp.csniper.ml.tksvm.DefaultTKSVMlightDataWriterFactory;
+import de.tudarmstadt.ukp.csniper.ml.tksvm.TKSVMlightDataWriter;
+import de.tudarmstadt.ukp.csniper.ml.tksvm.TKSVMlightSequenceClassifier;
+import de.tudarmstadt.ukp.csniper.ml.tksvm.TKSVMlightSequenceClassifierBuilder;
+import de.tudarmstadt.ukp.csniper.ml.tksvm.TreeFeatureVector;
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.CachedParse;
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.EvaluationResult;
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.Mark;
@@ -59,15 +67,6 @@ import de.tudarmstadt.ukp.csniper.webapp.support.task.Task;
 import de.tudarmstadt.ukp.csniper.webapp.support.uima.AnalysisEngineFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
-import de.tudarmstadt.ukp.dkpro.lab.ProgressMeter;
-import de.tudarmstadt.ukp.csniper.ml.DummySentenceSplitter;
-import de.tudarmstadt.ukp.csniper.ml.GoldFromMetadataAnnotator;
-import de.tudarmstadt.ukp.csniper.ml.TKSVMlightFeatureExtractor;
-import de.tudarmstadt.ukp.csniper.ml.tksvm.DefaultTKSVMlightDataWriterFactory;
-import de.tudarmstadt.ukp.csniper.ml.tksvm.TKSVMlightDataWriter;
-import de.tudarmstadt.ukp.csniper.ml.tksvm.TKSVMlightSequenceClassifier;
-import de.tudarmstadt.ukp.csniper.ml.tksvm.TKSVMlightSequenceClassifierBuilder;
-import de.tudarmstadt.ukp.csniper.ml.tksvm.TreeFeatureVector;
 
 public class MlPipeline
 {
