@@ -32,8 +32,6 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.uimafit.pipeline.SimplePipeline;
 
-import de.tudarmstadt.ukp.csniper.resbuild.hadoop.BncReaderReloaded;
-import de.tudarmstadt.ukp.csniper.resbuild.hadoop.PennTreesToCsvWriter;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.SerializedCasWriter;
 import de.tudarmstadt.ukp.dkpro.core.stanfordnlp.StanfordParser;
