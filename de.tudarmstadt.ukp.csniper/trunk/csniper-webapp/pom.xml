@@ -232,9 +232,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>de.tudarmstadt.ukp.statistics</groupId>
-			<artifactId>de.tudarmstadt.ukp.statistics</artifactId>
-			<version>0.0.2</version>
+			<groupId>de.tudarmstadt.ukp.dkpro.statistics</groupId>
+			<artifactId>de.tudarmstadt.ukp.dkpro.statistics</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>radeox</groupId>

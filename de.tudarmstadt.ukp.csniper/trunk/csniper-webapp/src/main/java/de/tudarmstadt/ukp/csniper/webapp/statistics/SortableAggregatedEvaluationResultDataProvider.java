@@ -18,7 +18,6 @@ package de.tudarmstadt.ukp.csniper.webapp.statistics;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -40,9 +39,9 @@ import org.apache.wicket.model.Model;
 import de.tudarmstadt.ukp.csniper.webapp.statistics.model.AggregatedEvaluationResult;
 import de.tudarmstadt.ukp.csniper.webapp.statistics.page.StatisticsPage.TypeStatistics;
 import de.tudarmstadt.ukp.csniper.webapp.statistics.page.StatisticsPage2.ItemStatistics;
-import de.tudarmstadt.ukp.statistics.agreement.AnnotationStudy;
-import de.tudarmstadt.ukp.statistics.agreement.IAnnotationStudy;
-import de.tudarmstadt.ukp.statistics.agreement.MultiRaterPiAgreement;
+import de.tudarmstadt.ukp.dkpro.statistics.agreement.AnnotationStudy;
+import de.tudarmstadt.ukp.dkpro.statistics.agreement.IAnnotationStudy;
+import de.tudarmstadt.ukp.dkpro.statistics.agreement.MultiRaterPiAgreement;
 
 /**
  * Original code from org.apache.wicket.examples.repeater.SortableContactDataProvider, modified and
