@@ -664,8 +664,22 @@ public class EvaluationPage
                     resultTable = resultTable
                             .replaceWith(new CustomDataTable<EvaluationResult>("resultTable",
                                     getAllColumns(pModel.type), dataProvider, ROWS_PER_PAGE));
+                    resultTable.setOutputMarkupPlaceholderTag(true);
+                    aTarget.add(resultTable.setVisible(false));
                     contextAvailable = false;
 
+                    // disable button
+                    setVisible(false);
+                    aTarget.add(stopButton.setVisible(true));
+                    aTarget.add(saveButton.setVisible(false));
+                    aTarget.add(predictButton.setVisible(false));
+                    aTarget.add(samplesetButton.setVisible(false));
+                    aTarget.add(showColumnsForm.setVisible(false));
+                    filterForm.setChoices();
+                    aTarget.add(filterForm);
+                    aTarget.add(limitForm.setVisible(false));
+                    aTarget.add(FindForm.this);
+                    showResultColumns(false);
                     updateComponents(aTarget);
 
                     // Schedule and start a new task
@@ -759,17 +773,9 @@ public class EvaluationPage
                             }
                         }
                     });
-
+                    
                     // Set taskId for model
                     progressionModel.setTaskId(taskId);
-
-                    // disable button
-                    setVisible(false);
-                    stopButton.setVisible(true);
-                    aTarget.add(saveButton.setVisible(false));
-                    aTarget.add(predictButton.setVisible(false));
-                    aTarget.add(samplesetButton.setVisible(false));
-                    aTarget.add(FindForm.this);
 
                     // Start the progress bar, will set visibility to true
                     progressBar.start(aTarget);
@@ -833,6 +839,7 @@ public class EvaluationPage
             aTarget.add(findButton.setVisible(true));
             aTarget.add(stopButton.setVisible(false));
             aTarget.add(saveButton.setVisible(true));
+            aTarget.add(resultTable.setVisible(true));
             aTarget.add(FindForm.this);
             updateComponents(aTarget);
         }
