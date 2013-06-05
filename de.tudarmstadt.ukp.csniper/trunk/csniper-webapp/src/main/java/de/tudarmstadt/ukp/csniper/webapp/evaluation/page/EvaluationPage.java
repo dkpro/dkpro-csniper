@@ -18,7 +18,11 @@
 package de.tudarmstadt.ukp.csniper.webapp.evaluation.page;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singleton;
+import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -26,11 +30,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UIMAException;
+import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.cas.CAS;
+import org.apache.uima.util.CasCreationUtils;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;
@@ -74,6 +83,8 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.lang.PropertyResolver;
+import org.cleartk.classifier.jar.DirectoryDataWriterFactory;
+import org.cleartk.classifier.jar.Train;
 import org.odlabs.wiquery.ui.tabs.Tabs;
 import org.radeox.api.engine.RenderEngine;
 import org.radeox.api.engine.context.RenderContext;
@@ -83,6 +94,10 @@ import org.springframework.dao.NonTransientDataAccessException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.wicketstuff.progressbar.ProgressBar;
 
+import com.google.common.io.Files;
+
+import de.tudarmstadt.ukp.csniper.ml.TKSVMlightFeatureExtractor;
+import de.tudarmstadt.ukp.csniper.ml.tksvm.DefaultTKSVMlightDataWriterFactory;
 import de.tudarmstadt.ukp.csniper.webapp.DefaultValues;
 import de.tudarmstadt.ukp.csniper.webapp.analysis.ParseTreeResource;
 import de.tudarmstadt.ukp.csniper.webapp.analysis.uima.ParsingPipeline;
@@ -104,6 +119,8 @@ import de.tudarmstadt.ukp.csniper.webapp.search.ContextProvider;
 import de.tudarmstadt.ukp.csniper.webapp.search.CorpusService;
 import de.tudarmstadt.ukp.csniper.webapp.search.PreparedQuery;
 import de.tudarmstadt.ukp.csniper.webapp.search.SearchEngine;
+import de.tudarmstadt.ukp.csniper.webapp.search.tgrep.PennTreeUtils;
+import de.tudarmstadt.ukp.csniper.webapp.statistics.model.AggregatedEvaluationResult;
 import de.tudarmstadt.ukp.csniper.webapp.support.task.ITaskService;
 import de.tudarmstadt.ukp.csniper.webapp.support.task.Task;
 import de.tudarmstadt.ukp.csniper.webapp.support.task.TaskProgressionModel;
@@ -116,6 +133,8 @@ import de.tudarmstadt.ukp.csniper.webapp.support.wicket.EmbeddableImage;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.ExtendedIndicatingAjaxButton;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.LocalizerUtil;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.ThresholdLink;
+import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 
 /**
  * Evaluation Page
@@ -131,6 +150,7 @@ public class EvaluationPage
 	private QueryForm queryForm;
 	private ReviewForm reviewForm;
 	private SamplesetForm samplesetForm;
+	private FindForm findForm;
 	private FilterForm filterForm;
 	private ShowColumnsForm showColumnsForm;
 	private LimitForm limitForm;
@@ -600,10 +620,228 @@ public class EvaluationPage
 		private SampleSet sampleset;
 	}
 
-	public static class PredictionFormModel
-		implements Serializable
-	{
-		private static final long serialVersionUID = 1L;
+    private class FindForm
+        extends Form<Void>
+    {
+        private static final long serialVersionUID = 1L;
+        private ProgressBar progressBar;
+        private TaskProgressionModel progressionModel;
+        private ExtendedIndicatingAjaxButton findButton;
+        private AjaxLink stopButton;
+
+        public FindForm(String aId)
+        {
+            super(aId);
+
+            progressionModel = new TaskProgressionModel()
+            {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                protected ITaskService getTaskService()
+                {
+                    return EvaluationPage.this.getTaskService();
+                }
+            };
+
+            add(findButton = new ExtendedIndicatingAjaxButton("findButton", new Model<String>(
+                    "Find"), new Model<String>("Finding ..."))
+            {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public void onSubmit(AjaxRequestTarget aTarget, Form<?> aForm)
+                {
+                    final ParentOptionsFormModel pModel = parentOptionsForm.getModelObject();
+                    final String user = SecurityContextHolder.getContext().getAuthentication()
+                            .getName();
+
+                    // update dataprovider
+                    dataProvider = new SortableEvaluationResultDataProvider();
+                    dataProvider.setSort("item.documentId", SortOrder.ASCENDING);
+                    dataProvider.setFilter(ResultFilter.ALL);
+                    // then update the table
+                    resultTable = resultTable
+                            .replaceWith(new CustomDataTable<EvaluationResult>("resultTable",
+                                    getAllColumns(pModel.type), dataProvider, ROWS_PER_PAGE));
+                    contextAvailable = false;
+
+                    updateComponents(aTarget);
+
+                    // Schedule and start a new task
+                    Long taskId = EvaluationPage.this.getTaskService().scheduleAndStart(new Task()
+                    {
+                        @Override
+                        protected void run()
+                        {
+                            try {
+                                // get aggregated results
+                                List<AggregatedEvaluationResult> aggregatedResults = repository
+                                        .listAggregatedResults(singleton(pModel.collectionId),
+                                                singleton(pModel.type), new HashSet<String>(
+                                                        repository.listUsers()), 0.0, 0.0);
+
+                                if (aggregatedResults.isEmpty()) {
+                                    return;
+                                }
+
+                                // create training list
+                                List<EvaluationResult> trainingList = MlPipeline
+                                        .convertToSimple(aggregatedResults);
+
+                                File modelDir = MlPipeline.train(trainingList, repository);
+
+                                String language = corpusService.getCorpus(pModel.collectionId)
+                                        .getLanguage();
+                                int max = (int) repository.getCachedParsesCount(pModel.collectionId);
+
+                                // Create list of pages
+                                int pageSize = 1000;
+                                int[][] pages = repository.listCachedParsesPages(
+                                        pModel.collectionId, pageSize);
+                                
+                                // Shuffle pages
+                                Random random = new Random();
+                                for (int i = 0; i < pages.length; i++) {
+                                    int randomPosition = random.nextInt(pages.length);
+                                    int[] temp = pages[i];
+                                    pages[i] = pages[randomPosition];
+                                    pages[randomPosition] = temp;                                    
+                                }
+
+                                int goal = 1000;
+                                setTotal(goal);
+                                
+                                for (int p = 0; p < pages.length; p++) {
+                                    checkCanceled();
+
+                                    List<CachedParse> parses = repository.listCachedParses(
+                                            pModel.collectionId, pages[p][0], pages[p][1]);
+                                    // In the last iteration, the page size is cropped to the size
+                                    // of the last page.
+                                    pageSize = parses.size();
+
+                                    List<EvaluationResult> results = MlPipeline.classifyPreParsed(
+                                            modelDir, parses, pModel.type.getName(), user);
+
+                                    // Keep only the correct ones
+                                    ListIterator<EvaluationResult> ri = results.listIterator();
+                                    while (ri.hasNext()) {
+                                        EvaluationResult r = ri.next();
+                                        Mark mark = Mark.fromString(r.getResult());
+                                        if (mark != Mark.PRED_CORRECT) {
+                                            ri.remove();
+                                        }
+                                    }
+                                    
+                                    // Putting this here to avoid adding results of a still
+                                    // running iteration to the table because this could tigger
+                                    // a concurrent modification problem. Checking for cancelled
+                                    // here again should reduce this risk to a minimum.
+                                    checkCanceled();
+
+                                    // Add to table
+                                    dataProvider.getResults().addAll(results);
+                                    
+                                    setCurrent(dataProvider.getResults().size());
+                                    
+                                    // Check if goal was reached
+                                    if (dataProvider.getResults().size() >= goal) {
+                                        break;
+                                    }
+                                }
+                            }
+                            catch (UIMAException e) {
+                                e.printStackTrace();
+                            }
+                            catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
+                    // Set taskId for model
+                    progressionModel.setTaskId(taskId);
+
+                    // disable button
+                    setVisible(false);
+                    stopButton.setVisible(true);
+                    aTarget.add(saveButton.setVisible(false));
+                    aTarget.add(predictButton.setVisible(false));
+                    aTarget.add(samplesetButton.setVisible(false));
+                    aTarget.add(FindForm.this);
+
+                    // Start the progress bar, will set visibility to true
+                    progressBar.start(aTarget);
+                }
+
+                @Override
+                public void onError(AjaxRequestTarget aTarget, Form<?> aForm)
+                {
+                    super.onError(aTarget, aForm);
+                    // Make sure the feedback messages are rendered
+                    aTarget.add(getFeedbackPanel());
+                }
+            });
+
+            add(progressBar = new ProgressBar("progress", progressionModel)
+            {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                protected void onFinished(AjaxRequestTarget aTarget)
+                {
+                    finishTask(aTarget);
+                }
+            });
+            // Hide progress bar initially
+            progressBar.setVisible(false);
+
+            add(stopButton = new AjaxLink("stopButton")
+            {
+                private static final long serialVersionUID = 1L;
+
+                @Override
+                public void onClick(AjaxRequestTarget aTarget)
+                {
+                    cancel(aTarget);
+                }
+            });
+            stopButton.setVisible(false);
+
+        }
+
+        protected void cancel(AjaxRequestTarget aTarget)
+        {
+            getTaskService().cancel(progressionModel.getTaskId());
+            finishTask(aTarget);
+        }
+
+        protected void finishTask(AjaxRequestTarget aTarget)
+        {
+            for (Message m : getTaskService().getMessages(progressionModel.getTaskId())) {
+                error(m.messageKey);
+            }
+
+            // finish the task!
+            getTaskService().finish(progressionModel.getTaskId());
+
+            // Hide progress bar after finish
+            progressBar.setVisible(false);
+
+            // re-enable button
+            aTarget.add(findButton.setVisible(true));
+            aTarget.add(stopButton.setVisible(false));
+            aTarget.add(saveButton.setVisible(true));
+            aTarget.add(FindForm.this);
+            updateComponents(aTarget);
+        }
+    }
+
+    public static class PredictionFormModel
+        implements Serializable
+    {
+        private static final long serialVersionUID = 1L;
 
 		private Set<String> users = new HashSet<String>();
 		private Double userThreshold = DefaultValues.DEFAULT_USER_THRESHOLD;
@@ -1547,6 +1785,8 @@ public class EvaluationPage
 		});
 		// sampleset tab
 		tabs.add(samplesetForm = new SamplesetForm("samplesetForm"));
+        // sampleset tab
+        tabs.add(findForm = new FindForm("findForm"));
 		add(tabs);
 
 		add(new Label("description", new LoadableDetachableModel<String>()
@@ -1616,16 +1856,17 @@ public class EvaluationPage
 						items = repository.writeEvaluationItems(items);
 						List<EvaluationResult> results = createEvaluationResults(items);
 						dataProvider.setResults(results);
+                        repository.writeEvaluationResults(results);
 
+                        // save results, query
 						ParentOptionsFormModel pModel = parentOptionsForm.getModelObject();
 						String user = SecurityContextHolder.getContext().getAuthentication()
 								.getName();
-
-						// save results, query
 						QueryFormModel model = queryForm.getModelObject();
-						repository.recordQuery(model.engine.getName(), model.query,
-								pModel.collectionId, pModel.type.getName(), model.comment, user);
-						repository.writeEvaluationResults(results);
+						if (model.engine != null && !StringUtils.isBlank(model.query)) {
+    						repository.recordQuery(model.engine.getName(), model.query,
+    								pModel.collectionId, pModel.type.getName(), model.comment, user);
+						}
 
 						// hide saveButton, show result columns and filter options
 						limitForm.setVisible(false);
@@ -1718,11 +1959,11 @@ public class EvaluationPage
 	private List<EvaluationResult> createEvaluationResults(List<EvaluationItem> aItems)
 	{
 		String user = SecurityContextHolder.getContext().getAuthentication().getName();
-		List<EvaluationResult> results = new ArrayList<EvaluationResult>();
-		for (EvaluationItem item : new HashSet<EvaluationItem>(aItems)) {
-			results.add(new EvaluationResult(item, user, ""));
-		}
-		return results;
+        List<EvaluationResult> results = new ArrayList<EvaluationResult>();
+        for (EvaluationItem item : new HashSet<EvaluationItem>(aItems)) {
+            results.add(new EvaluationResult(item, user, ""));
+        }
+        return results;
 	}
 
 	private void updateComponents(AjaxRequestTarget aTarget)
