@@ -27,6 +27,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Set;
 
@@ -75,7 +76,7 @@ import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 
 public class MlPipeline
 {
-	private Log LOG = LogFactory.getLog(MlPipeline.class);
+	private static Log LOG = LogFactory.getLog(MlPipeline.class);
 
 	// private static final String LANGUAGE = "en";
 	private static final Double THRESHOLD = 0.0;
@@ -406,6 +407,10 @@ public class MlPipeline
         return modelDir;
 	}
     
+    /**
+     * Mind this method may return less results than parses were passed to it, e.g. because a 
+     * cached parse may be empty or "ERROR" in which case no result for it is generated!
+     */
     public static List<EvaluationResult> classifyPreParsed(File aModelDir, List<CachedParse> aParses,
             String aType, String aUser)
         throws IOException, UIMAException
@@ -421,6 +426,19 @@ public class MlPipeline
             bw = new BufferedWriter(new FileWriter(cFile));
 
             for (CachedParse parse : aParses) {
+                if (parse.getPennTree().isEmpty() || "ERROR".equals(parse.getPennTree())) {
+                    continue;
+                }
+                
+                String coveredText;
+                try {
+                    coveredText = PennTreeUtils.toText(parse.getPennTree());
+                }
+                catch (EmptyStackException e) {
+                    LOG.error("Invalid Penn Tree: ["+parse.getPennTree()+"]", e);
+                    continue;
+                }
+                
                 // Prepare evaluation item to return
                 EvaluationItem item = new EvaluationItem();
                 item.setType(aType);
@@ -428,7 +446,7 @@ public class MlPipeline
                 item.setEndOffset(parse.getEndOffset());
                 item.setDocumentId(parse.getDocumentId());
                 item.setCollectionId(parse.getCollectionId());
-                item.setCoveredText(PennTreeUtils.toText(parse.getPennTree()));
+                item.setCoveredText(coveredText);
                 items.add(item);
                 
                 // write tree to file
@@ -451,10 +469,10 @@ public class MlPipeline
         // classify all
         List<Double> predictions = classifier.tkSvmLightPredict2(cFile);
 
-        if (predictions.size() != aParses.size()) {
+        if (predictions.size() != items.size()) {
             // TODO throw different exception instead
             throw new IOException("there are [" + predictions.size() + "] predictions, but ["
-                    + aParses.size() + "] were expected.");
+                    + items.size() + "] were expected.");
         }
 
         List<EvaluationResult> results = new ArrayList<EvaluationResult>();
