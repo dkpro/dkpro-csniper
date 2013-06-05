@@ -42,7 +42,10 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.CASException;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.util.CasCreationUtils;
+import org.cleartk.classifier.CleartkProcessingException;
+import org.cleartk.classifier.DataWriter;
 import org.cleartk.classifier.Feature;
+import org.cleartk.classifier.Instance;
 import org.cleartk.classifier.jar.DirectoryDataWriterFactory;
 import org.cleartk.classifier.jar.Train;
 import org.uimafit.util.JCasUtil;
@@ -58,9 +61,11 @@ import de.tudarmstadt.ukp.csniper.ml.tksvm.TKSVMlightSequenceClassifier;
 import de.tudarmstadt.ukp.csniper.ml.tksvm.TKSVMlightSequenceClassifierBuilder;
 import de.tudarmstadt.ukp.csniper.ml.tksvm.TreeFeatureVector;
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.CachedParse;
+import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.EvaluationItem;
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.EvaluationResult;
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.Mark;
 import de.tudarmstadt.ukp.csniper.webapp.project.model.AnnotationType;
+import de.tudarmstadt.ukp.csniper.webapp.search.tgrep.PennTreeUtils;
 import de.tudarmstadt.ukp.csniper.webapp.statistics.SortableAggregatedEvaluationResultDataProvider.ResultFilter;
 import de.tudarmstadt.ukp.csniper.webapp.statistics.model.AggregatedEvaluationResult;
 import de.tudarmstadt.ukp.csniper.webapp.support.task.Task;
@@ -73,7 +78,7 @@ public class MlPipeline
 	private Log LOG = LogFactory.getLog(MlPipeline.class);
 
 	// private static final String LANGUAGE = "en";
-	private final Double THRESHOLD = 0.0;
+	private static final Double THRESHOLD = 0.0;
 
 	private String language;
 
@@ -196,9 +201,7 @@ public class MlPipeline
 			CAS cas = CasCreationUtils.createCas(createTypeSystemDescription(), null, null);
 			ProgressMeter progress = new ProgressMeter(aToPredictList.size());
 			for (EvaluationResult result : aToPredictList) {
-				// set doc text
 				cas.setDocumentText(result.getItem().getCoveredText());
-				// set language
 				cas.setDocumentLanguage(language);
 
 				// dummy sentence split
@@ -209,6 +212,7 @@ public class MlPipeline
 
 				// get parse from db, or parse now
 				String pennTree = parse(result, cas);
+				
 				// write tree to file
 				Feature tree = new Feature("TK_tree", StringUtils.normalizeSpace(pennTree));
 				TreeFeatureVector tfv = classifier.getFeaturesEncoder().encodeAll(
@@ -366,4 +370,103 @@ public class MlPipeline
 
 		return trainingList;
 	}
+	
+    public static File train(List<EvaluationResult> aTrainingList, EvaluationRepository aRepository)
+        throws IOException, CleartkProcessingException
+    {
+        File modelDir = Files.createTempDir();
+        DefaultTKSVMlightDataWriterFactory dataWriterFactory = new DefaultTKSVMlightDataWriterFactory();
+        dataWriterFactory.setOutputDirectory(modelDir);
+        DataWriter<Boolean> dataWriter = dataWriterFactory.createDataWriter();
+        
+        for (EvaluationResult result : aTrainingList) {
+            CachedParse cp = aRepository.getCachedParse(result.getItem());
+            if (cp == null || cp.getPennTree().isEmpty() || "ERROR".equals(cp.getPennTree())) {
+                System.out.println("Unable to parse: [" + result.getItem().getCoveredText()
+                        + "] (cached)");
+                continue;
+            }
+            
+            Instance<Boolean> instance = new Instance<Boolean>();
+            instance.add(new Feature("TK_tree", StringUtils.normalizeSpace(cp.getPennTree())));
+            instance.setOutcome(Mark.fromString(result.getResult()) == Mark.CORRECT);
+            dataWriter.write(instance);
+        }
+
+        dataWriter.finish();
+
+        // train model
+        try {
+            Train.main(modelDir.getPath(), "-t", "5", "-c", "1.0", "-C", "+");
+        }
+        catch (Exception e) {
+            throw new CleartkProcessingException(e);
+        }
+        
+        return modelDir;
+	}
+    
+    public static List<EvaluationResult> classifyPreParsed(File aModelDir, List<CachedParse> aParses,
+            String aType, String aUser)
+        throws IOException, UIMAException
+    {
+        TKSVMlightSequenceClassifierBuilder builder = new TKSVMlightSequenceClassifierBuilder();
+        TKSVMlightSequenceClassifier classifier = builder
+                .loadClassifierFromTrainingDirectory(aModelDir);
+        File cFile = File.createTempFile("tkclassify", ".txt");
+
+        List<EvaluationItem> items = new ArrayList<EvaluationItem>();
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter(cFile));
+
+            for (CachedParse parse : aParses) {
+                // Prepare evaluation item to return
+                EvaluationItem item = new EvaluationItem();
+                item.setType(aType);
+                item.setBeginOffset(parse.getBeginOffset());
+                item.setEndOffset(parse.getEndOffset());
+                item.setDocumentId(parse.getDocumentId());
+                item.setCollectionId(parse.getCollectionId());
+                item.setCoveredText(PennTreeUtils.toText(parse.getPennTree()));
+                items.add(item);
+                
+                // write tree to file
+                Feature tree = new Feature("TK_tree", StringUtils.normalizeSpace(parse.getPennTree()));
+                TreeFeatureVector tfv = classifier.getFeaturesEncoder().encodeAll(
+                        Arrays.asList(tree));
+                
+                bw.write("0");
+                bw.write(TKSVMlightDataWriter.createString(tfv));
+                bw.write(SystemUtils.LINE_SEPARATOR);
+            }
+        }
+        catch (IOException e) {
+            throw new AnalysisEngineProcessException(e);
+        }
+        finally {
+            IOUtils.closeQuietly(bw);
+        }
+
+        // classify all
+        List<Double> predictions = classifier.tkSvmLightPredict2(cFile);
+
+        if (predictions.size() != aParses.size()) {
+            // TODO throw different exception instead
+            throw new IOException("there are [" + predictions.size() + "] predictions, but ["
+                    + aParses.size() + "] were expected.");
+        }
+
+        List<EvaluationResult> results = new ArrayList<EvaluationResult>();
+        for (EvaluationItem item : items) {
+            results.add(new EvaluationResult(item, aUser, ""));
+        }
+        
+        for (int i = 0; i < results.size(); i++) {
+            Mark m = (predictions.get(i) > THRESHOLD) ? Mark.PRED_CORRECT : Mark.PRED_WRONG;
+            results.get(i).setResult(m.getTitle());
+        }
+        
+        return results;
+    }
 }

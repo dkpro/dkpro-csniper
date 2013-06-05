@@ -77,10 +77,11 @@ public class SortableEvaluationResultDataProvider
 	private String lastSortProperty;
 	private boolean lastSortOrder;
 
-	private SortableEvaluationResultDataProvider()
+	public SortableEvaluationResultDataProvider()
 	{
 		// set default sort
 		setSort("id", SortOrder.ASCENDING);
+		setResults(new ArrayList<EvaluationResult>());
 	}
 	
 	public SortableEvaluationResultDataProvider(List<EvaluationResult> aResults)

@@ -41,6 +41,8 @@
 							</li>
 							<li><a href="#tab4">Sample sets</a>
 							</li>
+							<li><a href="#tab5">Find</a>
+							</li>
 						</ul>
 						<div id="tab1">
 							<form wicket:id="queryForm" method="post" action="?" style="padding: 15px">
@@ -102,6 +104,20 @@
 								</table>
 								<div class="buttons">
 									<button wicket:id="samplesetButton">Load sampleset</button>
+								</div>
+							</form>
+						</div>
+						<div id="tab5">
+							<form wicket:id="findForm" method="post" action="?" style="padding: 15px">
+								<p>Find instances of the selected type using a classifier. If an
+								  instance has already been manually marked as a positive or 
+								  negative instance, it is not returned.</p>
+								<div class="centering">
+									<div wicket:id="progress"></div>
+								</div>
+								<div class="buttons">
+									<button wicket:id="findButton">Find</button>
+									<button wicket:id="stopButton">Stop</button>
 								</div>
 							</form>
 						</div>

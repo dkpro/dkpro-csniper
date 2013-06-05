@@ -168,7 +168,7 @@ public class ProjectRepository
 					.getSingleResult();
 		}
 		catch (NoResultException e) {
-			log.debug("No results for query: " + StringUtils.join(query, " "));
+			// log.debug("No results for query: " + StringUtils.join(query, " "));
 		}
 
 		if (length.compareTo(BigInteger.valueOf(Integer.MAX_VALUE)) > 0) {

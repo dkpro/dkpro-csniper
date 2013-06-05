@@ -38,6 +38,21 @@ public class PennTreeUtilsTest
 				"(NNS approaches)))))))))))) (. .)))");
 	}
 
+	@Test
+	public void testToText()
+	{
+	    PennTreeNode n = PennTreeUtils.parsePennTree(
+	            "(ROOT (S (NP (PRP It)) (VP (VBZ is) (PP (IN for) (NP (NP (DT this) (NN reason)) " +
+                "(SBAR (IN that) (S (NP (NN deconstruction)) (VP (VP (VBZ remains) (NP (NP " +
+                "(DT a) (JJ fundamental) (NN threat)) (PP (TO to) (NP (NNP Marxism))))) (, ,) " +
+                "(CC and) (VP (PP (IN by) (NP (NP (NN implication)) (PP (TO to) (NP (JJ other) " +
+                "(ADJP (JJ culturalist) (CC and) (JJ contextualizing)) " +
+                "(NNS approaches)))))))))))) (. .)))");
+	    assertEquals("It is for this reason that deconstruction remains a fundamental threat to " +
+	    		"Marxism , and by implication to other culturalist and contextualizing " +
+	    		"approaches .", PennTreeUtils.toText(n));
+	}
+	
 	private static void doTest(String aBracket)
 	{
 		String expected = aBracket;

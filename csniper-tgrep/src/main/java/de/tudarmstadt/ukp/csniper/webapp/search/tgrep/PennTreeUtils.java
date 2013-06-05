@@ -28,6 +28,42 @@ import org.apache.commons.lang.mutable.MutableInt;
  */
 public class PennTreeUtils
 {
+    public static String toText(String aTree)
+    {
+        return toText(parsePennTree(aTree));
+    }
+    
+    public static String toText(PennTreeNode aNode)
+    {
+        StringBuilder buf = new StringBuilder();
+        toText(buf, aNode);
+        return buf.toString();
+    }
+    
+    private static void toText(StringBuilder aBuffer, PennTreeNode aNode)
+    {
+        if (aNode.isTerminal()) {
+            if (aBuffer.length() > 0) {
+                aBuffer.append(" ");
+            }
+            String label = aNode.getLabel();
+            if ("-LRB-".equals(label)) {
+                aBuffer.append("(");
+            }
+            else if ("-RRB-".equals(label)) {
+                aBuffer.append(")");
+            }
+            else {
+                aBuffer.append(label);
+            }
+        }
+        else {
+            for (PennTreeNode n : aNode.getChildren()) {
+                toText(aBuffer, n);
+            }
+        }
+    }
+    
 	public static PennTreeNode selectDfs(PennTreeNode aNode, int aIndex)
 	{
 		return dfs(aIndex, new MutableInt(0), aNode);
