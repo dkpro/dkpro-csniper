@@ -35,7 +35,8 @@ public class TuebaCorpusBuilder
 				NegraExportReader.PARAM_SOURCE_LOCATION, "/Users/bluefire/UKP/Library/Corpora/TueBaDZ/Version5/tuebadz-5.0.export.bz2",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_COLLECTION_ID, "tuebadz5",
-				NegraExportReader.PARAM_ENCODING, "ISO-8859-15");
+				NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
+				NegraExportReader.PARAM_READ_PENN_TREE, true);
 
 		AnalysisEngineDescription tt = createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class,
 				// POS tags are provided in the corpus, but lemmas are not
