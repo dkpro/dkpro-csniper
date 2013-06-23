@@ -75,6 +75,7 @@ public class ProjectRepository
 				.getResultList();
 	}
 
+    @Transactional
 	public AnnotationType readAnnotationType(String aName)
 	{
 		try {
@@ -119,6 +120,7 @@ public class ProjectRepository
 		entityManager.refresh(aEntity);
 	}
 
+    @Transactional
 	public int countEntriesWithAdditionalColumn(String aUserId, AnnotationType aType,
 			AdditionalColumn aAdditionalColumn)
 	{
@@ -152,6 +154,7 @@ public class ProjectRepository
 	 *            the column for which the maximum length shall be returned
 	 * @return the maximum length of the specified column in the specified table
 	 */
+    @Transactional
 	public int getDbColumnLength(String aEntityName, String aColumn)
 	{
 		BigInteger length = new BigInteger("255");
