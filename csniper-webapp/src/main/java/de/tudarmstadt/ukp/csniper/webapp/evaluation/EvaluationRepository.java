@@ -184,6 +184,7 @@ public class EvaluationRepository
         }
     }
 
+    @Transactional
     public int[][] listCachedParsesPages(String aCollectionId, int aPageSize)
     {
         List<int[]> pages = new ArrayList<int[]>();
@@ -224,6 +225,7 @@ public class EvaluationRepository
         return pages.toArray(new int[pages.size()][2]);
     }
     
+    @Transactional
     public List<CachedParse> listCachedParses(String aCollectionId, int aStartId, int aEndId)
     {
         return entityManager
@@ -234,6 +236,7 @@ public class EvaluationRepository
                 .getResultList();
     }
 
+    @Transactional
     public long getCachedParsesCount(String aCollectionId)
     {
         return entityManager
