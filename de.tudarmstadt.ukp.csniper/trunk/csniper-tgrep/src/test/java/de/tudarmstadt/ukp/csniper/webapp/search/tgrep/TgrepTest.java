@@ -24,9 +24,9 @@ import org.apache.uima.analysis_engine.AnalysisEngine;
 import org.apache.uima.collection.CollectionReader;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.uimafit.factory.AnalysisEngineFactory;
-import org.uimafit.factory.CollectionReaderFactory;
-import org.uimafit.pipeline.SimplePipeline;
+import org.apache.uima.fit.factory.AnalysisEngineFactory;
+import org.apache.uima.fit.factory.CollectionReaderFactory;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.ukp.dkpro.core.io.text.StringReader;
 import de.tudarmstadt.ukp.dkpro.core.io.tgrep.TGrepWriter;
@@ -86,7 +86,7 @@ public class TgrepTest
 		AnalysisEngine seg = AnalysisEngineFactory.createPrimitive(OpenNlpSegmenter.class);
 
 		AnalysisEngine par = AnalysisEngineFactory.createPrimitive(OpenNlpParser.class,
-				OpenNlpParser.PARAM_CREATE_PENN_TREE_STRING, true,
+				OpenNlpParser.PARAM_WRITE_PENN_TREE, true,
 				OpenNlpParser.PARAM_LANGUAGE, "en");
 
 		AnalysisEngine tcw = AnalysisEngineFactory.createPrimitive(TGrepWriter.class,

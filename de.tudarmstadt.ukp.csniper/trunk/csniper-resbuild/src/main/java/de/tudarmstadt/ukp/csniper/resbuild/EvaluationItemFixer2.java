@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
 
 import java.io.File;
 import java.sql.Connection;
@@ -35,9 +35,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.factory.JCasFactory;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.csniper.resbuild.stuff.DummySentenceSplitter;
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.Corpus;

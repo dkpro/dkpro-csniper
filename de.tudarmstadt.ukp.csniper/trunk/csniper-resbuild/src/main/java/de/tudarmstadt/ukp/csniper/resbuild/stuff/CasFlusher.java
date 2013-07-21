@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild.stuff;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -46,9 +46,9 @@ import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.junit.Test;
 import org.tukaani.xz.XZInputStream;
-import org.uimafit.pipeline.SimplePipeline;
-import org.uimafit.util.CasUtil;
-import org.uimafit.util.JCasUtil;
+import org.apache.uima.fit.pipeline.SimplePipeline;
+import org.apache.uima.fit.util.CasUtil;
+import org.apache.uima.fit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;

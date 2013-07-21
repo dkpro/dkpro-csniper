@@ -17,7 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,8 +27,6 @@ import java.io.IOException;
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
-import org.uimafit.factory.CollectionReaderFactory;
-import org.uimafit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
 import de.tudarmstadt.ukp.dkpro.core.io.bincas.SerializedCasWriter;
@@ -50,7 +50,7 @@ public class ConversionExample
 		throws UIMAException, IOException
 	{
 		// read the sample file
-		CollectionReader reader = CollectionReaderFactory.createCollectionReader(
+		CollectionReader reader = createCollectionReader(
 				NegraExportReader.class,
 				NegraExportReader.PARAM_ENCODING, "ISO-8859-1",
 				NegraExportReader.PARAM_LANGUAGE, aLanguage,
@@ -58,12 +58,12 @@ public class ConversionExample
 
 		// write serialized CAS (used for displying context in CSniper)
 		AnalysisEngineDescription casWriter = createPrimitiveDescription(SerializedCasWriter.class,
-				SerializedCasWriter.PARAM_PATH, "target/" + aCollection.toUpperCase() + "/bin",
+				SerializedCasWriter.PARAM_TARGET_LOCATION, "target/" + aCollection.toUpperCase() + "/bin",
 				SerializedCasWriter.PARAM_USE_DOCUMENT_ID, true,
 				SerializedCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ);
 
 		// write corpus in cqp format (used for searching in CSniper)
-		AnalysisEngineDescription cqpWriter = createPrimitiveDescription(ImsCwbWriter.class,
+		AnalysisEngineDescription cqpWriter = createEngineDescription(ImsCwbWriter.class,
 				ImsCwbWriter.PARAM_CORPUS_NAME, aCollection,
 				ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8",
 				ImsCwbWriter.PARAM_TARGET_LOCATION, "target/" + aCollection.toUpperCase() + "/cqp",
@@ -74,6 +74,6 @@ public class ConversionExample
 				ImsCwbWriter.PARAM_WRITE_LEMMA, true,
 				ImsCwbWriter.PARAM_WRITE_DOC_ID, false);
 
-		SimplePipeline.runPipeline(reader, casWriter, cqpWriter);
+		org.apache.uima.fit.pipeline.SimplePipeline.runPipeline(reader, casWriter, cqpWriter);
 	}
 }

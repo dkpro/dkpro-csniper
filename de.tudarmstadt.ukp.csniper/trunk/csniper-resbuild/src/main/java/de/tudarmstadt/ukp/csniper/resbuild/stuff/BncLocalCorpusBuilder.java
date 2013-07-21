@@ -17,9 +17,9 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild.stuff;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.uimafit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +30,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReader;
 import org.apache.uima.resource.ResourceInitializationException;
-import org.uimafit.pipeline.SimplePipeline;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.ukp.csniper.resbuild.ProgressLogger;
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
@@ -109,7 +109,7 @@ public class BncLocalCorpusBuilder
 		// output as serialized cas
 		AnalysisEngineDescription scw = createPrimitiveDescription(SerializedCasWriter.class,
 				SerializedCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ,
-				SerializedCasWriter.PARAM_PATH, OUTPUT_SER_CAS_PATH,
+				SerializedCasWriter.PARAM_TARGET_LOCATION, OUTPUT_SER_CAS_PATH,
 				SerializedCasWriter.PARAM_STRIP_EXTENSION, true);
 
 		// output as csv for fast db import

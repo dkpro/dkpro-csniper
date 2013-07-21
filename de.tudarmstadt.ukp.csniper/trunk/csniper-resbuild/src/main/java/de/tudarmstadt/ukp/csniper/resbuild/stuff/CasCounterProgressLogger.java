@@ -19,8 +19,8 @@ package de.tudarmstadt.ukp.csniper.resbuild.stuff;
 
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 
 public class CasCounterProgressLogger
 	extends JCasAnnotator_ImplBase

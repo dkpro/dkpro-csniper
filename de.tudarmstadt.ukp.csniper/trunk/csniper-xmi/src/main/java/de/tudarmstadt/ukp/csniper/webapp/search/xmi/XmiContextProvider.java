@@ -18,7 +18,7 @@
 package de.tudarmstadt.ukp.csniper.webapp.search.xmi;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
-import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
+import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,7 +39,7 @@ import org.apache.uima.cas.impl.XmiCasDeserializer;
 import org.apache.uima.internal.util.Timer;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.util.CasCreationUtils;
-import org.uimafit.util.JCasUtil;
+import org.apache.uima.fit.util.JCasUtil;
 import org.xml.sax.SAXException;
 
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.EvaluationItem;

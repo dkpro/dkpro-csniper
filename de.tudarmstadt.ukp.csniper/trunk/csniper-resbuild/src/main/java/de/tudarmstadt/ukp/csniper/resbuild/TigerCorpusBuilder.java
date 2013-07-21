@@ -17,10 +17,10 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild;
 
-import static org.uimafit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
 
 import org.apache.uima.collection.CollectionReaderDescription;
-import org.uimafit.pipeline.SimplePipeline;
+import org.apache.uima.fit.pipeline.SimplePipeline;
 
 import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
 
@@ -29,7 +29,7 @@ public class TigerCorpusBuilder
 	public static void main(String[] args) throws Exception
 	{
 		CollectionReaderDescription reader = createDescription(NegraExportReader.class, 
-				NegraExportReader.PARAM_SOURCE_LOCATION, "/Users/bluefire/UKP/Library/Corpora/tiger_release_dec05.export.bz2",
+				NegraExportReader.PARAM_SOURCE_LOCATION, "/Users/bluefire/UKP/Library/Corpora/TIGER/tiger_release_dec05.export.bz2",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
 				NegraExportReader.PARAM_GENERATE_NEW_IDS, true,
