@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,19 +40,19 @@ public class CSniperConsumerUtils
     {
         List<AnalysisEngineDescription> aes = new ArrayList<AnalysisEngineDescription>();
 
-        aes.add(createPrimitiveDescription(ProgressLogger.class, ProgressLogger.PARAM_BRIEF_OUTPUT,
-                true));
+        aes.add(createPrimitiveDescription(ProgressLogger.class, 
+                ProgressLogger.PARAM_BRIEF_OUTPUT, true));
 
         aes.add(createPrimitiveDescription(SerializedCasWriter.class,
-                SerializedCasWriter.PARAM_PATH, "target/" + aCollection + "/bin",
+                SerializedCasWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/bin",
                 SerializedCasWriter.PARAM_USE_DOCUMENT_ID, true,
                 SerializedCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ));
 
-        aes.add(createPrimitiveDescription(TextWriter.class, TextWriter.PARAM_PATH, "target/"
-                + aCollection + "/txt"));
+        aes.add(createPrimitiveDescription(TextWriter.class, 
+                TextWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/txt"));
 
         aes.add(createPrimitiveDescription(XmiWriter.class, 
-                XmiWriter.PARAM_PATH, "target/" + aCollection + "/xmi", 
+                XmiWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/xmi", 
                 XmiWriter.PARAM_COMPRESSION, CompressionMethod.XZ,
                 XmiWriter.PARAM_TYPE_SYSTEM_FILE, "TypeSystem.xml",
                 XmiWriter.PARAM_USE_DOCUMENT_ID, true));

@@ -19,7 +19,7 @@ package de.tudarmstadt.ukp.csniper.webapp.search.xmi;
 
 import static org.apache.commons.io.IOUtils.closeQuietly;
 import static org.apache.uima.cas.impl.Serialization.deserializeCASComplete;
-import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
+import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,7 +39,7 @@ import org.apache.uima.cas.impl.CASCompleteSerializer;
 import org.apache.uima.cas.impl.CASImpl;
 import org.apache.uima.internal.util.Timer;
 import org.apache.uima.util.CasCreationUtils;
-import org.uimafit.util.JCasUtil;
+import org.apache.uima.fit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.EvaluationItem;
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.ItemContext;
