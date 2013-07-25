@@ -42,9 +42,11 @@ import de.tudarmstadt.ukp.csniper.webapp.evaluation.EvaluationRepository;
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.EvaluationItem;
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.Query;
 import de.tudarmstadt.ukp.csniper.webapp.search.CorpusService;
+import de.tudarmstadt.ukp.csniper.webapp.search.PreparedQuery;
 import de.tudarmstadt.ukp.csniper.webapp.search.SearchEngine;
 import de.tudarmstadt.ukp.csniper.webapp.search.cqp.CqpEngine;
 import de.tudarmstadt.ukp.csniper.webapp.search.cqp.CqpQuery;
+import de.tudarmstadt.ukp.csniper.webapp.search.tgrep.TgrepEngine;
 import de.tudarmstadt.ukp.csniper.webapp.statistics.SortableAggregatedEvaluationResultDataProvider;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.ExtendedIndicatingAjaxButton;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.ThresholdLink;
@@ -192,21 +194,18 @@ public class StatisticsPage2
 		{
 			List<QueryStatistics> someList = new ArrayList<QueryStatistics>();
 			for (Query q : queries) {
-				CqpEngine engine = null;
-				for (SearchEngine se : corpusService.listEngines(q.getCollectionId())) {
-					if (se instanceof CqpEngine) {
-						engine = (CqpEngine) se;
-						break;
-					}
-				}
 				List<EvaluationItem> items = new ArrayList<EvaluationItem>();
-				if (engine != null) {
-					CqpQuery query = engine.createQuery(q.getType(), q.getCollectionId(), q.getQuery());
-					try {
-						items = query.execute();
-					}
-					finally {
-						IOUtils.closeQuietly(query);
+				for (SearchEngine engine : corpusService.listEngines(q.getCollectionId())) {
+					if (engine.getName().equals(q.getEngine())) {
+						PreparedQuery query = engine.createQuery(q.getType(), q.getCollectionId(), q.getQuery());
+						query.setMaxResults(Integer.MAX_VALUE);
+						try {
+							items = query.execute();
+						}
+						finally {
+							IOUtils.closeQuietly(query);
+						}
+						break;
 					}
 				}
 				items = repository.writeEvaluationItems(items, false);
