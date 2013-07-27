@@ -61,11 +61,11 @@ public class ExtendedNavigationToolbar
 					{
 						super.onConfigure();
 						setModelObject(table.getCurrentPage() + 1);
+						setMinimum(1);
+						setMaximum(table.getPageCount());
 					}
 				};
 				jumpto.setType(Integer.class);
-				jumpto.setMinimum(1);
-				jumpto.setMaximum(table.getPageCount());
 				add(jumpto);
 				add(new Button("jumptoButton")
 				{
