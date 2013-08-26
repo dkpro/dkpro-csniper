@@ -46,7 +46,7 @@ public interface AnnisToken extends Map<String, String>, JSONAble, Serializable 
 	
 	/**
 	 * 
-	 * @param Source text (word, etc.) of this token.
+	 * @param text Source text (word, etc.) of this token.
 	 */
 	public abstract void setText(String text);
 

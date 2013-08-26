@@ -54,9 +54,6 @@ public class GoldFromMetadataAnnotator
 
 	/**
 	 * Extracts the gold value from the document title.
-	 * 
-	 * @param aJCas
-	 * @return
 	 */
 	private boolean getGold(JCas aJCas)
 	{

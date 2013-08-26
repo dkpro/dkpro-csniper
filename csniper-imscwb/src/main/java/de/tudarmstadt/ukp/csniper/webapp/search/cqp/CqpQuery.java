@@ -88,10 +88,6 @@ public class CqpQuery
 
 	/**
 	 * Constructs a CQPManager.
-	 * 
-	 * @param aEngine
-	 * @param aType
-	 * @param aCorpus
 	 */
 	public CqpQuery(CqpEngine aEngine, String aType, String aCorpus)
 	{
@@ -143,7 +139,6 @@ public class CqpQuery
 	 * 
 	 * @param aQuery
 	 *            query which shall be sent to cqp
-	 * @throws DataAccessException
 	 */
 	public void runQuery(String aQuery)
 		throws DataAccessException
@@ -156,7 +151,6 @@ public class CqpQuery
 	 * Sends a size command to cqp.
 	 * 
 	 * @return size of the last query sent to cqp via runQuery()
-	 * @throws DataAccessException
 	 */
 	@Override
 	public int size()
@@ -181,7 +175,6 @@ public class CqpQuery
 	 * @param aSize
 	 *            maximum of result lines cat should deliver
 	 * @return result of the last query sent to cqp via runQuery()
-	 * @throws DataAccessException
 	 */
 	public List<EvaluationItem> cat(int aSize)
 		throws DataAccessException
@@ -253,7 +246,6 @@ public class CqpQuery
 	 * @param aCmd
 	 *            command you want to send to cqp
 	 * @return output of cqp triggered by the command
-	 * @throws DataAccessException
 	 */
 	private List<String> exec(String aCmd)
 		throws DataAccessException
@@ -291,8 +283,6 @@ public class CqpQuery
 
 	/**
 	 * Checks the stderr for errors thrown by cqp.
-	 * 
-	 * @throws InvalidDataAccessResourceUsageException
 	 */
 	private void checkError()
 		throws InvalidDataAccessResourceUsageException
@@ -529,11 +519,11 @@ public class CqpQuery
 	 * @param aContextUnit
 	 *            unit of context window
 	 */
-	public void setContext(int aLeft, int aRight, ContextUnit aUnit)
+	public void setContext(int aLeft, int aRight, ContextUnit aContextUnit)
 	{
 		setLeftContext(aLeft);
 		setRightContext(aRight);
-		setContextUnit(aUnit);
+		setContextUnit(aContextUnit);
 
 		if (leftContext >= 0) {
 			send("set LeftContext " + leftContext + " " + contextUnit);

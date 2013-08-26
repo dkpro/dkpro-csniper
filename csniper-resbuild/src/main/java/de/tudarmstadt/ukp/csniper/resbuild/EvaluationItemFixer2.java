@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
 
 import java.io.File;
 import java.sql.Connection;
@@ -138,11 +138,11 @@ public class EvaluationItemFixer2
 			update = connection.prepareStatement(updateQuery);
 //			File base = new File("");
 
-			AnalysisEngine sentences = createPrimitive(DummySentenceSplitter.class);
-			AnalysisEngine tokenizer = createPrimitive(StanfordSegmenter.class,
+			AnalysisEngine sentences = createEngine(DummySentenceSplitter.class);
+			AnalysisEngine tokenizer = createEngine(StanfordSegmenter.class,
 					StanfordSegmenter.PARAM_CREATE_SENTENCES, false,
 					StanfordSegmenter.PARAM_CREATE_TOKENS, true);
-			AnalysisEngine parser = createPrimitive(StanfordParser.class,
+			AnalysisEngine parser = createEngine(StanfordParser.class,
 					StanfordParser.PARAM_WRITE_CONSTITUENT, true,
 //					StanfordParser.PARAM_CREATE_DEPENDENCY_TAGS, true,
 					StanfordParser.PARAM_WRITE_PENN_TREE, true,
@@ -270,8 +270,6 @@ public class EvaluationItemFixer2
 
 	/**
 	 * Using a workaround for java < 1.7.
-	 * 
-	 * @param aAutoCloseable
 	 */
 	private static void closeQuietly(Object aAutoCloseable)
 	{
