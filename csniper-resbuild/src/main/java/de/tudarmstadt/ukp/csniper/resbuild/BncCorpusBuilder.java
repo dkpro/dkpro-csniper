@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
@@ -28,8 +28,8 @@ public class BncCorpusBuilder
 {
 	public static void main(String[] args) throws Exception
 	{
-		CollectionReaderDescription reader = createDescription(BncReader.class, 
-				BncReader.PARAM_PATH, "jar:file:/Users/bluefire/UKP/Library/Corpora/BNC.zip!",
+		CollectionReaderDescription reader = createReaderDescription(BncReader.class, 
+				BncReader.PARAM_PATH, "jar:file:/Users/bluefire/UKP/Library/Corpora/BNC/BNC.zip!",
 				BncReader.PARAM_PATTERNS, new String[] { "[+]**/*.xml" },
 				BncReader.PARAM_LANGUAGE, "en");
 

@@ -18,8 +18,7 @@
 package de.tudarmstadt.ukp.csniper.resbuild;
 
 import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createCollectionReader;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,14 +49,14 @@ public class ConversionExample
 		throws UIMAException, IOException
 	{
 		// read the sample file
-		CollectionReader reader = createCollectionReader(
+		CollectionReader reader = createReader(
 				NegraExportReader.class,
 				NegraExportReader.PARAM_ENCODING, "ISO-8859-1",
 				NegraExportReader.PARAM_LANGUAGE, aLanguage,
 				NegraExportReader.PARAM_SOURCE_LOCATION, aPathToCorpus);
 
-		// write serialized CAS (used for displying context in CSniper)
-		AnalysisEngineDescription casWriter = createPrimitiveDescription(SerializedCasWriter.class,
+		// write serialized CAS (used for displaying context in CSniper)
+		AnalysisEngineDescription casWriter = createEngineDescription(SerializedCasWriter.class,
 				SerializedCasWriter.PARAM_TARGET_LOCATION, "target/" + aCollection.toUpperCase() + "/bin",
 				SerializedCasWriter.PARAM_USE_DOCUMENT_ID, true,
 				SerializedCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ);

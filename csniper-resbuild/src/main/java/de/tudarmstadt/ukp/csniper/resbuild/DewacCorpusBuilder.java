@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild;
 
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.apache.uima.collection.CollectionReaderDescription;
 import org.apache.uima.fit.pipeline.SimplePipeline;
@@ -28,7 +28,7 @@ public class DewacCorpusBuilder
 {
 	public static void main(String[] args) throws Exception
 	{
-		CollectionReaderDescription reader = createDescription(ImsCwbReader.class, 
+		CollectionReaderDescription reader = createReaderDescription(ImsCwbReader.class, 
 				ImsCwbReader.PARAM_PATH, "/Users/bluefire/Downloads",
 				ImsCwbReader.PARAM_PATTERNS, new String[] { "[+]DEWAC-1.xml" },
 				ImsCwbReader.PARAM_LANGUAGE, "de",
