@@ -27,6 +27,7 @@ import org.apache.wicket.authroles.authorization.strategies.role.metadata.MetaDa
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.apache.wicket.util.time.Duration;
 import org.odlabs.wiquery.ui.themes.IThemableApplication;
 import org.odlabs.wiquery.ui.themes.WiQueryCoreThemeResourceReference;
 
@@ -66,6 +67,9 @@ public class WicketApplication
 	{
 		if (!isInitialized) {
 			super.init();
+			
+			getRequestCycleSettings().setTimeout(Duration.minutes(10)); 
+			
 			getComponentInstantiationListeners().add(new SpringComponentInjector(this));
 
 			CompoundAuthorizationStrategy autr = new CompoundAuthorizationStrategy();
