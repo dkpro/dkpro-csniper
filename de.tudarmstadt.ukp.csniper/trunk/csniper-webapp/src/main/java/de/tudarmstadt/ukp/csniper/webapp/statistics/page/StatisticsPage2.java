@@ -44,9 +44,6 @@ import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.Query;
 import de.tudarmstadt.ukp.csniper.webapp.search.CorpusService;
 import de.tudarmstadt.ukp.csniper.webapp.search.PreparedQuery;
 import de.tudarmstadt.ukp.csniper.webapp.search.SearchEngine;
-import de.tudarmstadt.ukp.csniper.webapp.search.cqp.CqpEngine;
-import de.tudarmstadt.ukp.csniper.webapp.search.cqp.CqpQuery;
-import de.tudarmstadt.ukp.csniper.webapp.search.tgrep.TgrepEngine;
 import de.tudarmstadt.ukp.csniper.webapp.statistics.SortableAggregatedEvaluationResultDataProvider;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.ExtendedIndicatingAjaxButton;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.ThresholdLink;
@@ -208,6 +205,10 @@ public class StatisticsPage2
 						break;
 					}
 				}
+				
+				// Remember the total number of items because the following call filters out all
+				// items that are not peristed yet
+				int totalItems = items.size();
 				items = repository.writeEvaluationItems(items, false);
 				dataProvider = new SortableAggregatedEvaluationResultDataProvider(
 						repository.listAggregatedResults(items, users, userThreshold,
@@ -219,6 +220,11 @@ public class StatisticsPage2
 				qstats.query = q.getQuery();
 				qstats.itemStats = dataProvider.getItemStatistics();
 
+				// Calculate based on all items, not only on the persisted items
+				qstats.itemStats.items = totalItems;
+                qstats.itemStats.unknown = qstats.itemStats.items - qstats.itemStats.truePositives
+                        - qstats.itemStats.falsePositive;
+				
 				someList.add(qstats);
 			}
 			return someList;

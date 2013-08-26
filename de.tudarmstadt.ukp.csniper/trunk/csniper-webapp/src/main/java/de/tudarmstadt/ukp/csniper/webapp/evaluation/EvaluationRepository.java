@@ -319,6 +319,9 @@ public class EvaluationRepository
      * with the item from the database. Transient data (e.g. match offsets) is preserved.
      * 
      * @param aItems
+     * @param aCreate
+     *            true = missing evaluation items are created and returned; false = missing
+     *            evaluation items are not created and returned
      */
     @Transactional
     public List<EvaluationItem> writeEvaluationItems(List<EvaluationItem> aItems, boolean aCreate)
@@ -337,7 +340,9 @@ public class EvaluationRepository
                         + ":documentId AND type = :type", EvaluationItem.class);
 
         log.info("Merging with in-database items in " + idx.size() + " chunks");
+        ProgressMeter progress = new ProgressMeter(idx.size());
         for (List<EvaluationItem> items : idx.values()) {
+            progress.next();
             EvaluationItem ref = items.get(0);
             List<EvaluationItem> pItems = query.setParameter("collectionId", ref.getCollectionId())
                     .setParameter("documentId", ref.getDocumentId())
@@ -371,8 +376,10 @@ public class EvaluationRepository
             for (EvaluationItem item : items) {
                 int i = Collections.binarySearch(pItems, item, cmp);
                 if (i < 0) {
-                    entityManager.persist(item);
-                    result.add(item);
+                    if (aCreate) {
+                        entityManager.persist(item);
+                        result.add(item);
+                    }
                 }
                 else {
                     EvaluationItem pItem = pItems.get(i);
@@ -380,6 +387,8 @@ public class EvaluationRepository
                     result.add(pItem);
                 }
             }
+            
+            log.info(progress);
         }
 
         log.info("writeEvaluationItems for " + aItems.size() + " items completed in "
@@ -714,18 +723,21 @@ public class EvaluationRepository
         log.info("Fetching in-database results in "
                 + ((aItems.size() / chunkSize) + (aItems.size() % chunkSize == 0 ? 0 : 1))
                 + " chunks");
+        ProgressMeter progress = new ProgressMeter(aItems.size());
         for (int i = 0; i < aItems.size(); i += chunkSize) {
             q.setParameter("itemIds", itemIds.subList(i, Math.min(i + chunkSize, itemIds.size())));
 
             // System.out.println("IDS: " + itemIds.subList(i, Math.min(i + chunkSize,
             // itemIds.size())));
-            System.out.println("USERS: " + aUsers);
+            //System.out.println("USERS: " + aUsers);
 
             List<Object[]> list = q.getResultList();
             for (Object[] obj : list) {
                 obj[0] = getEvaluationItem(Long.parseLong(obj[0].toString()));
                 aers.add(new AggregatedEvaluationResult(obj, aUsers));
             }
+            progress.setDone(i);
+            log.info(progress);
         }
         return aers;
     }
