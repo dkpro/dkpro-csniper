@@ -46,8 +46,6 @@ import de.tudarmstadt.ukp.csniper.webapp.statistics.page.StatisticsPage2;
 /**
  * Application object for your web application. If you want to run this application without
  * deploying, run the Start class.
- * 
- * @see de.tudarmstadt.ukp.csniper.webapp.Start#main(String[])
  */
 public class WicketApplication
 	extends AuthenticatedWebApplication

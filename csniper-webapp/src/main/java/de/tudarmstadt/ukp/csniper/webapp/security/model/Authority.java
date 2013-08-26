@@ -37,7 +37,7 @@ import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
  * 
  * @see <a
  *      href="http://static.springsource.org/spring-security/site/docs/3.0.x/reference/appendix-schema.html">Spring
- *      standard schema</a>.
+ *      standard schema</a>
  */
 @Entity
 @Table(name = "authorities", uniqueConstraints = { @UniqueConstraint(columnNames = { "authority",

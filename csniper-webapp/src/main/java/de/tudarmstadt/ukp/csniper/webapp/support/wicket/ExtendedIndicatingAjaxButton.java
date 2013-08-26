@@ -40,7 +40,6 @@ import org.apache.wicket.request.handler.resource.ResourceReferenceRequestHandle
  * IndicatingAjaxButton injects the busy indicator into the button.
  * 
  * @author Erik-Lân Do Dinh
- * @param <T>
  */
 public abstract class ExtendedIndicatingAjaxButton
 	extends AjaxButton

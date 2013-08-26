@@ -83,9 +83,6 @@ public class Task
 
 		/**
 		 * Message with no arguments
-		 * 
-		 * @param severity
-		 * @param messageKey
 		 */
 		public Message(Message.Severity severity, String messageKey)
 		{
@@ -215,9 +212,9 @@ public class Task
 	 * 
 	 * This should be called from the run method for every iteration.
 	 * 
-	 * @param current
+	 * @param aCurrent
 	 *            The current iteration (counted from zero!)
-	 * @param total
+	 * @param aTotal
 	 *            Total iterations
 	 */
 	public void updateProgress(int aCurrent, int aTotal)
@@ -265,9 +262,6 @@ public class Task
 
 	/**
 	 * Add an info message
-	 * 
-	 * @param messageKey
-	 * @param arguments
 	 */
 	public void info(String messageKey, Object... arguments)
 	{
@@ -276,9 +270,6 @@ public class Task
 
 	/**
 	 * Add an warn message
-	 * 
-	 * @param messageKey
-	 * @param arguments
 	 */
 	public void warn(String messageKey, Object... arguments)
 	{
@@ -287,9 +278,6 @@ public class Task
 
 	/**
 	 * Add an error message
-	 * 
-	 * @param messageKey
-	 * @param arguments
 	 */
 	public void error(String messageKey, Object... arguments)
 	{

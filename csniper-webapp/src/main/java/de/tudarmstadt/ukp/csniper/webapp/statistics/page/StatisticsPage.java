@@ -579,9 +579,6 @@ public class StatisticsPage
 
 	/**
 	 * Constructor that is invoked when page is invoked without a session.
-	 * 
-	 * @param parameters
-	 *            Page parameters
 	 */
 	public StatisticsPage()
 	{

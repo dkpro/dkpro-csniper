@@ -31,18 +31,12 @@ public class DetachableEvaluationResultModel extends LoadableDetachableModel<Eva
 	private final long id;
 	private EvaluationResult result;
 	
-	/**
-	 * @param c
-	 */
 	public DetachableEvaluationResultModel(EvaluationResult aResult)
 	{
 		this(aResult.getId());
 		result = aResult;
 	}
 
-	/**
-	 * @param id
-	 */
 	private DetachableEvaluationResultModel(long id)
 	{
 		if (id == 0)

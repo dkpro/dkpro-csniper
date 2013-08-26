@@ -28,8 +28,6 @@ import org.apache.wicket.model.IModel;
  * Adapted from http://wicketinaction.com/2008/10/building-a-listeditor-form-component/
  * 
  * @author Erik-Lân Do Dinh
- * 
- * @param <T>
  */
 public abstract class RepeatingEditor<T>
 	extends RepeatingView
