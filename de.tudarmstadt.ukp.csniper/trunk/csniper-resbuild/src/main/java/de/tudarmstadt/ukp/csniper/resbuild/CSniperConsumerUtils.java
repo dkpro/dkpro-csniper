@@ -17,8 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createAggregateDescription;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +26,6 @@ import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.resource.ResourceInitializationException;
 
 import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
-import de.tudarmstadt.ukp.dkpro.core.io.bincas.SerializedCasWriter;
-import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter;
-import de.tudarmstadt.ukp.dkpro.core.io.text.TextWriter;
-import de.tudarmstadt.ukp.dkpro.core.io.tgrep.TGrepWriter;
 import de.tudarmstadt.ukp.dkpro.core.io.xmi.XmiWriter;
 
 public class CSniperConsumerUtils
@@ -40,40 +35,45 @@ public class CSniperConsumerUtils
     {
         List<AnalysisEngineDescription> aes = new ArrayList<AnalysisEngineDescription>();
 
-        aes.add(createPrimitiveDescription(ProgressLogger.class, 
+        aes.add(createEngineDescription(ProgressLogger.class, 
                 ProgressLogger.PARAM_BRIEF_OUTPUT, true));
 
-        aes.add(createPrimitiveDescription(SerializedCasWriter.class,
-                SerializedCasWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/bin",
-                SerializedCasWriter.PARAM_USE_DOCUMENT_ID, true,
-                SerializedCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ));
+//        aes.add(createEngineDescription(SerializedCasWriter.class,
+//                SerializedCasWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/ser",
+//                SerializedCasWriter.PARAM_USE_DOCUMENT_ID, true,
+//                SerializedCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ));
 
-        aes.add(createPrimitiveDescription(TextWriter.class, 
-                TextWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/txt"));
+//        aes.add(createEngineDescription(de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter.class,
+//                de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/bin",
+//                de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter.PARAM_USE_DOCUMENT_ID, true,
+//                de.tudarmstadt.ukp.dkpro.core.io.bincas.BinaryCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ));
 
-        aes.add(createPrimitiveDescription(XmiWriter.class, 
+//        aes.add(createEngineDescription(TextWriter.class, 
+//                TextWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/txt"));
+
+        aes.add(createEngineDescription(XmiWriter.class, 
                 XmiWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/xmi", 
-                XmiWriter.PARAM_COMPRESSION, CompressionMethod.XZ,
+                XmiWriter.PARAM_COMPRESSION, CompressionMethod.NONE,
                 XmiWriter.PARAM_TYPE_SYSTEM_FILE, "TypeSystem.xml",
                 XmiWriter.PARAM_USE_DOCUMENT_ID, true));
 
-        aes.add(createPrimitiveDescription(TGrepWriter.class, 
-                TGrepWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/tgrep", 
-                TGrepWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
-                TGrepWriter.PARAM_DROP_MALFORMED_TREES, true,
-                TGrepWriter.PARAM_WRITE_COMMENTS, true,
-                TGrepWriter.PARAM_WRITE_T2C, true));
+//        aes.add(createEngineDescription(TGrepWriter.class, 
+//                TGrepWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/tgrep", 
+//                TGrepWriter.PARAM_COMPRESSION, CompressionMethod.GZIP,
+//                TGrepWriter.PARAM_DROP_MALFORMED_TREES, true,
+//                TGrepWriter.PARAM_WRITE_COMMENTS, true,
+//                TGrepWriter.PARAM_WRITE_T2C, true));
+//
+//        aes.add(createEngineDescription(ImsCwbWriter.class, 
+//                ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8", 
+//                ImsCwbWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/cqp",
+//                // ImsCwbWriter.PARAM_CQP_HOME, "/Users/bluefire/bin/cwb-3.2.0-snapshot-282",
+//                ImsCwbWriter.PARAM_WRITE_TEXT_TAG, true, 
+//                ImsCwbWriter.PARAM_WRITE_DOCUMENT_TAG, true, 
+//                ImsCwbWriter.PARAM_WRITE_OFFSETS, true, 
+//                ImsCwbWriter.PARAM_WRITE_LEMMA, true,
+//                ImsCwbWriter.PARAM_WRITE_DOC_ID, false));
 
-        aes.add(createPrimitiveDescription(ImsCwbWriter.class, 
-                ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8", 
-                ImsCwbWriter.PARAM_TARGET_LOCATION, "target/" + aCollection + "/cqp",
-                // ImsCwbWriter.PARAM_CQP_HOME, "/Users/bluefire/bin/cwb-3.2.0-snapshot-282",
-                ImsCwbWriter.PARAM_WRITE_TEXT_TAG, true, 
-                ImsCwbWriter.PARAM_WRITE_DOCUMENT_TAG, true, 
-                ImsCwbWriter.PARAM_WRITE_OFFSETS, true, 
-                ImsCwbWriter.PARAM_WRITE_LEMMA, true,
-                ImsCwbWriter.PARAM_WRITE_DOC_ID, false));
-
-        return createAggregateDescription(aes.toArray(new AnalysisEngineDescription[aes.size()]));
+        return createEngineDescription(aes.toArray(new AnalysisEngineDescription[aes.size()]));
     }
 }

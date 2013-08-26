@@ -17,8 +17,8 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.resbuild;
 
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitiveDescription;
-import static org.apache.uima.fit.factory.CollectionReaderFactory.createDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngineDescription;
+import static org.apache.uima.fit.factory.CollectionReaderFactory.createReaderDescription;
 
 import org.apache.uima.analysis_engine.AnalysisEngineDescription;
 import org.apache.uima.collection.CollectionReaderDescription;
@@ -31,14 +31,14 @@ public class TuebaCorpusBuilder
 {
 	public static void main(String[] args) throws Exception
 	{
-		CollectionReaderDescription reader = createDescription(NegraExportReader.class, 
+		CollectionReaderDescription reader = createReaderDescription(NegraExportReader.class, 
 				NegraExportReader.PARAM_SOURCE_LOCATION, "/Users/bluefire/UKP/Library/Corpora/TueBaDZ/Version5/tuebadz-5.0.export.bz2",
 				NegraExportReader.PARAM_LANGUAGE, "de",
 				NegraExportReader.PARAM_COLLECTION_ID, "tuebadz5",
 				NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
 				NegraExportReader.PARAM_READ_PENN_TREE, true);
 
-		AnalysisEngineDescription tt = createPrimitiveDescription(TreeTaggerPosLemmaTT4J.class,
+		AnalysisEngineDescription tt = createEngineDescription(TreeTaggerPosLemmaTT4J.class,
 				// POS tags are provided in the corpus, but lemmas are not
 				TreeTaggerPosLemmaTT4J.PARAM_WRITE_POS, false,
 				TreeTaggerPosLemmaTT4J.PARAM_WRITE_LEMMA, true);
