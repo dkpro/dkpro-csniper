@@ -45,10 +45,6 @@ public class AggregatedEvaluationResult
 
 	public AggregatedEvaluationResult(Object[] aColumns, Collection<String> aUsers)
 	{
-		// this((EvaluationItem) aColumns[0], Integer.parseInt(aColumns[1].toString()), Integer
-		// .parseInt(aColumns[2].toString()), Integer.parseInt(aColumns[3].toString()),
-		// (String) aColumns[4], Double.parseDouble(aColumns[5].toString()), Double
-		// .parseDouble(aColumns[6].toString()), toUserVoteMap(aColumns[7], aUsers));
 		this((EvaluationItem) aColumns[0], ((Number) aColumns[1]).intValue(),
 				((Number) aColumns[2]).intValue(), ((Number) aColumns[3]).intValue(),
 				(String) aColumns[4], ((Number) aColumns[5]).doubleValue(), ((Number) aColumns[6])
