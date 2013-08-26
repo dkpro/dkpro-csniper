@@ -79,22 +79,26 @@ public class EvaluationItemFixer
 		{
 			setCorpusService(new CorpusService()
 			{
-				public List<SearchEngine> listEngines(String aCorpusId)
+				@Override
+                public List<SearchEngine> listEngines(String aCorpusId)
 				{
 					return null;
 				}
 
-				public List<String> listCorpora()
+				@Override
+                public List<String> listCorpora()
 				{
 					return null;
 				}
 
-				public File getRepositoryPath()
+				@Override
+                public File getRepositoryPath()
 				{
 					return new File(REPOSITORY);
 				}
 
-				public Corpus getCorpus(String aCorpusId)
+				@Override
+                public Corpus getCorpus(String aCorpusId)
 				{
 					return null;
 				}
@@ -236,8 +240,6 @@ public class EvaluationItemFixer
 
 	/**
 	 * Using a workaround for java < 1.7.
-	 * 
-	 * @param aAutoCloseable
 	 */
 	private static void closeQuietly(Object aAutoCloseable)
 	{
