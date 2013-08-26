@@ -55,7 +55,6 @@ public class AnalysisEngineFactory
 	 * @param aAdditionalParameters
 	 *            additional parameters for the AE
 	 * @return an AnalysisEngine with the specified parameters
-	 * @throws ResourceInitializationException
 	 */
 	public static AnalysisEngine createAnalysisEngine(String aSettingsFile,
 			Object... aAdditionalParameters)

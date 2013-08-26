@@ -60,7 +60,6 @@ public class ExpandableList
 	}
 
 	/**
-	 * @param aId
 	 * @param aList
 	 *            A map caption->body, from which the list will be created.
 	 */

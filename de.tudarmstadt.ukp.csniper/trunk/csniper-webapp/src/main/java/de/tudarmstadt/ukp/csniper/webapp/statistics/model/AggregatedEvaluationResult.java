@@ -104,7 +104,7 @@ public class AggregatedEvaluationResult
 	}
 
 	/**
-	 * Get the users of this {@link AggregatedEvaluationResult.
+	 * Get the users of this {@link AggregatedEvaluationResult}.
 	 * 
 	 * @param aOnlyVoting if true, only return users who voted correct or wrong for this item
 	 * @return involved users

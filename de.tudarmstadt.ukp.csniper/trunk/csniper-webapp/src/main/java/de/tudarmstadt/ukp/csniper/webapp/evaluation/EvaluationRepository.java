@@ -305,8 +305,6 @@ public class EvaluationRepository
     /**
      * Persist the given items. If they already exist in the database, replace the item in the list
      * with the item from the database. Transient data (e.g. match offsets) is preserved.
-     * 
-     * @param aItems
      */
     @Transactional
     public List<EvaluationItem> writeEvaluationItems(List<EvaluationItem> aItems)
@@ -318,7 +316,6 @@ public class EvaluationRepository
      * Persist the given items. If they already exist in the database, replace the item in the list
      * with the item from the database. Transient data (e.g. match offsets) is preserved.
      * 
-     * @param aItems
      * @param aCreate
      *            true = missing evaluation items are created and returned; false = missing
      *            evaluation items are not created and returned
@@ -787,10 +784,6 @@ public class EvaluationRepository
     /**
      * Fetch all the results that the current annotator has not yet evaluated but at least one of
      * the other specified annotators already did evaluate.
-     * 
-     * @param aMyUser
-     * @param aOtherUsers
-     * @return
      */
     public List<EvaluationItem> listEvaluationResultsMissing(final String aCollectionId,
             final String aType, final String aMyUser, final Collection<String> aOtherUsers)

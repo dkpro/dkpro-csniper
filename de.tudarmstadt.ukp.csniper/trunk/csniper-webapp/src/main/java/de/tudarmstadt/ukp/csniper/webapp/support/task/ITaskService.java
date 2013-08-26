@@ -46,16 +46,12 @@ public interface ITaskService
 
 	/**
 	 * Start the task with given taskId
-	 * 
-	 * @param taskId
 	 */
 	void start(Long taskId);
 
 	/**
 	 * Cancel the task with given taskId. The task itself is responsible for stopping, so this
 	 * should be considered as some type of "soft interrupt".
-	 * 
-	 * @param taskId
 	 */
 	void cancel(Long taskId);
 
@@ -66,8 +62,6 @@ public interface ITaskService
 	 * 
 	 * Since this not really safe to do from a web page AJAX callback, you should always register
 	 * the TaskService as a SESSION bean.
-	 * 
-	 * @param taskId
 	 */
 	void finish(Long taskId);
 
@@ -81,7 +75,6 @@ public interface ITaskService
 	 * taskService.start(taskId);
 	 * </pre>
 	 * 
-	 * @param task
 	 * @return taskId for this Task
 	 */
 	Long scheduleAndStart(Task task);
@@ -89,11 +82,9 @@ public interface ITaskService
 	/**
 	 * Get the current progression of a task.
 	 * 
-	 * @param taskId
 	 * @return the current progression of a task.
 	 */
 	Progression getProgression(Long taskId);
 
 	List<Message> getMessages(Long taskId);
-
 }

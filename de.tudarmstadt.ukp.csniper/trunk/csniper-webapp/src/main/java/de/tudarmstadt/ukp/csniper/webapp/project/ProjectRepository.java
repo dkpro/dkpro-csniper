@@ -111,8 +111,6 @@ public class ProjectRepository
 	/**
 	 * For cancel operations, to detach an object which would otherwise still be stored in the
 	 * persistence context.
-	 * 
-	 * @param aEntity
 	 */
 	@Transactional
 	public void refreshEntity(Object aEntity)
@@ -148,8 +146,6 @@ public class ProjectRepository
 	 * Why is this method located here? For convenience reasons - we already have access to
 	 * projectRepository on the relevant pages (EvaluationPage, AnnotationTypePage).
 	 * 
-	 * @param aTable
-	 *            the table where the column is located
 	 * @param aColumn
 	 *            the column for which the maximum length shall be returned
 	 * @return the maximum length of the specified column in the specified table

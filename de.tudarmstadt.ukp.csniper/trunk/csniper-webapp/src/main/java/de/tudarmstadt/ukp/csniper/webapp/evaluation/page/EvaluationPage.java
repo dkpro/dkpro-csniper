@@ -1498,9 +1498,6 @@ public class EvaluationPage
 
 	/**
 	 * Constructor that is invoked when page is invoked without a session.
-	 * 
-	 * @param parameters
-	 *            Page parameters
 	 */
 	@SuppressWarnings({ "serial" })
 	public EvaluationPage()
@@ -1927,8 +1924,6 @@ public class EvaluationPage
 
 	/**
 	 * Set whether to show the result columns.
-	 * 
-	 * @param doShow
 	 */
 	private void showResultColumns(boolean doShow)
 	{

@@ -359,9 +359,6 @@ public class SearchPage
 
 	/**
 	 * Constructor that is invoked when page is invoked without a session.
-	 * 
-	 * @param parameters
-	 *            Page parameters
 	 */
 	@SuppressWarnings({ "serial" })
 	public SearchPage()
