@@ -374,9 +374,9 @@ public class EvaluationRepository
                 int i = Collections.binarySearch(pItems, item, cmp);
                 if (i < 0) {
                     if (aCreate) {
-                        entityManager.persist(item);
-                        result.add(item);
-                    }
+	                    entityManager.persist(item);
+	                    result.add(item);
+	                }
                 }
                 else {
                     EvaluationItem pItem = pItems.get(i);
@@ -693,6 +693,7 @@ public class EvaluationRepository
     }
 
     @SuppressWarnings("unchecked")
+    @Transactional
     public List<AggregatedEvaluationResult> listAggregatedResults(List<EvaluationItem> aItems,
             Collection<String> aUsers, double aUserThreshold, double aConfidenceThreshold)
     {
@@ -723,6 +724,7 @@ public class EvaluationRepository
         ProgressMeter progress = new ProgressMeter(aItems.size());
         for (int i = 0; i < aItems.size(); i += chunkSize) {
             q.setParameter("itemIds", itemIds.subList(i, Math.min(i + chunkSize, itemIds.size())));
+
 
             // System.out.println("IDS: " + itemIds.subList(i, Math.min(i + chunkSize,
             // itemIds.size())));
