@@ -27,10 +27,10 @@ import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.cleartk.classifier.Feature;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.testing.util.HideOutput;
-import org.uimafit.util.JCasUtil;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.testing.util.HideOutput;
+import org.apache.uima.fit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.csniper.ml.tksvm.TKSVMlightClassifier;
 import de.tudarmstadt.ukp.csniper.ml.tksvm.TKSVMlightClassifierBuilder;

@@ -18,9 +18,9 @@
 package de.tudarmstadt.ukp.csniper.webapp.analysis.uima;
 
 import static org.apache.uima.util.CasCreationUtils.mergeTypeSystems;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.TypePrioritiesFactory.createTypePriorities;
-import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.TypePrioritiesFactory.createTypePriorities;
+import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 
 import java.io.File;
 import java.io.FileNotFoundException;

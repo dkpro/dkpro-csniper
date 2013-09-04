@@ -22,7 +22,7 @@ import org.apache.uima.jcas.JCas;
 import org.cleartk.classifier.CleartkAnnotator;
 import org.cleartk.classifier.Feature;
 import org.cleartk.classifier.Instance;
-import org.uimafit.util.JCasUtil;
+import org.apache.uima.fit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.csniper.ml.type.BooleanClassification;
 import de.tudarmstadt.ukp.csniper.ml.type.ClearTkFeature;
