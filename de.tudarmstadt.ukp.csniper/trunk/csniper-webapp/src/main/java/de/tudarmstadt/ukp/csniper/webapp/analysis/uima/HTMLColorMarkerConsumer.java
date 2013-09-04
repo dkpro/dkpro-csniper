@@ -31,11 +31,11 @@ import org.apache.uima.cas.CAS;
 import org.apache.uima.cas.Type;
 import org.apache.uima.cas.TypeSystem;
 import org.apache.uima.cas.text.AnnotationFS;
+import org.apache.uima.fit.component.CasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.util.CasUtil;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.dom4j.io.SAXContentHandler;
-import org.uimafit.component.CasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.util.CasUtil;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
@@ -110,7 +110,7 @@ public class HTMLColorMarkerConsumer
 			AttributesImpl attr = new AttributesImpl();
 			attr.addAttribute("", "", "id", "CDATA", outputClass);
 			handler.startElement("", "div", "", attr);
-			
+
 			AttributesImpl style = new AttributesImpl();
 			style.addAttribute("", "", "type", "CDATA", "text/css");
 			handler.startElement("", "style", "", style);

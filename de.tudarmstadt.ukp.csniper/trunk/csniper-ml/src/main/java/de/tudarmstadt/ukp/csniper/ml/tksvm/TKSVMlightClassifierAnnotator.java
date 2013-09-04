@@ -25,14 +25,14 @@ import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.uima.UimaContext;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
+import org.apache.uima.fit.component.JCasAnnotator_ImplBase;
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
+import org.apache.uima.fit.testing.util.HideOutput;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.cleartk.classifier.Feature;
 import org.cleartk.classifier.ScoredOutcome;
-import org.uimafit.component.JCasAnnotator_ImplBase;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.testing.util.HideOutput;
-import org.uimafit.util.JCasUtil;
 
 import de.tudarmstadt.ukp.csniper.ml.type.BooleanClassification;
 import de.tudarmstadt.ukp.csniper.ml.type.ClearTkFeature;
@@ -80,6 +80,5 @@ public class TKSVMlightClassifierAnnotator
 		bc.setScore(out.getScore());
 
 		hide.restoreOutput();
-		IOUtils.closeQuietly(hide);
 	}
 }

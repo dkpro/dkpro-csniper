@@ -26,6 +26,7 @@ package de.tudarmstadt.ukp.csniper.ml.tksvm;
 
 import java.io.IOException;
 
+import org.apache.uima.fit.descriptor.ConfigurationParameter;
 import org.cleartk.classifier.DataWriter;
 import org.cleartk.classifier.encoder.features.BooleanEncoder;
 import org.cleartk.classifier.encoder.features.NumberEncoder;
@@ -35,8 +36,6 @@ import org.cleartk.classifier.encoder.features.normalizer.NameNumberNormalizer;
 import org.cleartk.classifier.encoder.outcome.BooleanToBooleanOutcomeEncoder;
 import org.cleartk.classifier.jar.DataWriterFactory_ImplBase;
 import org.cleartk.classifier.jar.DefaultDataWriterFactory;
-import org.uimafit.descriptor.ConfigurationParameter;
-import org.uimafit.factory.ConfigurationParameterFactory;
 
 /**
  * <br>
@@ -59,9 +58,7 @@ import org.uimafit.factory.ConfigurationParameterFactory;
 public class DefaultTKSVMlightDataWriterFactory extends
     DataWriterFactory_ImplBase<TreeFeatureVector, Boolean, Boolean> {
 
-  public static final String PARAM_CUTOFF = ConfigurationParameterFactory.createConfigurationParameterName(
-      DefaultTKSVMlightDataWriterFactory.class,
-      "cutoff");
+  public static final String PARAM_CUTOFF = "cutoff";
 
   @ConfigurationParameter(
       defaultValue = "5",

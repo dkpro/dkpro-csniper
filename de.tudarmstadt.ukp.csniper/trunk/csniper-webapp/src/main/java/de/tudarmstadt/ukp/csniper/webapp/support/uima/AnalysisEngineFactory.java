@@ -17,7 +17,7 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.webapp.support.uima;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
 
 import java.io.File;
 import java.io.FileInputStream;

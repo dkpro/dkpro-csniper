@@ -19,8 +19,8 @@ package de.tudarmstadt.ukp.csniper.webapp.evaluation.page;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
-import static org.uimafit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
+import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
 
 import java.io.File;
 import java.io.IOException;

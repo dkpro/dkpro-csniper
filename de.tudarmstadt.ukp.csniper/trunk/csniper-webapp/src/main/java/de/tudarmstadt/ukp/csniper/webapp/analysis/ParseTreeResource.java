@@ -25,8 +25,8 @@ import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
 import static java.awt.RenderingHints.VALUE_RENDER_QUALITY;
 import static java.awt.RenderingHints.VALUE_STROKE_PURE;
 import static java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_ON;
-import static org.uimafit.util.CasUtil.getType;
-import static org.uimafit.util.CasUtil.select;
+import static org.apache.uima.fit.util.CasUtil.getType;
+import static org.apache.uima.fit.util.CasUtil.select;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -41,12 +41,12 @@ import java.util.Properties;
 import javax.imageio.ImageIO;
 
 import org.apache.uima.cas.CASException;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.cas.FSArray;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.wicket.request.resource.DynamicImageResource;
 import org.apache.wicket.util.time.Time;
-import org.uimafit.util.JCasUtil;
 
 import annis.frontend.servlets.visualizers.Visualizer;
 import annis.frontend.servlets.visualizers.tree.TigerTreeVisualizer;
@@ -54,6 +54,7 @@ import annis.model.AnnisNode;
 import annis.model.AnnotationGraph;
 import annis.model.Edge;
 import annis.model.Edge.EdgeType;
+import de.tudarmstadt.ukp.csniper.treevisualizer.AnnisResultIncompleteImpl;
 import de.tudarmstadt.ukp.csniper.webapp.search.tgrep.PennTreeNode;
 import de.tudarmstadt.ukp.csniper.webapp.search.tgrep.PennTreeUtils;
 import de.tudarmstadt.ukp.csniper.webapp.support.uima.CasHolder;
@@ -61,7 +62,6 @@ import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
 import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.ROOT;
-import de.tudarmstadt.ukp.csniper.treevisualizer.AnnisResultIncompleteImpl;
 
 public class ParseTreeResource
 	extends DynamicImageResource

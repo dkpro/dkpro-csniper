@@ -17,19 +17,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.webapp.support.uima;
 
-import static org.uimafit.factory.AnalysisEngineFactory.createPrimitive;
+import static org.apache.uima.fit.factory.AnalysisEngineFactory.createPrimitive;
 
 import org.apache.uima.UIMAException;
 import org.apache.uima.analysis_engine.AnalysisEngine;
+import org.apache.uima.fit.factory.JCasFactory;
+import org.apache.uima.fit.util.JCasUtil;
 import org.apache.uima.jcas.JCas;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.uimafit.factory.JCasFactory;
-import org.uimafit.util.JCasUtil;
 
-import de.tudarmstadt.ukp.csniper.webapp.support.uima.AnalysisEngineFactory;
 import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.constituent.Constituent;
 import de.tudarmstadt.ukp.dkpro.core.opennlp.OpenNlpSegmenter;
 import de.tudarmstadt.ukp.dkpro.core.testing.AssertAnnotations;
