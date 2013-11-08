@@ -216,7 +216,9 @@ public class AnnotationTypePage
 						@Override
 						protected void onError(AjaxRequestTarget aTarget, Form<?> aForm)
 						{
-							System.out.println("Error.");
+		                    super.onError(aTarget, aForm);
+		                    // Make sure the feedback messages are rendered
+		                    aTarget.add(getFeedbackPanel());
 						}
 					});
 				}
@@ -239,7 +241,9 @@ public class AnnotationTypePage
 				@Override
 				protected void onError(AjaxRequestTarget aTarget, Form<?> aForm)
 				{
-					System.out.println("Error.");
+                    super.onError(aTarget, aForm);
+                    // Make sure the feedback messages are rendered
+                    aTarget.add(getFeedbackPanel());
 				}
 			});
 
@@ -281,7 +285,9 @@ public class AnnotationTypePage
 				@Override
 				protected void onError(AjaxRequestTarget aTarget, Form<?> aForm)
 				{
-					System.out.println("Error.");
+                    super.onError(aTarget, aForm);
+                    // Make sure the feedback messages are rendered
+                    aTarget.add(getFeedbackPanel());
 				}
 			}).setOutputMarkupId(true);
 
