@@ -18,9 +18,10 @@
 package de.tudarmstadt.ukp.csniper.webapp.project;
 
 import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -28,6 +29,8 @@ import javax.persistence.PersistenceContext;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Session;
+import org.hibernate.jdbc.Work;
 import org.springframework.transaction.annotation.Transactional;
 
 import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.AdditionalColumn;
@@ -153,12 +156,23 @@ public class ProjectRepository
     @Transactional
 	public int getDbColumnLength(String aEntityName, String aColumn)
 	{
-		BigInteger length = new BigInteger("255");
+        BigInteger length = new BigInteger("255");
 
-		List<String> query = new ArrayList<String>();
-		query.add("SELECT CHARACTER_MAXIMUM_LENGTH");
-		query.add("FROM INFORMATION_SCHEMA.COLUMNS");
-		query.add("WHERE table_schema = 'csniper'");
+        final List<String> query = new ArrayList<String>();
+        query.add("SELECT CHARACTER_MAXIMUM_LENGTH");
+        query.add("FROM INFORMATION_SCHEMA.COLUMNS");
+        
+        Session session = entityManager.unwrap(Session.class);
+        session.doWork(new Work()
+        {
+            @Override
+            public void execute(Connection aConnection)
+                throws SQLException
+            {
+                query.add("WHERE table_schema = '"+aConnection.getCatalog()+"'");
+            }
+        });
+        
 		query.add("AND table_name = '" + aEntityName + "'");
 		query.add("AND column_name = '" + aColumn + "'");
 
