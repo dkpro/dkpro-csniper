@@ -25,7 +25,7 @@
 		<div class="content">
 			<h4>Quality control settings</h4>
 			<ul>
-				<li><b>User threshold</b>: percentage of users who have to
+				<li><b>Participation threshold</b>: percentage of users who have to
 					assess an item as <i>Correct</i> or <i>Wrong</i> for it to be
 					considered <i>Correct</i>, <i>Wrong</i> or <i>Disputed</i>. If less
 					than the given percentage of users have voted either <i>Correct</i>
@@ -45,15 +45,15 @@
 			The user ratio is (5+3)/10 = 0.8, and the confidence ratio is (5-3)/max(5,3) = 2/5 = 0.4.
 			<br /><br /> We will show 3 scenarios:<br />
 			<ol style="list-style-type: lower-alpha">
-				<li>User threshold = 0.3, Confidence threshold = 0.6.<br />
+				<li>Participation threshold = 0.3, Confidence threshold = 0.6.<br />
 					The item is labeled as <i>Disputed</i>, because the user ratio is high enough
 					[0.8 &gt; 0.3] but the confidence ratio is not [0.4 &lt; 0.6].<br /><br />
 				</li>
-				<li>User threshold = 0.9, Confidence threshold = 0.4.<br />
+				<li>Participation threshold = 0.9, Confidence threshold = 0.4.<br />
 					The item is labeled as <i>Incomplete</i>, because the user ratio is not high
 					enough [0.8 &lt; 0.9].<br /><br />
 				</li>
-				<li>User threshold = 0.6, Confidence threshold = 0.3<br /> The
+				<li>Participation threshold = 0.6, Confidence threshold = 0.3<br /> The
 					The item is labeled as <i>Correct</i>, because the user ratio is high enough
 					[0.8 &gt; 0.6], the confidence ratio is high enough [0.4 &gt; 0.3], and the
 					there are more <i>Correct</i> than <i>Wrong</i> votes.<br /><br />
