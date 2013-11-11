@@ -41,7 +41,7 @@
 								</div>
 								<br />
 								<div>
-									<label class="top">User threshold</label>
+									<label class="top">Participation threshold</label>
 									<input type="number" wicket:id="userThreshold" /><br />
 									<br />
 									<label class="top">Confidence threshold</label>
@@ -107,55 +107,6 @@
 					<wicket:container wicket:id="contextView"/>
 				</wicket:container> 
 			</div>
-<!--
-			<div class="ui-state-highlight ui-corner-all info biginfo">
-				<img class="icon" src="images/tux-help.png"/>
-				<div class="content">
-					<h4>Thresholds</h4>
-					<ul>
-						<li>
-			 				<b>User threshold</b>: percentage of users who have to assess an item as
-			 				<i>Correct</i> or <i>Wrong</i> for it to be considered <i>Correct</i>, <i>Wrong</i> or <i>Disputed</i>.
-			 				If below for both <i>Correct</i> and <i>Wrong</i>, this item is considered <i>Incomplete</i>.
-			 			</li>
-			 			<li>
-							<b>Confidence threshold</b>: percentage of assessments the majority vote
-							has to have over the minority (only counting votes above the user threshold).
-						</li>
-					</ul>
-					Consider the following example:<br />
-					10 testers, with 6 voting <i>Correct</i> and 4 voting <i>Wrong</i>.
-					We will show 3 scenarios:<br />
-					<ol style="list-style-type:lower-alpha">
-						<li>
-							User threshold = 0.3, Confidence threshold = 0.6.<br />
-							The item is labeled as <i>Correct</i>,
-							because there are enough <i>Correct</i> votes (6/10 &gt; 0.3),
-							and the difference between <i>Correct</i> and <i>Wrong</i> votes
-							(after subtraction of user threshold) is (0.6 - 0.3) - (0.4 - 0.3) = 0.2,
-							normalized 0.2 / 0.3 = 0.66 &gt; 0.6.<br />
-							<img src="images/statistics-example-a.png" alt="example a)" /><br /><br />
-						</li>
-						<li>
-							User threshold = 0.7, Confidence threshold = 0.4.<br />
-							The item is labeled as <i>Incomplete</i>,
-							because there are neither enough <i>Correct</i> (6/10 &lt; 0.7)
-							nor enough <i>Wrong</i> votes (4/10 &lt; 0.7).<br />
-							[image tbd]<br /><br />
-						</li>
-						<li>
-							User threshold = 0.2, Confidence threshold = 0.7<br />
-							The item is labeled as <i>Disputed</i>,
-							because there are enough votes (6/10 &gt; 0.2, 4/10 &gt; 0.2),
-							but the difference between <i>Correct</i> and <i>Wrong</i> votes
-							(after subtraction of user threshold) is 0.4 - 0.2 = 0.2,
-							normalized 0.2 / 0.4 = 0.5 &lt; 0.7.<br />
-							[image tbd]<br /><br />
-						</li>
-					</ol>
-				</div>
-			</div>
--->
 		</wicket:extend>
 	</body>
 </html>
