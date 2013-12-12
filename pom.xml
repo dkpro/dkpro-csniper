@@ -70,27 +70,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<!-- For uimaFIT 2.0.0-SNAPSHOT -->
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
 	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<!-- For uimaFIT 2.0.0-SNAPSHOT maven plugin -->
-			<id>apache.snapshots</id>
-			<name>Apache Snapshot Repository</name>
-			<url>http://repository.apache.org/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</pluginRepository>
-	</pluginRepositories>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -232,35 +212,6 @@
 		</dependencies>
 	</dependencyManagement>
 	<build>
-		<plugins>
-			<!--
-				<plugin>
-				<groupId>org.apache.rat</groupId>
-				<artifactId>apache-rat-plugin</artifactId>
-				<version>0.9</version>
-				<executions>
-				<execution>
-				<id>default</id>
-				<phase>verify</phase>
-				<goals>
-				<goal>check</goal>
-				</goals>
-				<configuration>
-				<excludeSubProjects>true</excludeSubProjects>
-				<excludes>
-				<exclude>**/*.example</exclude>
-				<exclude>**/*.export</exclude>
-				<exclude>**/*.properties</exclude>
-				<exclude>**/*.txt</exclude>
-				<exclude>*.txt</exclude>
-				</excludes>
-				</configuration>
-				</execution>
-				</executions>
-				</plugin>
-			-->
-		</plugins>
-
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
@@ -269,4 +220,48 @@
 			</extension>
 		</extensions>
 	</build>
+		<profiles>
+		<profile>
+			<id>rat-check</id>
+			<activation>
+				<file>
+					<exists>src/main/java</exists>
+				</file>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.rat</groupId>
+						<artifactId>apache-rat-plugin</artifactId>
+						<version>0.10</version>
+						<executions>
+							<execution>
+								<id>default</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>check</goal>
+								</goals>
+								<configuration>
+									<excludes>
+										<exclude>*.example</exclude>
+										<exclude>licenses/*</exclude>
+										<exclude>src/main/resources/**/*</exclude>
+										<exclude>src/test/resources/**/*</exclude>
+										<!-- Third party stuff -->
+										<exclude>src/main/webapp/js/css_browser_selector.js</exclude>
+										<exclude>src/main/java/de/tudarmstadt/ukp/csniper/ml/tksvm/*</exclude>
+										<exclude>src/main/java/de/tudarmstadt/ukp/csniper/ml/type/*</exclude>
+										<!-- maven config files -->
+										<exclude>src/filter/**/*</exclude>
+										<!-- release generated artifact -->
+										<exclude>release.properties</exclude>
+									</excludes>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

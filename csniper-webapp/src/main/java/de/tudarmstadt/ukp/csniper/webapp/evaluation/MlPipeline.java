@@ -281,11 +281,11 @@ public class MlPipeline
 		classify(modelDir, aToPredictList);
 	}
 
-	public boolean predict(List<EvaluationResult> aResults, int minItemsAssessed)
+	public boolean predict(List<EvaluationResult> aResults, int aMinItemsAnnotated)
 		throws UIMAException, IOException
 	{
-		// split results in assessed and empty
-		List<EvaluationResult> assessed = new ArrayList<EvaluationResult>();
+		// split results in annotated and empty
+		List<EvaluationResult> annotated = new ArrayList<EvaluationResult>();
 		List<EvaluationResult> empty = new ArrayList<EvaluationResult>();
 
 		for (EvaluationResult result : aResults) {
@@ -293,7 +293,7 @@ public class MlPipeline
 			switch (m) {
 			case CORRECT:
 			case WRONG:
-				assessed.add(result);
+				annotated.add(result);
 				break;
 			case NA:
 			case PRED_CORRECT:
@@ -306,14 +306,14 @@ public class MlPipeline
 			}
 		}
 
-		// exit, if not enough items have been assessed
+		// exit, if not enough items have been annotated
 		// TODO differentiate between correct/wrong?
 		// i.e. ensure the user to at least have X correct and X wrong items before predicting?
 		// a classifier trained only on "correct"s will not issue "wrong"s for anything, etc.
-		if (assessed.size() < minItemsAssessed) {
+		if (annotated.size() < aMinItemsAnnotated) {
 			return false;
 		}
-		predict(assessed, empty);
+		predict(annotated, empty);
 
 		return true;
 	}

@@ -1,0 +1,6 @@
+Code in the following packages was copied and adapter from ClearTK
+
+  de.tudarmstadt.ukp.csniper.ml.tksvm
+  de.tudarmstadt.ukp.csniper.ml.type
+  
+  Copyright (c) 2009, Regents of the University of Colorado 
