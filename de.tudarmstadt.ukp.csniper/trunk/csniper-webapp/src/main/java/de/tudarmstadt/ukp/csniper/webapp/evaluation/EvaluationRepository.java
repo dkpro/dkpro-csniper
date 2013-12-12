@@ -542,7 +542,7 @@ public class EvaluationRepository
         if (aFilter == ResultFilter.TODO) {
             query.append("AND length(result) = 0 ");
         }
-        else if (aFilter == ResultFilter.ASSESSED) {
+        else if (aFilter == ResultFilter.ANNOTATED) {
             query.append("AND length(result) > 0 ");
         }
         /*
@@ -566,7 +566,7 @@ public class EvaluationRepository
         if (aFilter == ResultFilter.TODO) {
             query.append("AND length(result) = 0 ");
         }
-        else if (aFilter == ResultFilter.ASSESSED) {
+        else if (aFilter == ResultFilter.ANNOTATED) {
             query.append("AND length(result) > 0 ");
         }
         return entityManager.createQuery(query.toString(), EvaluationResult.class)

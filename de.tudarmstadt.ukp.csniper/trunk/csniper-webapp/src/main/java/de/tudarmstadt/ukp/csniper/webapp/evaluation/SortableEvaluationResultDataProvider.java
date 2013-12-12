@@ -47,10 +47,10 @@ public class SortableEvaluationResultDataProvider
 {
 	public enum ResultFilter
 	{
-		ALL("all items"), 
-		TODO("not assessed items"),
-		ASSESSED("assessed items"),
-		TO_CHECK("items to check");
+		ALL("all"), 
+		TODO("to do"),
+		ANNOTATED("annotated"),
+		TO_CHECK("check");
 
 
 		private String label;
@@ -122,7 +122,7 @@ public class SortableEvaluationResultDataProvider
 				for (EvaluationResult e : results) {
 					Mark emark = Mark.fromString(e.getResult());
 					switch (getFilter()) {
-					case ASSESSED:
+					case ANNOTATED:
 						if (emark == Mark.CORRECT || emark == Mark.WRONG) {
 							limitedResults.add(e);
 						}

@@ -102,7 +102,7 @@ public class SearchPage
 	private static final int ROWS_PER_PAGE = 10;
 	private static final int MAX_RESULTS = 1000;
 
-	private static final int MIN_ITEMS_ASSESSED = 10;
+	private static final int MIN_ITEMS_ANNOTATED = 10;
 
 	@SpringBean(name = "evaluationRepository")
 	private EvaluationRepository repository;

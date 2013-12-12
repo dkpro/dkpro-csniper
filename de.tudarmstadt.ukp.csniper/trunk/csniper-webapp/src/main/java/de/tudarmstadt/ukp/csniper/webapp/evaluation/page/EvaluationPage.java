@@ -19,9 +19,6 @@ package de.tudarmstadt.ukp.csniper.webapp.evaluation.page;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
-import static org.apache.uima.fit.factory.AnalysisEngineFactory.createEngine;
-import static org.apache.uima.fit.factory.TypeSystemDescriptionFactory.createTypeSystemDescription;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -37,9 +34,6 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.uima.UIMAException;
-import org.apache.uima.analysis_engine.AnalysisEngine;
-import org.apache.uima.cas.CAS;
-import org.apache.uima.util.CasCreationUtils;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;
@@ -83,8 +77,6 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.lang.PropertyResolver;
-import org.cleartk.classifier.jar.DirectoryDataWriterFactory;
-import org.cleartk.classifier.jar.Train;
 import org.odlabs.wiquery.ui.tabs.Tabs;
 import org.radeox.api.engine.RenderEngine;
 import org.radeox.api.engine.context.RenderContext;
@@ -94,10 +86,6 @@ import org.springframework.dao.NonTransientDataAccessException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.wicketstuff.progressbar.ProgressBar;
 
-import com.google.common.io.Files;
-
-import de.tudarmstadt.ukp.csniper.ml.TKSVMlightFeatureExtractor;
-import de.tudarmstadt.ukp.csniper.ml.tksvm.DefaultTKSVMlightDataWriterFactory;
 import de.tudarmstadt.ukp.csniper.webapp.DefaultValues;
 import de.tudarmstadt.ukp.csniper.webapp.analysis.ParseTreeResource;
 import de.tudarmstadt.ukp.csniper.webapp.analysis.uima.ParsingPipeline;
@@ -119,7 +107,6 @@ import de.tudarmstadt.ukp.csniper.webapp.search.ContextProvider;
 import de.tudarmstadt.ukp.csniper.webapp.search.CorpusService;
 import de.tudarmstadt.ukp.csniper.webapp.search.PreparedQuery;
 import de.tudarmstadt.ukp.csniper.webapp.search.SearchEngine;
-import de.tudarmstadt.ukp.csniper.webapp.search.tgrep.PennTreeUtils;
 import de.tudarmstadt.ukp.csniper.webapp.statistics.model.AggregatedEvaluationResult;
 import de.tudarmstadt.ukp.csniper.webapp.support.task.ITaskService;
 import de.tudarmstadt.ukp.csniper.webapp.support.task.Task;
@@ -133,8 +120,6 @@ import de.tudarmstadt.ukp.csniper.webapp.support.wicket.EmbeddableImage;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.ExtendedIndicatingAjaxButton;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.LocalizerUtil;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.ThresholdLink;
-import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
-import de.tudarmstadt.ukp.dkpro.core.api.syntax.type.PennTree;
 
 /**
  * Evaluation Page
@@ -173,7 +158,7 @@ public class EvaluationPage
 	private static final int ROWS_PER_PAGE = 10;
 	private static final int MAX_RESULTS = 1000;
 
-	private static final int MIN_ITEMS_ASSESSED = 10;
+	private static final int MIN_ITEMS_ANNOTATED = 10;
 
 	@SpringBean(name = "evaluationRepository")
 	private EvaluationRepository repository;
@@ -1253,9 +1238,10 @@ public class EvaluationPage
 								// if taking only current results into account, ignore user list
 								if (model.onlycurrent) {
 									// parse, obtain Penn trees, predict results
-									result = mlp.predict(results, MIN_ITEMS_ASSESSED);
-									errorMsg = "You have not assessed enough items to use the prediction feature. Please assess at least ["
-											+ MIN_ITEMS_ASSESSED + "] items manually.";
+									result = mlp.predict(results, MIN_ITEMS_ANNOTATED);
+									errorMsg = "You have not annotated enough items to use the "
+									        + "prediction feature. Please annotate at least ["
+											+ MIN_ITEMS_ANNOTATED + "] items manually.";
 								}
 								else {
 									// parse, obtain Penn trees, predict results
@@ -1849,7 +1835,7 @@ public class EvaluationPage
 		{
 			{
 				add(saveButton = (ExtendedIndicatingAjaxButton) new ExtendedIndicatingAjaxButton(
-						"saveButton", new Model<String>("Begin assessment"), new Model<String>(
+						"saveButton", new Model<String>("Start annotating"), new Model<String>(
 								"Preparing ..."))
 				{
 					@Override

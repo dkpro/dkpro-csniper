@@ -1,13 +1,20 @@
 de.tudarmstadt.ukp.csniper.webapp.support.task:
 
-Classes in this package have been adapted from org.wicketstuff.progressbar by Christopher Hlubek
-licensed under the Apache Software License 2.0.
+  Classes in this package have been adapted from org.wicketstuff.progressbar by Christopher Hlubek
+  licensed under the Apache Software License 2.0.
 
 AjaxFileDownload:
 
-This class is based on concepts found in example code at
-https://cwiki.apache.org/WICKET/ajax-update-and-file-download-in-one-blow.html
+  This class is based on concepts found in example code at
+  https://cwiki.apache.org/WICKET/ajax-update-and-file-download-in-one-blow.html
 
+css_browser_selector.js:
+
+  CSS Browser Selector v0.4.0 (Nov 02, 2010)
+  Rafael Lima (http://rafael.adm.br)
+  http://rafael.adm.br/css_browser_selector
+  License: http://creativecommons.org/licenses/by/2.5/
+  Contributors: http://rafael.adm.br/css_browser_selector#contributors
 
 Image files:
 
@@ -35,3 +42,4 @@ Entypo pictograms by Daniel Bruce [www.entypo.com] in src/main/webapp/images are
 
 statistics-example-a.png
 ukp-logo.png
+
