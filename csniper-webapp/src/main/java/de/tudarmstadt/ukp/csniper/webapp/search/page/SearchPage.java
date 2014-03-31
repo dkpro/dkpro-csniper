@@ -19,13 +19,20 @@ package de.tudarmstadt.ukp.csniper.webapp.search.page;
 
 import static java.util.Arrays.asList;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxEventBehavior;
@@ -36,6 +43,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
+import org.apache.wicket.markup.html.link.DownloadLink;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.DropDownChoice;
@@ -46,13 +54,17 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.repeater.Item;
+import org.apache.wicket.model.AbstractReadOnlyModel;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
+import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.request.handler.resource.*;
 import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.apache.wicket.util.resource.*;
 import org.springframework.dao.NonTransientDataAccessException;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -85,6 +97,8 @@ public class SearchPage
 	extends ApplicationPageBase
 {
 	private static final long serialVersionUID = 1L;
+        
+	private final Log log = LogFactory.getLog(getClass());
 
 	private List<EvaluationItem> items;
 
@@ -187,6 +201,52 @@ public class SearchPage
 			};
 			add(queryInput);
 			add(queryButton);
+                        
+                        // Add download functionality for query result.
+                        IModel<File> fileModel = new AbstractReadOnlyModel<File>() {
+			    @Override
+			    public File getObject() {
+			    	File rvalfile = null;
+			    	log.info("Downloadlink ...  generating rval file.");
+					
+			    	if(items!=null) {
+						if(items.size() > 0) {
+							ServletContext ctx = WebApplication.get().getServletContext();
+							final String path = ctx.getRealPath("/");
+							
+							PrintWriter pw = null;
+							try {
+								pw = new PrintWriter(new File(path + "/results.txt"));
+							} catch (FileNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+                                                        // Add all query result items to rval list.
+							for(int i = 0; i < items.size(); i++) {
+								pw.write(items.get(i) + "\n");
+							}
+
+							pw.close();
+							rvalfile = new File(path + "/results.txt");	
+						}
+					}
+					else {
+						log.warn("Nothing to be saved.");
+					}
+			        return rvalfile;
+			    }
+			};
+			DownloadLink dynamicDownloadlink = new DownloadLink("downloadButton", fileModel) {
+			 
+			    @Override
+			    public void onClick() {
+			        File file = (File)getModelObject();
+			        IResourceStream resourceStream = new FileResourceStream(new org.apache.wicket.util.file.File(file));
+			        getRequestCycle().scheduleRequestHandlerAfterCurrent(new ResourceStreamRequestHandler(resourceStream, file.getName()));
+			    }
+			};
+			 
+			add(dynamicDownloadlink);
 
 			// collection dropdown
 			collectionIdInput = new DropDownChoice<String>("collectionId",
