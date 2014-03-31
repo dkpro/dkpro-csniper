@@ -688,7 +688,7 @@ public class EvaluationRepository
     public List<String> listUsers()
     {
         return entityManager.createQuery(
-                "SELECT DISTINCT userId FROM EvaluationResult ORDER BY userId", String.class)
+                "SELECT username FROM User ORDER BY username", String.class)
                 .getResultList();
     }
 
