@@ -115,6 +115,8 @@ public class SearchPage
 
 	private static final int ROWS_PER_PAGE = 10;
 	private static final int MAX_RESULTS = 1000;
+        // TODO: Make parameterizable via web interface.
+        private static final int MAX_DOWNLOAD_RESULTS = 5000;
 
 	private static final int MIN_ITEMS_ANNOTATED = 10;
 
@@ -223,9 +225,13 @@ public class SearchPage
 							}
                                                         // Add all query result items to rval list.
 							for(int i = 0; i < items.size(); i++) {
-								pw.write(items.get(i) + "\n");
+                                                                if(i < MAX_DOWNLOAD_RESULTS) {
+                                                                    pw.write(items.get(i) + "\n");
+                                                                }
+                                                                else {
+                                                                    break;
+                                                                }
 							}
-
 							pw.close();
 							rvalfile = new File(path + "/results.txt");	
 						}
