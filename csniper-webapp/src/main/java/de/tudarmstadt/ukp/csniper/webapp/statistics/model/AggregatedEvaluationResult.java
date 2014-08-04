@@ -203,4 +203,9 @@ public class AggregatedEvaluationResult
 				+ wrong + ", incomplete=" + incomplete + ", classification=" + classification
 				+ ", confidence=" + confidence + ", userRatio=" + userRatio + "]";
 	}
+
+    public SortedMap<String, Mark> getUserVoteMap()
+    {
+        return userVoteMap;
+    }
 }
