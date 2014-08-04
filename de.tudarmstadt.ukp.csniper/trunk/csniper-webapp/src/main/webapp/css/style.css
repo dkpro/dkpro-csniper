@@ -108,7 +108,24 @@ select.hfill {
 select.hfill[multiple] {
     width: auto; /* If the select content is very large, this forces the select to accomodate the
  *  full expanded content... usually not what we want, only the popup should be full-width. But
- *  for multiple selection, we really want to show the full with by default*/
+ *  for multiple selection, we really want to show the full width by default*/
+}
+
+/* For better viewing, split long lines in select boxes (on the "Best Queries" page) */
+.breakword {
+    -ms-word-break: break-all;
+    word-break: break-all;
+    // Non standard for webkit
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+/* Also indent lines from 2nd line on to make clear which lines belong to which option */
+.breakword option {
+    text-indent: -20px;
+    padding-left: 23px;
 }
 
 .nowrap {
