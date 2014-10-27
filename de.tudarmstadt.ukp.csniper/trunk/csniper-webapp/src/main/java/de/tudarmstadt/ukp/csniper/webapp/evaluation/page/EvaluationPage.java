@@ -1525,6 +1525,7 @@ public class EvaluationPage
 							aTarget.add(contextViewsContainer);
 						}
 						catch (IOException e) {
+						    aTarget.add(getFeedbackPanel());
 							error("Unable to load context: " + e.getMessage());
 						}
 					}
