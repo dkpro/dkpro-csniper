@@ -45,7 +45,7 @@ import org.apache.wicket.model.IModel;
  * @param <T>
  *            The model object type
  */
-public class CustomDataTable<T> extends DataTable<T>
+public class CustomDataTable<T> extends DataTable<T, String>
 {
 	private static final long serialVersionUID = 1L;
 
@@ -61,8 +61,8 @@ public class CustomDataTable<T> extends DataTable<T>
 	 * @param rowsPerPage
 	 *            number of rows per page
 	 */
-	public CustomDataTable(final String id, final List<IColumn<T>> columns,
-		final ISortableDataProvider<T> dataProvider, final int rowsPerPage)
+	public CustomDataTable(final String id, final List<IColumn<T, String>> columns,
+		final ISortableDataProvider<T, String> dataProvider, final int rowsPerPage)
 	{
 		super(id, columns, dataProvider, rowsPerPage);
 

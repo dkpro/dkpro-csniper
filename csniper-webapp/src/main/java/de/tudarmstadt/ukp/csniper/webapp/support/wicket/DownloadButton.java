@@ -25,7 +25,7 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.IRequestCycle;
-import org.apache.wicket.request.UrlEncoder;
+import org.apache.wicket.util.encoding.UrlEncoder;
 import org.apache.wicket.request.handler.resource.ResourceStreamRequestHandler;
 import org.apache.wicket.request.resource.ContentDisposition;
 import org.apache.wicket.util.resource.FileResourceStream;

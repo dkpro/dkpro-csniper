@@ -41,7 +41,7 @@ public class ExtendedNavigationToolbar
 	 *            data table this toolbar will be attached to
 	 */
 	@SuppressWarnings("rawtypes")
-	public ExtendedNavigationToolbar(final DataTable<?> table)
+	public ExtendedNavigationToolbar(final DataTable<?, String> table)
 	{
 		super(table);
 
@@ -51,8 +51,8 @@ public class ExtendedNavigationToolbar
 			private static final long serialVersionUID = 1L;
 
 			{
-				final NumberTextField<Integer> jumpto = new NumberTextField<Integer>("jumpto",
-						new Model<Integer>())
+				final NumberTextField<Long> jumpto = new NumberTextField<Long>("jumpto",
+						new Model<Long>())
 				{
 					private static final long serialVersionUID = 1L;
 
@@ -61,11 +61,11 @@ public class ExtendedNavigationToolbar
 					{
 						super.onConfigure();
 						setModelObject(table.getCurrentPage() + 1);
-						setMinimum(1);
+						setMinimum(1L);
 						setMaximum(table.getPageCount());
 					}
 				};
-				jumpto.setType(Integer.class);
+				jumpto.setType(Long.class);
 				add(jumpto);
 				add(new Button("jumptoButton")
 				{

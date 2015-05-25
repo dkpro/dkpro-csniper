@@ -17,21 +17,18 @@
  ******************************************************************************/
 package de.tudarmstadt.ukp.csniper.webapp.support.wicket;
 
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
-import org.odlabs.wiquery.core.IWiQueryPlugin;
-import org.odlabs.wiquery.core.javascript.JsStatement;
-import org.odlabs.wiquery.ui.commons.WiQueryUIPlugin;
 
-@WiQueryUIPlugin
 public class ThresholdHelpPage
 	extends WebPage
-	implements IWiQueryPlugin
 {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public JsStatement statement()
+	public void renderHead(IHeaderResponse aResponse)
 	{
-		return new JsStatement();
+		aResponse.render(OnDomReadyHeaderItem.forScript(""));
 	}
 }
