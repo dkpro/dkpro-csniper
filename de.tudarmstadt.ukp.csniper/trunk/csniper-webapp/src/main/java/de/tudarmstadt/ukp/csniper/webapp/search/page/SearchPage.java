@@ -106,7 +106,7 @@ public class SearchPage
 	private LimitForm limitForm;
 	private WebMarkupContainer contextViewsContainer;
 	private ListView<ContextView> contextViews;
-	private List<IColumn<EvaluationResult>> columns;
+	private List<IColumn<EvaluationResult, String>> columns;
 	private Component resultTable;
 	private ModalWindow analysisModal;
 	private ParsingPipeline pp;
@@ -446,8 +446,8 @@ public class SearchPage
 		contextViewsContainer.setOutputMarkupId(true);
 		add(contextViewsContainer);
 
-		columns = new ArrayList<IColumn<EvaluationResult>>();
-		columns.add(new AbstractColumn<EvaluationResult>(new Model<String>(""))
+		columns = new ArrayList<IColumn<EvaluationResult, String>>();
+		columns.add(new AbstractColumn<EvaluationResult, String>(new Model<String>(""))
 		{
 			@Override
 			public void populateItem(final Item<ICellPopulator<EvaluationResult>> aCellItem,
@@ -476,7 +476,7 @@ public class SearchPage
 				aCellItem.add(iconContext);
 			}
 		});
-		columns.add(new AbstractColumn<EvaluationResult>(new Model<String>(""))
+		columns.add(new AbstractColumn<EvaluationResult, String>(new Model<String>(""))
 		{
 			@Override
 			public void populateItem(final Item<ICellPopulator<EvaluationResult>> aCellItem,
@@ -515,9 +515,9 @@ public class SearchPage
 				aCellItem.add(iconAnalysis);
 			}
 		});
-		columns.add(new PropertyColumn<EvaluationResult>(new Model<String>("Doc"),
+		columns.add(new PropertyColumn<EvaluationResult, String>(new Model<String>("Doc"),
 				"item.documentId", "item.documentId"));
-		columns.add(new PropertyColumn<EvaluationResult>(new Model<String>("Left"),
+		columns.add(new PropertyColumn<EvaluationResult, String>(new Model<String>("Left"),
 				"item.leftContext", "item.leftContext")
 		{
 			@Override
@@ -526,8 +526,8 @@ public class SearchPage
 				return contextAvailable ? "leftContext" : " hideCol";
 			}
 		});
-		columns.add(new PropertyColumn<EvaluationResult>(new Model<String>("Match"), "item.match",
-				"item.match")
+		columns.add(new PropertyColumn<EvaluationResult, String>(new Model<String>("Match"), "item.match",
+		        "item.match")
 		{
 			@Override
 			public String getCssClass()
@@ -535,7 +535,7 @@ public class SearchPage
 				return contextAvailable ? "match nowrap" : null;
 			}
 		});
-		columns.add(new PropertyColumn<EvaluationResult>(new Model<String>("Right"),
+		columns.add(new PropertyColumn<EvaluationResult, String>(new Model<String>("Right"),
 				"item.rightContext", "item.rightContext")
 		{
 			@Override

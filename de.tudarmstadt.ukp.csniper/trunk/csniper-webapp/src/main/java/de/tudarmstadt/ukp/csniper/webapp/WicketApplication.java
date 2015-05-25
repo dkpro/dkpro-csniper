@@ -18,17 +18,16 @@
 package de.tudarmstadt.ukp.csniper.webapp;
 
 import org.apache.wicket.Page;
-import org.apache.wicket.Session;
 import org.apache.wicket.authorization.strategies.CompoundAuthorizationStrategy;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.annotations.AnnotationsRoleAuthorizationStrategy;
 import org.apache.wicket.authroles.authorization.strategies.role.metadata.MetaDataRoleAuthorizationStrategy;
 import org.apache.wicket.markup.html.WebPage;
+import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.time.Duration;
-import org.odlabs.wiquery.ui.themes.IThemableApplication;
 import org.odlabs.wiquery.ui.themes.WiQueryCoreThemeResourceReference;
 
 import de.tudarmstadt.ukp.csniper.webapp.analysis.page.AnalysisPage;
@@ -49,7 +48,6 @@ import de.tudarmstadt.ukp.csniper.webapp.statistics.page.StatisticsPage2;
  */
 public class WicketApplication
 	extends AuthenticatedWebApplication
-	implements IThemableApplication
 {
 	boolean isInitialized = false;
 
@@ -57,16 +55,21 @@ public class WicketApplication
 	
 	public WicketApplication()
 	{
-		theme = new WiQueryCoreThemeResourceReference("redlion");
+		// theme = new WiQueryCoreThemeResourceReference("redlion");
+		// cannot use above line, because it uses jquery-ui-1.8.24, for which we don't have redlion
+		theme = new CssResourceReference(WiQueryCoreThemeResourceReference.class, "redlion"
+				+ "/jquery-ui-1.8.16.custom.css");
 	}
 	
 	@Override
 	public void init()
 	{
+		addResourceReplacement(WiQueryCoreThemeResourceReference.get(), theme);
+
 		if (!isInitialized) {
 			super.init();
 			
-			getRequestCycleSettings().setTimeout(Duration.minutes(10)); 
+			getRequestCycleSettings().setTimeout(Duration.minutes(10));
 			
 			getComponentInstantiationListeners().add(new SpringComponentInjector(this));
 
@@ -111,14 +114,5 @@ public class WicketApplication
 	protected Class<? extends AuthenticatedWebSession> getWebSessionClass()
 	{
 		return SpringAuthenticatedWebSession.class;
-	}
-	
-	public void setTheme(ResourceReference theme) {
-		this.theme = theme;
-	}
-	
-	@Override
-	public ResourceReference getTheme(Session session) {
-		return theme;
 	}
 }

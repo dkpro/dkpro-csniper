@@ -43,7 +43,7 @@ import de.tudarmstadt.ukp.csniper.webapp.evaluation.model.Mark;
  * 
  */
 public class SortableEvaluationResultDataProvider
-	extends SortableDataProvider<EvaluationResult>
+	extends SortableDataProvider<EvaluationResult, String>
 {
 	public enum ResultFilter
 	{
@@ -94,18 +94,18 @@ public class SortableEvaluationResultDataProvider
 	 * @see org.apache.wicket.markup.repeater.data.IDataProvider#iterator(int, int)
 	 */
 	@Override
-	public Iterator<EvaluationResult> iterator(int aFirst, int aCount)
+	public Iterator<EvaluationResult> iterator(long aFirst, long aCount)
 	{
 		// Apply paging
 		updateView();
-		return limitedResults.subList(aFirst, Math.min(aFirst + aCount, results.size())).iterator();
+		return limitedResults.subList((int) aFirst, (int) Math.min(aFirst + aCount, results.size())).iterator();
 	}
 
 	/**
 	 * @see org.apache.wicket.markup.repeater.data.IDataProvider#size()
 	 */
 	@Override
-	public int size()
+	public long size()
 	{
 		updateView();
 		return limitedResults.size();
@@ -113,7 +113,7 @@ public class SortableEvaluationResultDataProvider
 	
 	private void updateView()
 	{
-		final SortParam sp = getSort();
+		final SortParam<String> sp = getSort();
 
 		if (!sp.getProperty().equals(lastSortProperty) || (lastSortOrder != sp.isAscending()) || filterChanged) {
 			// Apply filter
@@ -147,11 +147,11 @@ public class SortableEvaluationResultDataProvider
 			}
 			
 			// Apply sorting
-			Collections.sort(limitedResults, new Comparator<Object>()
+			Collections.sort(limitedResults, new Comparator<EvaluationResult>()
 			{
 				@SuppressWarnings("rawtypes")
 				@Override
-				public int compare(Object aO1, Object aO2)
+				public int compare(EvaluationResult aO1, EvaluationResult aO2)
 				{
 					try {
 						Comparable v1 = (Comparable) PropertyUtils.getNestedProperty(aO1, sp.getProperty());

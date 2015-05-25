@@ -29,12 +29,12 @@ import de.tudarmstadt.ukp.csniper.webapp.project.ProjectRepository;
  * 
  */
 public class DbFieldMaxLengthValidator
-	extends StringValidator.MaximumLengthValidator
+	extends StringValidator
 {
 	private static final long serialVersionUID = 1L;
 
 	public DbFieldMaxLengthValidator(ProjectRepository aRepository, String aTable, String aColumn)
 	{
-		super(aRepository.getDbColumnLength(aTable, aColumn));
+		super(0, aRepository.getDbColumnLength(aTable, aColumn));
 	}
 }

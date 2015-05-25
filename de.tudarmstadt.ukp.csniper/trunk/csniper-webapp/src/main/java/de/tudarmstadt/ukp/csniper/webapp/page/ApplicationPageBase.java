@@ -35,9 +35,6 @@ import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
-import org.odlabs.wiquery.core.IWiQueryPlugin;
-import org.odlabs.wiquery.core.javascript.JsStatement;
-import org.odlabs.wiquery.ui.commons.WiQueryUIPlugin;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -49,12 +46,8 @@ import de.tudarmstadt.ukp.csniper.webapp.security.page.LogInOutPanel;
 import de.tudarmstadt.ukp.csniper.webapp.support.task.TaskService;
 import de.tudarmstadt.ukp.csniper.webapp.support.wicket.ExpandableList;
 
-// The @WiQueryUIPlugin annotation and that the class implements IWiQueryPlugin makes sure that the
-// JQuery stylesheet is always present. - REC 2012-02-28
-@WiQueryUIPlugin
 public abstract class ApplicationPageBase
 	extends WebPage
-	implements IWiQueryPlugin
 {
 	private final static Log LOG = LogFactory.getLog(ApplicationPageBase.class);
 
@@ -170,12 +163,6 @@ public abstract class ApplicationPageBase
 	public FeedbackPanel getFeedbackPanel()
 	{
 		return feedbackPanel;
-	}
-	
-	@Override
-	public JsStatement statement()
-	{
-		return new JsStatement();
 	}
 	
 	public Properties getVersionProperties()

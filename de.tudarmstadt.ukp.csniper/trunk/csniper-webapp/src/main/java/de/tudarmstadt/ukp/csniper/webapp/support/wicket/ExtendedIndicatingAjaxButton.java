@@ -20,9 +20,9 @@ package de.tudarmstadt.ukp.csniper.webapp.support.wicket;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
-import org.apache.wicket.ajax.IAjaxCallDecorator;
 import org.apache.wicket.ajax.IAjaxIndicatorAware;
-import org.apache.wicket.ajax.calldecorator.AjaxCallDecorator;
+import org.apache.wicket.ajax.attributes.AjaxCallListener;
+import org.apache.wicket.ajax.attributes.AjaxRequestAttributes;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.extensions.ajax.markup.html.IndicatingAjaxButton;
 import org.apache.wicket.markup.ComponentTag;
@@ -81,30 +81,31 @@ public abstract class ExtendedIndicatingAjaxButton
 	}
 
 	@Override
-	protected IAjaxCallDecorator getAjaxCallDecorator()
+	protected void updateAjaxAttributes(AjaxRequestAttributes aAttributes)
 	{
-		return new AjaxCallDecorator()
+		AjaxCallListener listener = new AjaxCallListener()
 		{
 			private static final long serialVersionUID = 8211975176278631439L;
 
 			@Override
-			public CharSequence decorateOnSuccessScript(Component c, CharSequence script)
+			public CharSequence getSuccessHandler(Component aComponent)
 			{
-				return getJs(c.getMarkupId(), model.getObject(), false);
+				return getJs(aComponent.getMarkupId(), model.getObject(), false);
 			}
 
 			@Override
-			public CharSequence decorateOnFailureScript(Component c, CharSequence script)
+			public CharSequence getFailureHandler(Component aComponent)
 			{
-				return getJs(c.getMarkupId(), failureModel.getObject(), false);
+				return getJs(aComponent.getMarkupId(), failureModel.getObject(), false);
 			}
 
 			@Override
-			public CharSequence decorateScript(Component c, CharSequence script)
+			public CharSequence getAfterHandler(Component aComponent)
 			{
-				return getJs(c.getMarkupId(), busyModel.getObject(), true) + script;
+				return getJs(aComponent.getMarkupId(), busyModel.getObject(), true);
 			}
 		};
+		aAttributes.getAjaxCallListeners().add(listener);
 	}
 
 	@Override

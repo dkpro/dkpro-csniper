@@ -76,7 +76,7 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.resource.ContextRelativeResource;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.apache.wicket.util.lang.PropertyResolver;
+import org.apache.wicket.core.util.lang.PropertyResolver;
 import org.odlabs.wiquery.ui.tabs.Tabs;
 import org.radeox.api.engine.RenderEngine;
 import org.radeox.api.engine.context.RenderContext;
@@ -144,7 +144,7 @@ public class EvaluationPage
 	private ExtendedIndicatingAjaxButton saveButton;
 	private ExtendedIndicatingAjaxButton predictButton;
 	private ExtendedIndicatingAjaxButton samplesetButton;
-	private List<IColumn<EvaluationResult>> columns;
+	private List<IColumn<EvaluationResult, String>> columns;
 	private boolean showResultColumns;
 	private Component resultTable;
 	private ModalWindow samplesetModal;
@@ -1505,8 +1505,8 @@ public class EvaluationPage
 		contextViewsContainer.setOutputMarkupId(true);
 		add(contextViewsContainer);
 
-		columns = new ArrayList<IColumn<EvaluationResult>>();
-		columns.add(new AbstractColumn<EvaluationResult>(new Model<String>(""))
+		columns = new ArrayList<IColumn<EvaluationResult, String>>();
+		columns.add(new AbstractColumn<EvaluationResult, String>(new Model<String>(""))
 		{
 			@Override
 			public void populateItem(final Item<ICellPopulator<EvaluationResult>> aCellItem,
@@ -1535,7 +1535,7 @@ public class EvaluationPage
 				aCellItem.add(iconContext);
 			}
 		});
-		columns.add(new AbstractColumn<EvaluationResult>(new Model<String>(""))
+		columns.add(new AbstractColumn<EvaluationResult, String>(new Model<String>(""))
 		{
 			@Override
 			public void populateItem(final Item<ICellPopulator<EvaluationResult>> aCellItem,
@@ -1582,13 +1582,13 @@ public class EvaluationPage
 		// columns.add(new PropertyColumn(new Model<String>("ID"), "id", "id"));
 		// columns.add(new PropertyColumn(new Model<String>("Collection"), "item.collectionId",
 		// "item.collectionId"));
-		columns.add(new PropertyColumn<EvaluationResult>(new Model<String>("Doc"),
+		columns.add(new PropertyColumn<EvaluationResult, String>(new Model<String>("Doc"),
 				"item.documentId", "item.documentId"));
 		// columns.add(new PropertyColumn(new Model<String>("Begin"), "item.beginOffset",
 		// "item.beginOffset"));
 		// columns.add(new PropertyColumn(new Model<String>("End"), "item.endOffset",
 		// "item.endOffset"));
-		columns.add(new PropertyColumn<EvaluationResult>(new Model<String>("Left"),
+		columns.add(new PropertyColumn<EvaluationResult, String>(new Model<String>("Left"),
 				"item.leftContext", "item.leftContext")
 		{
 			@Override
@@ -1597,7 +1597,7 @@ public class EvaluationPage
 				return contextAvailable ? "leftContext" : " hideCol";
 			}
 		});
-		columns.add(new PropertyColumn<EvaluationResult>(new Model<String>("Match"), "item.match",
+		columns.add(new PropertyColumn<EvaluationResult, String>(new Model<String>("Match"), "item.match",
 				"item.match")
 		{
 			@Override
@@ -1606,7 +1606,7 @@ public class EvaluationPage
 				return contextAvailable ? "match nowrap" : null;
 			}
 		});
-		columns.add(new PropertyColumn<EvaluationResult>(new Model<String>("Right"),
+		columns.add(new PropertyColumn<EvaluationResult, String>(new Model<String>("Right"),
 				"item.rightContext", "item.rightContext")
 		{
 			@Override
@@ -1615,7 +1615,7 @@ public class EvaluationPage
 				return contextAvailable ? "rightContext" : " hideCol";
 			}
 		});
-		columns.add(new AbstractColumn<EvaluationResult>(new Model<String>("Label"), "result")
+		columns.add(new AbstractColumn<EvaluationResult, String>(new Model<String>("Label"), "result")
 		{
 			@Override
 			public void populateItem(final Item<ICellPopulator<EvaluationResult>> aCellItem,
@@ -1658,7 +1658,7 @@ public class EvaluationPage
 				return (showResultColumns ? "" : " hideCol");
 			}
 		});
-		columns.add(new AbstractColumn<EvaluationResult>(new Model<String>("Comment"), "comment")
+		columns.add(new AbstractColumn<EvaluationResult, String>(new Model<String>("Comment"), "comment")
 		{
 			@Override
 			public void populateItem(Item<ICellPopulator<EvaluationResult>> cellItem,
@@ -1968,16 +1968,16 @@ public class EvaluationPage
 	 *            the type to get additional columns for
 	 * @return additional columns
 	 */
-	private List<IColumn<EvaluationResult>> getAllColumns(AnnotationType aType)
+	private List<IColumn<EvaluationResult, String>> getAllColumns(AnnotationType aType)
 	{
-		List<IColumn<EvaluationResult>> ac = new ArrayList<IColumn<EvaluationResult>>();
+		List<IColumn<EvaluationResult, String>> ac = new ArrayList<IColumn<EvaluationResult, String>>();
 
 		// add "standard" columns
 		ac.addAll(columns);
 
 		// add type dependent columns
 		for (final AdditionalColumn ad : aType.getAdditionalColumns()) {
-			ac.add(new AbstractColumn<EvaluationResult>(new Model<String>(ad.getName()),
+			ac.add(new AbstractColumn<EvaluationResult, String>(new Model<String>(ad.getName()),
 					"additionalColumnValue(" + ad.getId() + ")")
 			{
 				private static final long serialVersionUID = 1L;

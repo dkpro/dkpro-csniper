@@ -28,7 +28,7 @@
 	<name>csniper-webapp</name>
 	<description />
 	<properties>
-		<wicket.version>1.5.8</wicket.version>
+		<wicket.version>6.13.0</wicket.version>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 	</properties>
@@ -74,7 +74,7 @@
 		<dependency>
 			<groupId>org.wicketstuff</groupId>
 			<artifactId>wicketstuff-progressbar-spring</artifactId>
-			<version>1.5.8</version>
+			<version>${wicket.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>

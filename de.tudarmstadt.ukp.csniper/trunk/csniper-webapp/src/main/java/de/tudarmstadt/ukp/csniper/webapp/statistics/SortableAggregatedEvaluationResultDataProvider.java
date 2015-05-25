@@ -51,7 +51,7 @@ import de.tudarmstadt.ukp.dkpro.statistics.agreement.MultiRaterPiAgreement;
  * 
  */
 public class SortableAggregatedEvaluationResultDataProvider
-	extends SortableDataProvider<AggregatedEvaluationResult>
+	extends SortableDataProvider<AggregatedEvaluationResult, String>
 {
 	public enum ResultFilter
 	{
@@ -112,19 +112,19 @@ public class SortableAggregatedEvaluationResultDataProvider
 	 * @see org.apache.wicket.markup.repeater.data.IDataProvider#iterator(int, int)
 	 */
 	@Override
-	public Iterator<AggregatedEvaluationResult> iterator(int aFirst, int aCount)
+	public Iterator<AggregatedEvaluationResult> iterator(long aFirst, long aCount)
 	{
 		// Apply paging
 		updateView();
-		return limitedResults.subList(aFirst, Math.min(aFirst + aCount, limitedResults.size()))
-				.iterator();
+		return limitedResults.subList((int) aFirst, (int) Math.min(aFirst + aCount, limitedResults.size()))
+		        .iterator();
 	}
 
 	/**
 	 * @see org.apache.wicket.markup.repeater.data.IDataProvider#size()
 	 */
 	@Override
-	public int size()
+	public long size()
 	{
 		updateView();
 		return limitedResults.size();
@@ -132,7 +132,7 @@ public class SortableAggregatedEvaluationResultDataProvider
 
 	private void updateView()
 	{
-		final SortParam sp = getSort();
+		final SortParam<String> sp = getSort();
 
 		// filter
 		if (!sp.getProperty().equals(lastSortProperty) || (lastSortOrder != sp.isAscending())

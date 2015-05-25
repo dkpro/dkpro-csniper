@@ -130,7 +130,7 @@ public class StatisticsPage
 	private WebMarkupContainer displayOptions;
 	private WebMarkupContainer contextViewsContainer;
 	private ListView<ContextView> contextViews;
-	private List<IColumn<AggregatedEvaluationResult>> columns = new ArrayList<IColumn<AggregatedEvaluationResult>>();
+	private List<IColumn<AggregatedEvaluationResult, String>> columns = new ArrayList<IColumn<AggregatedEvaluationResult, String>>();
 	private Component resultTable;
 	private SortableAggregatedEvaluationResultDataProvider dataProvider;
 
@@ -600,7 +600,7 @@ public class StatisticsPage
 		contextViewsContainer.setOutputMarkupId(true);
 		add(contextViewsContainer);
 
-		columns.add(new AbstractColumn<AggregatedEvaluationResult>(new Model<String>(""))
+		columns.add(new AbstractColumn<AggregatedEvaluationResult, String>(new Model<String>(""))
 		{
 			@Override
 			public void populateItem(
@@ -629,7 +629,7 @@ public class StatisticsPage
 				aCellItem.add(iconContext);
 			}
 		});
-		columns.add(new PropertyColumn<AggregatedEvaluationResult>(new Model<String>("Type"),
+		columns.add(new PropertyColumn<AggregatedEvaluationResult, String>(new Model<String>("Type"),
 				"item.type", "item.type")
 		{
 			private static final long serialVersionUID = 1L;
@@ -640,7 +640,7 @@ public class StatisticsPage
 				return super.getCssClass() + " nowrap";
 			}
 		});
-		columns.add(new PropertyColumn<AggregatedEvaluationResult>(new Model<String>("Collection"),
+		columns.add(new PropertyColumn<AggregatedEvaluationResult, String>(new Model<String>("Collection"),
 				"item.collectionId", "item.collectionId")
 		{
 			private static final long serialVersionUID = 1L;
@@ -652,7 +652,7 @@ public class StatisticsPage
 			}
 
 		});
-		columns.add(new PropertyColumn<AggregatedEvaluationResult>(new Model<String>("Document"),
+		columns.add(new PropertyColumn<AggregatedEvaluationResult, String>(new Model<String>("Document"),
 				"item.documentId", "item.documentId")
 		{
 			private static final long serialVersionUID = 1L;
@@ -663,15 +663,15 @@ public class StatisticsPage
 				return super.getCssClass() + " nowrap";
 			}
 		});
-		columns.add(new PropertyColumn<AggregatedEvaluationResult>(new Model<String>("Item"),
+		columns.add(new PropertyColumn<AggregatedEvaluationResult, String>(new Model<String>("Item"),
 				"item.coveredText", "item.coveredText"));
-		columns.add(new PropertyColumn<AggregatedEvaluationResult>(new Model<String>("#Correct"),
+		columns.add(new PropertyColumn<AggregatedEvaluationResult, String>(new Model<String>("#Correct"),
 				"correct", "correct"));
-		columns.add(new PropertyColumn<AggregatedEvaluationResult>(new Model<String>("#Wrong"),
+		columns.add(new PropertyColumn<AggregatedEvaluationResult, String>(new Model<String>("#Wrong"),
 				"wrong", "wrong"));
-		columns.add(new PropertyColumn<AggregatedEvaluationResult>(
+		columns.add(new PropertyColumn<AggregatedEvaluationResult, String>(
 				new Model<String>("#Incomplete"), "incomplete", "incomplete"));
-		columns.add(new PropertyColumn<AggregatedEvaluationResult>(new Model<String>("Aggregated"),
+		columns.add(new PropertyColumn<AggregatedEvaluationResult, String>(new Model<String>("Aggregated"),
 				"classification", "classification"));
 		// {
 		// private static final long serialVersionUID = 1L;
@@ -686,7 +686,7 @@ public class StatisticsPage
 		// aCellItem.add(new Label(aComponentId, aggregated.getLabel()));
 		// }
 		// });
-		columns.add(new PropertyColumn<AggregatedEvaluationResult>(new Model<String>("Confidence"),
+		columns.add(new PropertyColumn<AggregatedEvaluationResult, String>(new Model<String>("Confidence"),
 				"confidence", "confidence"));
 		// {
 		// private static final long serialVersionUID = 1L;
