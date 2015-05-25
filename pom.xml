@@ -20,7 +20,7 @@
 	<parent>
 		<artifactId>dkpro-parent-pom</artifactId>
 		<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
-		<version>6</version>
+		<version>10</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.tudarmstadt.ukp.csniper</groupId>
@@ -37,6 +37,7 @@
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 		<mysql.connector.version>5.1.25</mysql.connector.version>
+		<java.version>1.7</java.version>
 	</properties>
 	<modules>
 		<module>csniper-treevisualizer</module>
@@ -219,6 +220,16 @@
 				<version>1.0-beta-2</version>
 			</extension>
 		</extensions>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 		<profiles>
 		<profile>
