@@ -50,8 +50,10 @@
 		<module>csniper-tgrep</module>
 	</modules>
 	<scm>
-		<developerConnection>scm:svn:https://csniper.googlecode.com/svn/de.tudarmstadt.ukp.csniper/trunk</developerConnection>
-	</scm>
+		<connection>scm:git:git://github.com/dkpro/dkpro-csniper</connection>
+		<developerConnection>scm:git:git@github.com:dkpro/dkpro-csniper.git</developerConnection>
+		<url>https://github.com/dkpro/dkpro-csniper</url>
+	</scm>  
 	<distributionManagement>
 		<repository>
 			<id>ukp-oss</id>
