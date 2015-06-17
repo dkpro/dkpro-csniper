@@ -19,6 +19,7 @@ package de.tudarmstadt.ukp.csniper.webapp.evaluation.page;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -49,6 +50,7 @@ import org.apache.wicket.extensions.markup.html.repeater.data.sort.SortOrder;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.AbstractColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
+import org.apache.wicket.extensions.markup.html.repeater.util.SortParam;
 import org.apache.wicket.feedback.FeedbackMessage;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
@@ -1342,6 +1344,7 @@ public class EvaluationPage
 			button.setVisible(true);
 			aTarget.add(button);
 			aTarget.add(form);
+			dataProvider.setSort(new SortParam("score", false));
 			updateComponents(aTarget);
 			predictionModal.close(aTarget);
 		}
@@ -1615,6 +1618,14 @@ public class EvaluationPage
 				return contextAvailable ? "rightContext" : " hideCol";
 			}
 		});
+        columns.add(new PropertyColumn<EvaluationResult>(new Model<String>("Score"), "score", "score")
+        {            
+            @Override
+            public String getCssClass()
+            {
+                return (showResultColumns ? "" : " hideCol");
+            }
+        });
 		columns.add(new AbstractColumn<EvaluationResult>(new Model<String>("Label"), "result")
 		{
 			@Override

@@ -34,6 +34,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -65,6 +66,9 @@ public class EvaluationResult
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private Map<AdditionalColumn, String> additionalColumns = new HashMap<AdditionalColumn, String>();
+
+    @Transient
+    private double score;
 
 	public EvaluationResult()
 	{
@@ -158,7 +162,17 @@ public class EvaluationResult
 		additionalColumns = aAdditionalColumns;
 	}
 
-	@PrePersist
+	public double getScore()
+    {
+        return score;
+    }
+
+    public void setScore(double aScore)
+    {
+        score = aScore;
+    }
+
+    @PrePersist
 	public void updateTimestamp()
 	{
 		lastUpdate = Calendar.getInstance();

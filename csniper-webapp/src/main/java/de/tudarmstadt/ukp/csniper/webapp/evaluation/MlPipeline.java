@@ -250,7 +250,9 @@ public class MlPipeline
 
 		for (int i = 0; i < aToPredictList.size(); i++) {
 			Mark m = (predictions.get(i) > THRESHOLD) ? Mark.PRED_CORRECT : Mark.PRED_WRONG;
-			aToPredictList.get(i).setResult(m.getTitle());
+			EvaluationResult er = aToPredictList.get(i);
+			er.setResult(m.getTitle());
+			er.setScore(predictions.get(i));
 		}
 	}
 
