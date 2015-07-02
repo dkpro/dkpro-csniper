@@ -42,6 +42,8 @@ The corpora directory structure being used by CSniper is as follows:
 
 At the moment, a *format* can be, e.g., cqp (mandatory), bin (used for context display) or tgrep (to search on parse trees rather than token/lemmas/POS tags). Each corpus directory has to contain a corpus.properties file, an example of which can be seen further below.
 
+## Example conversion
+
 Let's say we have a corpus in the NEGRA export format (a sample can be found here: [http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/corpus-sample.export](http://www.coli.uni-saarland.de/projects/sfb378/negra-corpus/corpus-sample.export)).
 
 To convert it, we'll write a short conversion program:
@@ -49,7 +51,7 @@ To convert it, we'll write a short conversion program:
 GROOVY RECIPE?
 
 We're presented with a directory `SAMPLE`, with two subdirectories `bin` and `cqp`. Copy `SAMPLE` to your corpora directory. Now we have to do some post-processing:
-First create a `corpus.properties` below `SAMPLE`, like this:
+First create a `corpus.properties` below `SAMPLE`, containing these lines:
 
 	name=NEGRA sample
 	description=Just an example corpus.
