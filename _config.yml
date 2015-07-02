@@ -8,25 +8,25 @@
 #                                                 /____/        
 #
 # Title of your website
-title: "DKPro Core"
+title: "CSniper"
 
 
 # The slogan describes your website and is used on homepage in <title> and other important places
-slogan: "Getting things done in NLP"
+slogan: "Semi-Automatic Search Annotation of Linguistic Phenomena in Large Corpora"
 
 
 # The description is used on homepage and in the footer to quickly describe your website. Use a maximum of 150 characters for SEO-purposes.
-description: "DKPro Core is a collection of software components for natural language processing (NLP) based on the Apache UIMA framework."
+description: "CSniper is a multi-user web-tool that allows to efficiently search and annotate large corpora, by using linugistic queries and in-tool learning."
 
 
 # This URL is the main adresse. Don't include a slash at the end.
 #
-url: "https://dodinh.github.io/dkpro-core-page-draft"
+url: "https://dkpro.github.io/dkpro-csniper"
 baseurl: ""
 
 # This is for the editing function in _/includes/improve_content.html
 # Leave it empty if your site is not on GitHub/GitHub Pages
-improve_content: https://github.com/dodinh/dkpro-core-page-draft/edit/gh-pages
+improve_content: https://github.com/dkpro/dkpro-csniper/edit/gh-pages
 
 # This URL points directly to the images directory making
 # things easier to link to images in posts and templates. It needs a slash.

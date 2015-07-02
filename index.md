@@ -15,7 +15,7 @@ CSniper (Corpus Sniper) is a tool that implements
 
 This annotation-by-query approach efficiently harnesses expert knowledge to identify instances of linguistic phenomena that are hard to identify by means of existing purely automatic annotation tools. In addition, CSniper uses inbuilt machine learning mechanism (using an SVM with tree-kernel) to rank search results, facilitating the annotation process.
 
-![Sentence based Annotation in CSniper](images/search.png)
+![Sentence based Annotation in CSniper](images/screenshots/search.png)
 
 How to cite
 -----------
