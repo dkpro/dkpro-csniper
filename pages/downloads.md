@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: page-fullwidth
 title: "Download"
 permalink: "/downloads/"
 ---
 
-You can download the current version 0.6 of CSniper on [bintray](url to bintray goes here).
+You can download the current version v0.6 of CSniper on [bintray](url to bintray goes here).
 
 For the code, see [source](https://github.com/dkpro/dkpro-csniper/tree/csniper-wicket-5).
 
