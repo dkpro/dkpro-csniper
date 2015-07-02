@@ -1,21 +1,11 @@
 - menu_name: "Mailing lists"
 
 - name: "Users"
-  url: "http://groups.google.com/group/dkpro-core-user"
+  url: "https://groups.google.com/forum/#!forum/csniper-user"
   class: "network-entypo"
-  title: "Users"
+  title: "User list"
 
 - name: "Developers"
-  url: "http://groups.google.com/group/dkpro-core-developers"
+  url: "https://groups.google.com/forum/#!forum/csniper-dev"
   class: "services-newsletter"
-  title: "Developers"
-
-- name: "Announcements"
-  url: "http://groups.google.com/group/dkpro-core-announcements"
-  class: "rss-link"
-  title: "Announcements"
-
-- name: "Commits"
-  url: "http://groups.google.com/group/dkpro-core-source"
-  class: "sitemap-link"
-  title: "Commits"
+  title: "Developer list"
