@@ -21,8 +21,7 @@ import org.apache.commons.lang.StringUtils;
 
 public enum Mark
 {
-	// TODO change titles for PRED_CORRECT and PRED_WRONG - then make sure fromString() still works
-	NA(""), CORRECT("Correct"), WRONG("Wrong"), CHECK("Check"), PRED_CORRECT("Pred_Correct"), PRED_WRONG("Pred_Wrong");
+	NA(""), CORRECT("Correct"), WRONG("Wrong"), CHECK("Check"), PRED_CORRECT("(Correct)"), PRED_WRONG("(Wrong)");
 
 	private String title;
 
@@ -33,8 +32,6 @@ public enum Mark
 
 	public Mark next()
 	{
-//		int idx = (ordinal() + 1) % Mark.values().length;
-//		return Mark.values()[idx];
 		switch(this) {
 		case NA:
 		case PRED_CORRECT:
@@ -57,7 +54,25 @@ public enum Mark
 			return NA;
 		}
 		else {
-			return valueOf(aTitle.toUpperCase());
+			aTitle = aTitle.toLowerCase();
+			if (aTitle.equals("correct")) {
+			    return CORRECT;
+			}
+            else if (aTitle.equals("wrong")) {
+                return WRONG;
+            }
+            else if (aTitle.equals("check")) {
+                return CHECK;
+            }
+            else if (aTitle.equals("(correct)")) {
+                return PRED_CORRECT;
+            }
+            else if (aTitle.equals("(wrong)")) {
+                return PRED_WRONG;
+            }
+            else {
+                throw new IllegalArgumentException("There is no Mark titled [" + aTitle + "].");
+            }
 		}
 	}
 
