@@ -1206,7 +1206,7 @@ public class EvaluationPage
 					.setMaximum(1.0).setOutputMarkupId(true).setEnabled(false));
 
 			form.add(new ExtendedIndicatingAjaxButton("predictionOkButton", new Model<String>(
-					"Predict results"), new Model<String>("Predicting..."))
+					"Rank results"), new Model<String>("Predicting..."))
 			{
 				private static final long serialVersionUID = 1L;
 
@@ -1638,7 +1638,7 @@ public class EvaluationPage
 				aCellItem.add(resultLabel);
 				if (showResultColumns) {
 					aCellItem.add(AttributeModifier.replace("class", new Model<String>("editable "
-							+ model.getObject().getResult().toLowerCase())));
+							+ Mark.fromString(model.getObject().getResult()).name().toLowerCase())));
 				}
 
 				aCellItem.add(new AjaxEventBehavior("onclick")
@@ -1657,7 +1657,7 @@ public class EvaluationPage
 
 						// update DataTable
 						aCellItem.add(AttributeModifier.replace("class", new Model<String>(
-								"editable " + newResult.getTitle().toLowerCase())));
+								"editable " + newResult.name().toLowerCase())));
 						aTarget.add(resultLabel, aCellItem);
 					}
 				});
@@ -1817,7 +1817,7 @@ public class EvaluationPage
 		add(predictionModal = new ModalWindow("predictionModal"));
 		final PredictionPanel predictionPanel = new PredictionPanel(predictionModal.getContentId());
 		predictionModal.setContent(predictionPanel);
-		predictionModal.setTitle("Predict results");
+		predictionModal.setTitle("Rank results");
 		predictionModal.setAutoSize(false);
 		predictionModal.setInitialWidth(550);
 		predictionModal.setInitialHeight(350);
@@ -1885,7 +1885,7 @@ public class EvaluationPage
 				}.setOutputMarkupPlaceholderTag(true));
 
 				add(predictButton = (ExtendedIndicatingAjaxButton) new ExtendedIndicatingAjaxButton(
-						"predictButton", new Model<String>("Predict results"), new Model<String>(
+						"predictButton", new Model<String>("Rank results"), new Model<String>(
 								"Predicting ..."))
 				{
 					@Override
