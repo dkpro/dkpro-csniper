@@ -48,7 +48,60 @@ Let's say we have a corpus in the NEGRA export format (a sample can be found her
 
 To convert it, we'll write a short conversion program:
 
-GROOVY RECIPE?
+	#!/usr/bin/env groovy
+	@Grab(
+		group='de.tudarmstadt.ukp.dkpro.core', 
+		module='de.tudarmstadt.ukp.dkpro.core.io.bincas-asl', 
+		version='1.5.0')
+	@Grab(
+		group='de.tudarmstadt.ukp.dkpro.core', 
+		module='de.tudarmstadt.ukp.dkpro.core.io.negra-asl', 
+		version='1.5.0')
+	@Grab(
+		group='de.tudarmstadt.ukp.dkpro.core', 
+		module='de.tudarmstadt.ukp.dkpro.core.io.imscwb-asl', 
+		version='1.5.0')
+
+	import org.uimafit.pipeline.SimplePipeline;
+	import de.tudarmstadt.ukp.dkpro.core.io.bincas.SerializedCasWriter;
+	import de.tudarmstadt.ukp.dkpro.core.io.imscwb.ImsCwbWriter;
+	import de.tudarmstadt.ukp.dkpro.core.io.negra.NegraExportReader;
+	import de.tudarmstadt.ukp.dkpro.core.api.resources.CompressionMethod;
+	import static org.uimafit.factory.AnalysisEngineFactory.createPrimitiveDescription;
+	import static org.uimafit.factory.CollectionReaderFactory.createDescription;
+
+	// Collection ID
+	def id = args[0]
+
+	// Source file (e.g. tuebadz-5.0.anaphora.export.bz2)
+	def source = args[1]
+
+	// Target folder
+	def target = args[2];
+
+	SimplePipeline.runPipeline(
+		createDescription(NegraExportReader.class,
+		    NegraExportReader.PARAM_SOURCE_LOCATION, source,
+		    NegraExportReader.PARAM_COLLECTION_ID, id,
+		    NegraExportReader.PARAM_LANGUAGE, "de",
+		    NegraExportReader.PARAM_ENCODING, "ISO-8859-15",
+		    NegraExportReader.PARAM_READ_PENN_TREE, true),
+
+		createPrimitiveDescription(SerializedCasWriter.class,
+		    SerializedCasWriter.PARAM_PATH, target + "/bin",
+		    SerializedCasWriter.PARAM_USE_DOCUMENT_ID, true,
+		    SerializedCasWriter.PARAM_COMPRESSION, CompressionMethod.XZ),
+
+		createPrimitiveDescription(ImsCwbWriter.class,
+		    ImsCwbWriter.PARAM_TARGET_ENCODING, "UTF-8",
+		    ImsCwbWriter.PARAM_TARGET_LOCATION, target + "/cqp",
+		    ImsCwbWriter.PARAM_WRITE_TEXT_TAG, true,
+		    ImsCwbWriter.PARAM_WRITE_DOCUMENT_TAG, true,
+		    ImsCwbWriter.PARAM_WRITE_OFFSETS, true,
+		    ImsCwbWriter.PARAM_WRITE_LEMMA, true,
+		    ImsCwbWriter.PARAM_WRITE_DOC_ID, false));
+
+Save it as `convert-sample.groovy` and run it, using: `groovy convert-sample sample corpus-sample.export SAMPLE`.
 
 We're presented with a directory `SAMPLE`, with two subdirectories `bin` and `cqp`. Copy `SAMPLE` to your corpora directory. Now we have to do some post-processing:
 First create a `corpus.properties` below `SAMPLE`, containing these lines:
@@ -94,7 +147,9 @@ we supply here a couple of conversion scripts written in groovy. There is nothin
 - **source**: the source file
 - **target**: a folder into which the output is generated
 
-	convert-tueba5 tueba5 tuebadz-5.0.anaphora.export.bz2 tueba5
+If you name your file e.g. convert-tueba5.groovy, run it as
+ 
+	groovy convert-tueba5 tueba5 tuebadz-5.0.anaphora.export.bz2 tueba5
 
 ### Conversion script - TüBa D/Z 5
 
