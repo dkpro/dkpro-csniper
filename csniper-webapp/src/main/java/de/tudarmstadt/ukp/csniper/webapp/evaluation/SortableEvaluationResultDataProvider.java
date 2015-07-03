@@ -74,8 +74,9 @@ public class SortableEvaluationResultDataProvider
 	private ResultFilter filter;
 	private boolean filterChanged;
 	
-	private String lastSortProperty;
-	private boolean lastSortOrder;
+//	private String lastSortProperty;
+//	private boolean lastSortOrder;
+	private boolean resort;
 
 	public SortableEvaluationResultDataProvider()
 	{
@@ -115,7 +116,7 @@ public class SortableEvaluationResultDataProvider
 	{
 		final SortParam sp = getSort();
 
-		if (!sp.getProperty().equals(lastSortProperty) || (lastSortOrder != sp.isAscending()) || filterChanged) {
+		if (resort || filterChanged) {
 			// Apply filter
 			if (getFilter() != ResultFilter.ALL) {
 				limitedResults = new ArrayList<EvaluationResult>();
@@ -174,8 +175,9 @@ public class SortableEvaluationResultDataProvider
 				}
 			});
 			
-			lastSortProperty = sp.getProperty();
-			lastSortOrder = sp.isAscending();
+//			lastSortProperty = sp.getProperty();
+//			lastSortOrder = sp.isAscending();
+			resort = false;
 			filterChanged = false;
 		}
 	}
@@ -208,8 +210,9 @@ public class SortableEvaluationResultDataProvider
 		results = aResults;
 		// Reset the remembered sort properties so that the limitedResults get updated with the
 		// new results in the next rendering iteration
-		lastSortProperty = null;
-		lastSortOrder = false;
+//		lastSortProperty = null;
+//		lastSortOrder = false;
+		resort = true;
 		filterChanged = true;
 	}
 
@@ -223,4 +226,18 @@ public class SortableEvaluationResultDataProvider
 		filter = aFilter;
 		filterChanged = true;
 	}
+
+    @Override
+    public void setSort(String aProperty, SortOrder aOrder)
+    {
+        super.setSort(aProperty, aOrder);
+        resort = true;
+    }
+
+    @Override
+    public void setSort(SortParam aParam)
+    {
+        super.setSort(aParam);
+        resort = true;
+    }
 }

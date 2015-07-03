@@ -742,7 +742,8 @@ public class EvaluationPage
                                     checkCanceled();
 
                                     // Add to table
-                                    dataProvider.getResults().addAll(results);
+                                    dataProvider.setSort("score", SortOrder.DESCENDING);
+                                    dataProvider.setResults(results);
                                     
                                     setCurrent(dataProvider.getResults().size());
                                     
@@ -828,6 +829,7 @@ public class EvaluationPage
             aTarget.add(saveButton.setVisible(true));
             aTarget.add(resultTable.setVisible(true));
             aTarget.add(FindForm.this);
+            showResultColumns(true);
             updateComponents(aTarget);
         }
     }
@@ -1223,6 +1225,7 @@ public class EvaluationPage
 						protected void run()
 						{
 							List<EvaluationResult> results = dataProvider.getResults();
+				            dataProvider.setSort("score", SortOrder.DESCENDING);
 							if (results.isEmpty()) {
 								return;
 							}
@@ -1344,7 +1347,6 @@ public class EvaluationPage
 			button.setVisible(true);
 			aTarget.add(button);
 			aTarget.add(form);
-			dataProvider.setSort(new SortParam("score", false));
 			updateComponents(aTarget);
 			predictionModal.close(aTarget);
 		}
