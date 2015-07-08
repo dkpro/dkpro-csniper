@@ -52,7 +52,7 @@ The two icons to the left of each entry provide additional insight into an item:
 - The magnifier icon opens an overlay window which contains the parse tree for the specific sentence.
 - The text icon opens a text box at the bottom of the table which shows the corpus context for the specific sentence.
 
-![Search page, context box](../../images/screenshots/search_2.png)
+<!--- ![Search page, context box](../../images/screenshots/search_2.png) -->
 
 ## Assessment
 
@@ -85,12 +85,17 @@ You can evaluate your annotation experiments, selecting different options to gai
 Select the corpus and phenomenon type to show agreement for, and also which annotators should be taken into account.
 You can select to show only sentences which have been labeled **Correct** by all chosen annotators, similar for **Wrong**, **Disputed** and **Incomplete** sentences. You can also set two thresholds, participation threshold and confidence threshold, both between 0 and 1:
 
+<!---
 - **participation** - this regulates which percentage of the selected users has to have annotated a sentence, so that it does not count as **Incomplete**
 - **confidence** - this regulates when a sentence is labeled as **Disputed**; for an explanation see the graphic below
+-->
 
-![Evaluation page](../../images/screenshots/evaluation_2.png)
+- *participation*: percentage of users who have to annotate an item as **Correct** or **Wrong** for it to be considered **Correct**, **Wrong** or **Disputed**. If less than the given percentage of users have voted either **Correct** and **Wrong**, an item is considered **Incomplete**.
+- *confidence*: percentage of annotations the majority vote has to have over the minority. If it is set to 0, only items with a tie between **Correct** and **Wrong** votes are considered **Disputed**. If this is set to 1, any item which has not been voted for unanimously, is considered **Disputed**.
 
-These settings also influence what gets exported when you press the "Export" button; supported export file formats are HTML, CSV, and XLS.
+<!--- ![Evaluation page](../../images/screenshots/evaluation_2.png) -->
+
+These settings also influence what gets exported when you press the **Export** button; supported export file formats are HTML, CSV, and XLS.
 
 You can also show statistics for queries by clicking on **By Query**.
 
