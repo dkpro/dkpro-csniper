@@ -4,7 +4,7 @@ title: "Download"
 permalink: "/downloads/"
 ---
 
-You can download the current version v0.6 of CSniper on [bintray](url to bintray goes here).
+You can download the current version v0.6 of CSniper on [bintray](https://bintray.com/dodinh/dkpro-csniper/CSniper/0.6.0/view#files).
 
 For the code, see [source](https://github.com/dkpro/dkpro-csniper/tree/csniper-wicket-5).
 
