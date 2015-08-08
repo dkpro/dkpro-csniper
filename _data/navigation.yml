@@ -1,5 +1,9 @@
-- title: DKPro family
-  url: "/dkpro/"
+- title: DKPro
+  url: "//dkpro.github.io"
+  side: left
+
+- title: CSniper
+  url: "/"
   side: left
 
 - title: Downloads
@@ -22,7 +26,7 @@
   side: left
 
 - title: Source
-  url: "https://github.com/dkpro/dkpro-csniper/tree/csniper-wicket-5"
+  url: "https://github.com/dkpro/dkpro-csniper"
   side: left
 
 - title: "Contact"
