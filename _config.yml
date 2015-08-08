@@ -21,7 +21,7 @@ description: "CSniper is a multi-user web-tool that allows to efficiently search
 
 # This URL is the main adresse. Don't include a slash at the end.
 #
-url: "https://dkpro.github.io/dkpro-csniper"
+url: "//dkpro.github.io/dkpro-csniper"
 baseurl: ""
 
 # This is for the editing function in _/includes/improve_content.html
@@ -34,7 +34,7 @@ improve_content: https://github.com/dkpro/dkpro-csniper/edit/gh-pages
 # Example: <img src="{{ site.urlimg }}/{{ post.image.title }}">
 # Markdown-Example for posts ![Image Text]({{ site.urlimg }}/image.jpg)
 #
-urlimg: "images/"
+urlimg: "/dkpro-csniper/images/"
 
 
 # Logo size is 600x80 pixels
