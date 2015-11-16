@@ -32,7 +32,3 @@
 - title: "Contact"
   url: "/contact/"
   side: left
-
-- title: "About"
-  side: left
-  url: "/info"
