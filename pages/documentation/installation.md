@@ -78,7 +78,7 @@ After you have saved this configuration, you want to restart tomcat again.
 
 CSniper is (almost) ready to be used now, and can be found at http://localhost:8080/csniper (default Tomcat configuration). But without data, CSniper doesn't make a whole lot of sense.
 
-Which means: it's time to [convert a corpus for CSniper](/documentation/conversion/).
+Which means: it's time to [convert a corpus for CSniper](../conversion/).
 
 </div><!-- /.medium-8.columns -->
 </div><!-- /.row -->
