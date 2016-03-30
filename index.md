@@ -41,8 +41,8 @@ About CSniper
 
 This project is being developed by the Ubiquitous Knowledge Processing Lab (UKP) at the Technische Universität Darmstadt, Germany under the auspices of Prof. Iryna Gurevych.
 
-[1]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/OIAF4HLT2014DKProCore_cameraready.pdf
-[2]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1%5Bpub_id%5D=TUD-CS-2014-0864&type=99&tx_bibtex_pi1%5Bbibtex%5D=yes
+[1]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/publikationen/2012/CSNIPER.pdf
+[2]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1[pub_id]=TUD-CS-2012-0099&type=99&tx_bibtex_pi1[bibtex]=yes
 [3]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/publikationen/2015/csniper_acl_camera.pdf
 [4]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&L=..%3Ftx_bibtex_pi1%5Bpub_id%5D%3DTUD-CS-2013-0259&tx_bibtex_pi1%5Bpub_id%5D=TUD-CS-2015-0098&type=99&tx_bibtex_pi1%5Bbibtex%5D=yes
 [5]: http://www.apache.org/licenses/LICENSE-2.0
