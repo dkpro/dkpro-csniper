@@ -32,7 +32,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.cleartk</groupId>
-			<artifactId>cleartk-examples</artifactId>
+			<artifactId>cleartk-ml</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>de.tudarmstadt.ukp.dkpro.core</groupId>
