@@ -5,7 +5,7 @@
 # this work, you have to use › layout: frontpage
 #
 layout: page
-title: ""
+title: "Welcome"
 ---
 
 CSniper (Corpus Sniper) is a tool that implements
