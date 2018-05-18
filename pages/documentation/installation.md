@@ -1,6 +1,6 @@
 ---
 layout: page-fullwidth
-title: "Installing CSniper"
+title: "Installation"
 permalink: "/documentation/installation/"
 ---
 
