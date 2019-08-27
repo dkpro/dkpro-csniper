@@ -15,7 +15,7 @@ CSniper (Corpus Sniper) is a tool that implements
 
 This annotation-by-query approach efficiently harnesses expert knowledge to identify instances of linguistic phenomena that are hard to identify by means of existing purely automatic annotation tools. In addition, CSniper uses inbuilt machine learning mechanism (using an SVM with tree-kernel) to rank search results, facilitating the annotation process.
 
-![Sentence based Annotation in CSniper](images/screenshots/search.png)
+![Sentence based Annotation in CSniper]({{ site.url }}/images/screenshots/search.png)
 
 How to cite
 -----------
@@ -41,9 +41,9 @@ About CSniper
 
 This project is being developed by the Ubiquitous Knowledge Processing Lab (UKP) at the Technische Universität Darmstadt, Germany under the auspices of Prof. Iryna Gurevych.
 
-[1]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/publikationen/2012/CSNIPER.pdf
-[2]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&tx_bibtex_pi1[pub_id]=TUD-CS-2012-0099&type=99&tx_bibtex_pi1[bibtex]=yes
-[3]: https://www.ukp.tu-darmstadt.de/fileadmin/user_upload/Group_UKP/publikationen/2015/csniper_acl_camera.pdf
-[4]: https://www.ukp.tu-darmstadt.de/publications/details/?no_cache=1&L=..%3Ftx_bibtex_pi1%5Bpub_id%5D%3DTUD-CS-2013-0259&tx_bibtex_pi1%5Bpub_id%5D=TUD-CS-2015-0098&type=99&tx_bibtex_pi1%5Bbibtex%5D=yes
+[1]: {{ site.url }}/publications/P12-3015.pdf
+[2]: {{ site.url }}/publications/P12-3015.bib
+[3]: {{ site.url }}/publications/P15-4003.pdf
+[4]: {{ site.url }}/publications/P15-4003.bib
 [5]: http://www.apache.org/licenses/LICENSE-2.0
 
